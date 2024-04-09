@@ -3,7 +3,7 @@ import uniq from "lodash.uniq";
 
 export interface Character {
   name: string;
-  avatarPath?: string | null;
+  portraitPath?: string | null;
 }
 
 export const STELLARON_HUNTERS: Character[] = [
@@ -183,6 +183,7 @@ export const GALAXY_RANGERS: Character[] = [
 export const SELF_ANNIHILATORS: Character[] = [
   {
     name: "Acheron",
+    portraitPath: "/img/v1/portraits/acheron.webp",
   },
 ];
 
@@ -219,19 +220,31 @@ export const characterByIndex = (idx: number): Character | null => {
   return CHARACTERS[idx];
 };
 
+export const characterByName = (name: string | undefined | null): Character | null => {
+  if (name == null) {
+    return null;
+  }
+
+  const idx = CHARACTERS.findIndex((ch) => ch.name === name);
+  if (idx === -1) {
+    return null;
+  }
+
+  return CHARACTERS[idx];
+};
+
 export class ComparisonGraph {
-  /** Keys and values are integers representing character indexes in CHARACTERS constant */
   public adjList: Record<string, string[]> = {};
   private keys: string[] = [];
 
-  constructor() {
+  constructor(characters: Character[] = CHARACTERS) {
     for (let idx = 0; idx < CHARACTERS.length; idx++) {
-      this.adjList[CHARACTERS[idx].name] = [];
-      this.keys.push(CHARACTERS[idx].name);
+      this.adjList[characters[idx].name] = [];
+      this.keys.push(characters[idx].name);
     }
   }
 
-  public connect(a: string, b: string) {
+  public connectByName(a: string, b: string) {
     if (!(a in this.adjList) || !(b in this.adjList)) {
       throw Error(`${a} or ${b} are unknown nodes`);
     }
