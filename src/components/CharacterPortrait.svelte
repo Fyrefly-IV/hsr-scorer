@@ -10,7 +10,12 @@
   export { character, classes as class };
 </script>
 
-<div class={cn("group relative block overflow-hidden border border-zinc-700 bg-zinc-800", classes)}>
+<div
+  class={cn(
+    "group relative block aspect-[9/16] h-[300px] overflow-hidden border border-zinc-700 bg-zinc-800 md:h-[400px]",
+    classes,
+  )}
+>
   <h6
     class="absolute bottom-0 z-10 mb-4 w-full text-center font-anuphan text-xl font-bold md:text-2xl"
   >
@@ -18,6 +23,6 @@
   </h6>
   <div
     style="background-image: url('{portraitPath}');"
-    class="relative block aspect-[9/16] h-[300px] overflow-hidden bg-cover bg-center bg-no-repeat shadow-zinc-900 transition-transform duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-gradient-to-t before:from-zinc-900 before:via-transparent before:to-transparent group-hover:scale-110 md:h-[400px]"
+    class="relative block h-full w-full overflow-hidden bg-cover bg-center bg-no-repeat shadow-zinc-900 transition-transform duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-gradient-to-t before:from-zinc-900 before:via-transparent before:to-transparent group-hover:scale-110"
   ></div>
 </div>
