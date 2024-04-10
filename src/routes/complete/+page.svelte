@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CHARACTERS, ComparisonGraph, characterByName } from "@/data/characters";
+  import { CHARACTERS, ComparisonGraph, characterByName, type Character } from "@/data/characters";
   import { randomElement } from "$lib/arrays";
   import { ExcludedCharacters } from "@/stores/characters";
   import CharacterPortrait from "@/components/CharacterPortrait.svelte";
@@ -35,6 +35,13 @@
     comparisonGraph.connectByName(chosenCharacter, otherCharacter);
     notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
   }
+
+  function getLeaders(): Character[] {
+    const maxScore = results[0].value;
+    return results
+      .filter((entry) => entry.value === maxScore)
+      .map((entry) => CHARACTERS.find((ch) => ch.name === entry.character)!);
+  }
 </script>
 
 <main
@@ -69,10 +76,20 @@
         {/if}
       </button>
     {:else}
-      <div class="flex flex-col">
-        <ol class="list-decimal">
+      <div class="flex flex-col gap-4 xs:grid xs:grid-cols-[auto_auto] xs:grid-rows-[auto_auto]">
+        <h3 class="text-center font-anuphan text-xl font-bold">
+          Winner{#if getLeaders().length > 1}<span>s</span>{/if}
+        </h3>
+        <div class="hidden xs:block"></div>
+        <div class="flex flex-col gap-4">
+          {#each getLeaders() as leader}
+            <CharacterPortrait character={leader} class="pointer-events-none" />
+          {/each}
+        </div>
+
+        <ol class="hidden list-decimal overflow-hidden xs:block">
           {#each results as entry (entry.character)}
-            <li class="font-anuphan text-lg">
+            <li class="list-inside font-anuphan text-lg">
               <span class="font-bold">{entry.character}</span>
               <span> was chosen </span>
               <span class="font-bold">{entry.value} times</span>
