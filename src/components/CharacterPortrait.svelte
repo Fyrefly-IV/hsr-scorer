@@ -13,7 +13,7 @@
 
 <div
   class={cn(
-    "group relative block aspect-[9/16] h-[300px] overflow-hidden border border-zinc-700 bg-zinc-800 md:h-[400px]",
+    "group relative block aspect-[9/16] h-[270px] overflow-hidden border border-zinc-700 bg-zinc-800 sm:h-[300px] md:h-[400px]",
     classes,
   )}
 >
