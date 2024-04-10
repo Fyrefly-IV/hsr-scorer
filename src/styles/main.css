@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-zinc-900 text-zinc-200;
+    @apply relative bg-zinc-900 text-zinc-200;
   }
 }
