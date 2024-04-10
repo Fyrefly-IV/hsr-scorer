@@ -9,12 +9,14 @@ export interface Character {
 export const STELLARON_HUNTERS: Character[] = [
   {
     name: "Firefly",
+    portraitPath: "/img/v2/portraits/firefly.webp",
   },
   {
     name: "Kafka",
   },
   {
     name: "Silver Wolf",
+    portraitPath: "/img/v2/portraits/silver_wolf.webp",
   },
   {
     name: "Blade",
@@ -36,6 +38,7 @@ export const ASTRAL_EXPRESS: Character[] = [
   },
   {
     name: "Himeko",
+    portraitPath: "/img/v2/portraits/himeko.webp",
   },
   {
     name: "Welt",
@@ -45,9 +48,11 @@ export const ASTRAL_EXPRESS: Character[] = [
 export const BELOBOG: Character[] = [
   {
     name: "Bronya",
+    portraitPath: "/img/v2/portraits/bronya.webp",
   },
   {
     name: "Seele",
+    portraitPath: "/img/v2/portraits/seele.webp",
   },
   {
     name: "Clara",
@@ -81,9 +86,11 @@ export const BELOBOG: Character[] = [
 export const HERTA_SPACE_STATION: Character[] = [
   {
     name: "Arlan",
+    portraitPath: "/img/v2/portraits/arlan.webp",
   },
   {
     name: "Asta",
+    portraitPath: "/img/v2/portraits/asta.webp",
   },
 ];
 
@@ -183,13 +190,14 @@ export const GALAXY_RANGERS: Character[] = [
 export const SELF_ANNIHILATORS: Character[] = [
   {
     name: "Acheron",
-    portraitPath: "/img/v1/portraits/acheron.webp",
+    portraitPath: "/img/v2/portraits/acheron.webp",
   },
 ];
 
 export const OTHER: Character[] = [
   {
     name: "Argenti",
+    portraitPath: "/img/v2/portraits/argenti.webp",
   },
   {
     name: "Luocha",
