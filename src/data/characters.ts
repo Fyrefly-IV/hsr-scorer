@@ -246,7 +246,7 @@ export class ComparisonGraph {
   private keys: string[] = [];
 
   constructor(characters: Character[] = CHARACTERS) {
-    for (let idx = 0; idx < CHARACTERS.length; idx++) {
+    for (let idx = 0; idx < characters.length; idx++) {
       this.adjList[characters[idx].name] = [];
       this.keys.push(characters[idx].name);
     }
