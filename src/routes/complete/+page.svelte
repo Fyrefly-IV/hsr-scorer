@@ -51,7 +51,6 @@
         {#if characterA != null}
           <CharacterPortrait character={characterA} />
         {/if}
-        <h3 class="mt-4 font-anuphan text-2xl font-bold">{question[0]}</h3>
       </button>
 
       <button
@@ -61,7 +60,6 @@
         {#if characterB != null}
           <CharacterPortrait character={characterB} />
         {/if}
-        <h3 class="mt-4 font-anuphan text-2xl font-bold">{question[1]}</h3>
       </button>
     {:else}
       <div class="flex flex-col">
