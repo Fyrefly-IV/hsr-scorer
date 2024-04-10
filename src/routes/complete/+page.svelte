@@ -1,12 +1,16 @@
 <script lang="ts">
-  import { ComparisonGraph, characterByIndex, characterByName } from "@/data/characters";
+  import { CHARACTERS, ComparisonGraph, characterByName } from "@/data/characters";
   import { randomElement } from "$lib/arrays";
+  import { ExcludedCharacters } from "@/stores/characters";
   import CharacterPortrait from "@/components/CharacterPortrait.svelte";
+  import difference from "lodash.difference";
 
-  const scores: Record<string, { character: string; value: number; changedAt: number }> = {};
+  let scores: Record<string, { character: string; value: number; changedAt: number }> = {};
   $: results = Object.values(scores).toSorted((a, b) => b.value - a.value);
 
-  let comparisonGraph = new ComparisonGraph();
+  let comparisonGraph: ComparisonGraph = new ComparisonGraph(
+    difference(CHARACTERS, $ExcludedCharacters)
+  );
   let notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
 
   $: question = randomElement(notConnectedNodes) ?? [];
