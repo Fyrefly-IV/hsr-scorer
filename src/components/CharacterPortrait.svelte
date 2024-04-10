@@ -2,7 +2,7 @@
   import type { Character } from "@/data/characters";
   import { cn } from "@/lib/cn";
 
-  let classes: string | undefined;
+  let classes: string | undefined = undefined;
   let character: Character;
 
   $: portraitPath = character.portraitPath ?? "/img/v1/portraits/undefined.webp";
