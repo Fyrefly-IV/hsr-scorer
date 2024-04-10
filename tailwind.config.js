@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         anuphan: ["Anuphan", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xs: "375px",
+      },
     },
   },
   plugins: [],
