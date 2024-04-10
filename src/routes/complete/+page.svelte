@@ -9,7 +9,7 @@
   $: results = Object.values(scores).toSorted((a, b) => b.value - a.value);
 
   let comparisonGraph: ComparisonGraph = new ComparisonGraph(
-    difference(CHARACTERS, $ExcludedCharacters)
+    difference(CHARACTERS, $ExcludedCharacters),
   );
   let notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
 
@@ -41,12 +41,15 @@
   class="flex min-h-screen w-full flex-col items-center justify-center bg-zinc-900 text-zinc-200"
 >
   {#if notConnectedNodes.length > 0}
-    <h4 class="mb-4 text-center text-zinc-600">
-      {notConnectedNodes.length} pairs left
-    </h4>
+    <div class="mb-4">
+      <h4 class="text-center text-zinc-600">
+        {notConnectedNodes.length} pairs left
+      </h4>
+      <p class="text-center text-zinc-600">you can update character pool in settings (top left)</p>
+    </div>
   {/if}
 
-  <div class="flex gap-16">
+  <div class="flex gap-4 xs:gap-6 md:gap-16">
     {#if question.length > 1}
       <button
         class="flex flex-col items-center"
