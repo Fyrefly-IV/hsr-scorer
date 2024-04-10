@@ -1,8 +1,9 @@
 <script lang="ts">
+  import type { ClassValue } from "clsx";
   import type { Character } from "@/data/characters";
   import { cn } from "@/lib/cn";
 
-  let classes: string | undefined = undefined;
+  let classes: ClassValue | undefined = undefined;
   let character: Character;
 
   $: portraitPath = character.portraitPath ?? "/img/v1/portraits/undefined.webp";
