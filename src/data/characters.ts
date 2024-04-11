@@ -97,6 +97,7 @@ export const HERTA_SPACE_STATION: Character[] = [
 export const TEN_STONEHEARTS: Character[] = [
   {
     name: "Aventurine",
+    portraitPath: "/img/v2/portraits/aventurine.webp"
   },
   {
     name: "Topaz",
@@ -106,6 +107,7 @@ export const TEN_STONEHEARTS: Character[] = [
 export const LUOFU_XIANZHOU: Character[] = [
   {
     name: "Bailu",
+    portraitPath: "/img/v2/portraits/bailu.webp"
   },
   {
     name: "Fu Xuan",
