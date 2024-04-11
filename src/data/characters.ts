@@ -9,10 +9,11 @@ export interface Character {
 export const STELLARON_HUNTERS: Character[] = [
   {
     name: "Firefly",
-    portraitPath: "/img/v2/portraits/firefly.webp",
+    portraitPath: "/img/v3/portraits/firefly.webp",
   },
   {
     name: "Kafka",
+    portraitPath: "/img/v2/portraits/kafka.webp",
   },
   {
     name: "Silver Wolf",
@@ -20,12 +21,14 @@ export const STELLARON_HUNTERS: Character[] = [
   },
   {
     name: "Blade",
+    portraitPath: "/img/v2/portraits/blade.webp",
   },
 ];
 
 export const ASTRAL_EXPRESS: Character[] = [
   {
     name: "March 7th",
+    portraitPath: "/img/v2/portraits/march_7th.webp",
   },
   {
     name: "Stelle",
@@ -35,6 +38,7 @@ export const ASTRAL_EXPRESS: Character[] = [
   },
   {
     name: "Dan Heng",
+    portraitPath: "/img/v2/portraits/dan_heng.webp",
   },
   {
     name: "Himeko",
@@ -42,6 +46,7 @@ export const ASTRAL_EXPRESS: Character[] = [
   },
   {
     name: "Welt",
+    portraitPath: "/img/v2/portraits/welt.webp",
   },
 ];
 
@@ -56,30 +61,39 @@ export const BELOBOG: Character[] = [
   },
   {
     name: "Clara",
+    portraitPath: "/img/v2/portraits/clara.webp",
   },
   {
     name: "Pela",
+    portraitPath: "/img/v2/portraits/pela.webp",
   },
   {
     name: "Gepard",
+    portraitPath: "/img/v2/portraits/gepard.webp",
   },
   {
     name: "Luka",
+    portraitPath: "/img/v2/portraits/luka.webp",
   },
   {
     name: "Lynx",
+    portraitPath: "/img/v2/portraits/lynx.webp",
   },
   {
     name: "Natasha",
+    portraitPath: "/img/v2/portraits/natasha.webp",
   },
   {
     name: "Hook",
+    portraitPath: "/img/v2/portraits/hook.webp",
   },
   {
     name: "Sampo",
+    portraitPath: "/img/v2/portraits/sampo.webp",
   },
   {
     name: "Serval",
+    portraitPath: "/img/v2/portraits/serval.webp",
   },
 ];
 
@@ -101,6 +115,7 @@ export const TEN_STONEHEARTS: Character[] = [
   },
   {
     name: "Topaz",
+    portraitPath: "/img/v2/portraits/topaz.webp",
   },
 ];
 
@@ -111,81 +126,101 @@ export const LUOFU_XIANZHOU: Character[] = [
   },
   {
     name: "Fu Xuan",
+    portraitPath: "/img/v2/portraits/fu_xuan.webp",
   },
   {
     name: "Guinaifen",
+    portraitPath: "/img/v2/portraits/guinaifen.webp",
   },
   {
     name: "Hanya",
+    portraitPath: "/img/v2/portraits/hanya.webp",
   },
   {
     name: "Huohuo",
+    portraitPath: "/img/v2/portraits/huohuo.webp",
   },
   {
     name: "Jing Yuan",
+    portraitPath: "/img/v2/portraits/jing_yuan.webp",
   },
   {
     name: "Jingliu",
+    portraitPath: "/img/v2/portraits/jingliu.webp",
   },
   {
     name: "Qingque",
+    portraitPath: "/img/v2/portraits/qingque.webp",
   },
   {
     name: "Sushang",
+    portraitPath: "/img/v2/portraits/sushang.webp",
   },
   {
     name: "Tingyun",
+    portraitPath: "/img/v2/portraits/tingyun.webp",
   },
   {
     name: "Xueyi",
+    portraitPath: "/img/v2/portraits/xueyi.webp",
   },
   {
     name: "Yanqing",
+    portraitPath: "/img/v2/portraits/yanqing.webp",
   },
   {
     name: "Yukong",
+    portraitPath: "/img/v2/portraits/yukong.webp",
   },
 ];
 
 export const PENACONY: Character[] = [
   {
     name: "Robin",
+    portraitPath: "/img/v2/portraits/robin.webp",
   },
   {
     name: "Gallagher",
   },
   {
     name: "Misha",
+    portraitPath: "/img/v2/portraits/misha.webp",
   },
 ];
 
 export const GARDEN_OF_RECOLLECTION: Character[] = [
   {
     name: "Black Swan",
+    portraitPath: "/img/v2/portraits/black_swan.webp",
   },
 ];
 
 export const GENIUS_SOCIETY: Character[] = [
   {
     name: "Herta",
+    portraitPath: "/img/v2/portraits/herta.webp",
   },
   {
     name: "Dr. Ratio",
+    portraitPath: "/img/v2/portraits/ratio.webp",
   },
   {
     name: "Ruan Mei",
+    portraitPath: "/img/v2/portraits/ruan_mei.webp",
   },
 ];
 
 export const MASKED_FOOLS: Character[] = [
   {
     name: "Sparkle",
+    portraitPath: "/img/v2/portraits/sparkle.webp",
   },
 ];
 
 export const GALAXY_RANGERS: Character[] = [
   {
     name: "Boothill",
+    portraitPath: "/img/v2/portraits/boothill.webp",
   },
 ];
 
@@ -203,6 +238,7 @@ export const OTHER: Character[] = [
   },
   {
     name: "Luocha",
+    portraitPath: "/img/v2/portraits/luocha.webp",
   },
 ];
 
