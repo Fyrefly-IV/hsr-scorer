@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
-
 @layer base {
   body {
     @apply relative bg-zinc-900 text-zinc-200;
