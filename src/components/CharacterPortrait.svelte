@@ -24,6 +24,6 @@
   </h6>
   <div
     style="background-image: url('{portraitPath}');"
-    class="relative block h-full w-full overflow-hidden bg-cover bg-center bg-no-repeat shadow-zinc-900 transition-transform duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-gradient-to-t before:from-zinc-900 before:via-transparent before:to-transparent group-hover:scale-110"
+    class="relative block h-full w-full overflow-hidden bg-cover bg-center bg-no-repeat shadow-zinc-900 transition-transform duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:bg-gradient-to-t before:from-zinc-900 before:via-transparent before:to-transparent group-hover:scale-105"
   ></div>
 </div>
