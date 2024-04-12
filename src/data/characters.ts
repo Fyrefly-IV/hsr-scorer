@@ -2,6 +2,7 @@ import { permutations } from "@/lib/arrays";
 import uniq from "lodash.uniq";
 
 export interface Character {
+  id?: string;
   name: string;
   portraitPath?: string | null;
 }
@@ -9,236 +10,288 @@ export interface Character {
 export const STELLARON_HUNTERS: Character[] = [
   {
     name: "Firefly",
-    portraitPath: "/img/v3/portraits/firefly.webp",
+    portraitPath: "/img/v4/portraits/Firefly.webp",
   },
   {
+    id: "1005",
     name: "Kafka",
-    portraitPath: "/img/v2/portraits/kafka.webp",
+    portraitPath: "/img/v4/portraits/1005.webp",
   },
   {
+    id: "1006",
     name: "Silver Wolf",
-    portraitPath: "/img/v2/portraits/silver_wolf.webp",
+    portraitPath: "/img/v4/portraits/1006.webp",
   },
   {
+    id: "1205",
     name: "Blade",
-    portraitPath: "/img/v2/portraits/blade.webp",
+    portraitPath: "/img/v4/portraits/1205.webp",
   },
 ];
 
 export const ASTRAL_EXPRESS: Character[] = [
   {
+    id: "1001",
     name: "March 7th",
-    portraitPath: "/img/v2/portraits/march_7th.webp",
+    portraitPath: "/img/v4/portraits/1001.webp",
   },
   {
+    id: "8002",
     name: "Stelle",
+    portraitPath: "/img/v4/portraits/8002.webp"
   },
   {
+    id: "8001",
     name: "Caelus",
+    portraitPath: "/img/v4/portraits/8001.webp"
   },
   {
+    id: "1002",
     name: "Dan Heng",
-    portraitPath: "/img/v2/portraits/dan_heng.webp",
+    portraitPath: "/img/v4/portraits/1002.webp",
   },
   {
+    id: "1003",
     name: "Himeko",
-    portraitPath: "/img/v2/portraits/himeko.webp",
+    portraitPath: "/img/v4/portraits/1003.webp",
   },
   {
+    id: "1004",
     name: "Welt",
-    portraitPath: "/img/v2/portraits/welt.webp",
+    portraitPath: "/img/v4/portraits/1004.webp",
   },
 ];
 
 export const BELOBOG: Character[] = [
   {
+    id: "1101",
     name: "Bronya",
-    portraitPath: "/img/v2/portraits/bronya.webp",
+    portraitPath: "/img/v4/portraits/1101.webp",
   },
   {
+    id: "1102",
     name: "Seele",
-    portraitPath: "/img/v2/portraits/seele.webp",
+    portraitPath: "/img/v4/portraits/1102.webp",
   },
   {
+    id: "1107",
     name: "Clara",
-    portraitPath: "/img/v2/portraits/clara.webp",
+    portraitPath: "/img/v4/portraits/1107.webp",
   },
   {
+    id: "1106",
     name: "Pela",
-    portraitPath: "/img/v2/portraits/pela.webp",
+    portraitPath: "/img/v4/portraits/1106.webp",
   },
   {
+    id: "1104",
     name: "Gepard",
-    portraitPath: "/img/v2/portraits/gepard.webp",
+    portraitPath: "/img/v4/portraits/1104.webp",
   },
   {
+    id: "1111",
     name: "Luka",
-    portraitPath: "/img/v2/portraits/luka.webp",
+    portraitPath: "/img/v4/portraits/1111.webp",
   },
   {
+    id: '1110',
     name: "Lynx",
-    portraitPath: "/img/v2/portraits/lynx.webp",
+    portraitPath: "/img/v4/portraits/1110.webp",
   },
   {
+    id: "1105",
     name: "Natasha",
-    portraitPath: "/img/v2/portraits/natasha.webp",
+    portraitPath: "/img/v4/portraits/1105.webp",
   },
   {
+    id: "1109",
     name: "Hook",
-    portraitPath: "/img/v2/portraits/hook.webp",
+    portraitPath: "/img/v4/portraits/1109.webp",
   },
   {
+    id: "1108",
     name: "Sampo",
-    portraitPath: "/img/v2/portraits/sampo.webp",
+    portraitPath: "/img/v4/portraits/1108.webp",
   },
   {
+    id: "1103",
     name: "Serval",
-    portraitPath: "/img/v2/portraits/serval.webp",
+    portraitPath: "/img/v4/portraits/1103.webp",
   },
 ];
 
 export const HERTA_SPACE_STATION: Character[] = [
   {
+    id: "1008",
     name: "Arlan",
-    portraitPath: "/img/v2/portraits/arlan.webp",
+    portraitPath: "/img/v4/portraits/1008.webp",
   },
   {
+    id: "1009",
     name: "Asta",
-    portraitPath: "/img/v2/portraits/asta.webp",
+    portraitPath: "/img/v4/portraits/1009.webp",
   },
 ];
 
 export const TEN_STONEHEARTS: Character[] = [
   {
+    id: "1304",
     name: "Aventurine",
-    portraitPath: "/img/v2/portraits/aventurine.webp"
+    portraitPath: "/img/v4/portraits/1304.webp"
   },
   {
+    id: "1112",
     name: "Topaz",
-    portraitPath: "/img/v2/portraits/topaz.webp",
+    portraitPath: "/img/v4/portraits/1112.webp",
   },
 ];
 
 export const LUOFU_XIANZHOU: Character[] = [
   {
+    id: "1211",
     name: "Bailu",
-    portraitPath: "/img/v2/portraits/bailu.webp"
+    portraitPath: "/img/v4/portraits/1211.webp"
   },
   {
+    id: '1208',
     name: "Fu Xuan",
-    portraitPath: "/img/v2/portraits/fu_xuan.webp",
+    portraitPath: "/img/v4/portraits/1208.webp",
   },
   {
+    id: "1210",
     name: "Guinaifen",
-    portraitPath: "/img/v2/portraits/guinaifen.webp",
+    portraitPath: "/img/v4/portraits/1210.webp",
   },
   {
+    id: "1215",
     name: "Hanya",
-    portraitPath: "/img/v2/portraits/hanya.webp",
+    portraitPath: "/img/v4/portraits/1215.webp",
   },
   {
+    id: "1217",
     name: "Huohuo",
-    portraitPath: "/img/v2/portraits/huohuo.webp",
+    portraitPath: "/img/v4/portraits/1217.webp",
   },
   {
+    id: "1204",
     name: "Jing Yuan",
-    portraitPath: "/img/v2/portraits/jing_yuan.webp",
+    portraitPath: "/img/v4/portraits/1204.webp",
   },
   {
+    id: "1212",
     name: "Jingliu",
-    portraitPath: "/img/v2/portraits/jingliu.webp",
+    portraitPath: "/img/v4/portraits/1212.webp",
   },
   {
+    id: "1201",
     name: "Qingque",
-    portraitPath: "/img/v2/portraits/qingque.webp",
+    portraitPath: "/img/v4/portraits/1201.webp",
   },
   {
+    id: "1206",
     name: "Sushang",
-    portraitPath: "/img/v2/portraits/sushang.webp",
+    portraitPath: "/img/v4/portraits/1206.webp",
   },
   {
+    id: "1202",
     name: "Tingyun",
-    portraitPath: "/img/v2/portraits/tingyun.webp",
+    portraitPath: "/img/v4/portraits/1202.webp",
   },
   {
+    id: "1214",
     name: "Xueyi",
-    portraitPath: "/img/v2/portraits/xueyi.webp",
+    portraitPath: "/img/v4/portraits/1214.webp",
   },
   {
+    id: "1209",
     name: "Yanqing",
-    portraitPath: "/img/v2/portraits/yanqing.webp",
+    portraitPath: "/img/v4/portraits/1209.webp",
   },
   {
+    id: "1207",
     name: "Yukong",
-    portraitPath: "/img/v2/portraits/yukong.webp",
+    portraitPath: "/img/v4/portraits/1207.webp",
   },
 ];
 
 export const PENACONY: Character[] = [
   {
+    id: "1309",
     name: "Robin",
-    portraitPath: "/img/v2/portraits/robin.webp",
+    portraitPath: "/img/v4/portraits/1309.webp",
   },
   {
+    id: "1301",
     name: "Gallagher",
+    portraitPath: "/img/v4/portraits/1301.webp",
   },
   {
+    id: "1312",
     name: "Misha",
-    portraitPath: "/img/v2/portraits/misha.webp",
+    portraitPath: "/img/v4/portraits/1312.webp",
   },
 ];
 
 export const GARDEN_OF_RECOLLECTION: Character[] = [
   {
+    id: "1307",
     name: "Black Swan",
-    portraitPath: "/img/v2/portraits/black_swan.webp",
+    portraitPath: "/img/v4/portraits/1307.webp",
   },
 ];
 
 export const GENIUS_SOCIETY: Character[] = [
   {
+    id: "1013",
     name: "Herta",
-    portraitPath: "/img/v2/portraits/herta.webp",
+    portraitPath: "/img/v4/portraits/1013.webp",
   },
   {
+    id: "1305",
     name: "Dr. Ratio",
-    portraitPath: "/img/v2/portraits/ratio.webp",
+    portraitPath: "/img/v4/portraits/1305.webp",
   },
   {
+    id: "1303",
     name: "Ruan Mei",
-    portraitPath: "/img/v2/portraits/ruan_mei.webp",
+    portraitPath: "/img/v4/portraits/1303.webp",
   },
 ];
 
 export const MASKED_FOOLS: Character[] = [
   {
+    id: "1306",
     name: "Sparkle",
-    portraitPath: "/img/v2/portraits/sparkle.webp",
+    portraitPath: "/img/v4/portraits/1306.webp",
   },
 ];
 
 export const GALAXY_RANGERS: Character[] = [
   {
+    id: "1315",
     name: "Boothill",
-    portraitPath: "/img/v2/portraits/boothill.webp",
+    portraitPath: "/img/v4/portraits/1315.webp",
   },
 ];
 
 export const SELF_ANNIHILATORS: Character[] = [
   {
+    id: "1308",
     name: "Acheron",
-    portraitPath: "/img/v2/portraits/acheron.webp",
+    portraitPath: "/img/v4/portraits/1308.webp",
   },
 ];
 
 export const OTHER: Character[] = [
   {
+    id: "1302",
     name: "Argenti",
-    portraitPath: "/img/v2/portraits/argenti.webp",
+    portraitPath: "/img/v4/portraits/1302.webp",
   },
   {
+    id: "1203",
     name: "Luocha",
-    portraitPath: "/img/v2/portraits/luocha.webp",
+    portraitPath: "/img/v4/portraits/1203.webp",
   },
 ];
 
