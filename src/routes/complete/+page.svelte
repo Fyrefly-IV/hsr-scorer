@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { CHARACTERS, ComparisonGraph, characterByName, type Character } from "@/data/characters";
+  import { CHARACTERS, ComparisonGraph, characterByName } from "@/data/characters";
   import { randomElement } from "$lib/arrays";
   import { ExcludedCharacters } from "@/stores/characters";
   import CharacterPortrait from "@/components/CharacterPortrait.svelte";
   import difference from "lodash.difference";
+  import Modal from "@/components/Modal.svelte";
 
+  let showScoresModal = false;
   let scores: Record<string, { character: string; value: number; changedAt: number }> = {};
   $: results = Object.values(scores).toSorted((a, b) => b.value - a.value);
+  $: leaders = results
+    .filter((entry) => entry.value === results.at(0)?.value)
+    .map((entry) => CHARACTERS.find((ch) => ch.name === entry.character)!);
 
-  let comparisonGraph: ComparisonGraph = new ComparisonGraph(
-    difference(CHARACTERS, $ExcludedCharacters),
-  );
+  let comparisonGraph = new ComparisonGraph(difference(CHARACTERS, $ExcludedCharacters));
   let notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
 
   $: question = randomElement(notConnectedNodes) ?? [];
@@ -35,13 +38,6 @@
     comparisonGraph.connectByName(chosenCharacter, otherCharacter);
     notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
   }
-
-  function getLeaders(): Character[] {
-    const maxScore = results[0].value;
-    return results
-      .filter((entry) => entry.value === maxScore)
-      .map((entry) => CHARACTERS.find((ch) => ch.name === entry.character)!);
-  }
 </script>
 
 <main
@@ -56,8 +52,8 @@
     </div>
   {/if}
 
-  <div class="flex gap-4 xs:gap-6 md:gap-16">
-    {#if question.length > 1}
+  {#if question.length > 1}
+    <div class="flex gap-4 xs:gap-6 md:gap-16">
       <button
         class="flex flex-col items-center"
         on:click={() => chooseCharacter(question[0], question[1])}
@@ -75,28 +71,42 @@
           <CharacterPortrait character={characterB} />
         {/if}
       </button>
-    {:else}
-      <div class="flex flex-col gap-4 xs:grid xs:grid-cols-[auto_auto] xs:grid-rows-[auto_auto]">
-        <h3 class="text-center font-anuphan text-xl font-bold">
-          Winner{#if getLeaders().length > 1}<span>s</span>{/if}
-        </h3>
-        <div class="hidden xs:block"></div>
-        <div class="flex flex-col gap-4">
-          {#each getLeaders() as leader}
-            <CharacterPortrait character={leader} class="pointer-events-none" />
-          {/each}
-        </div>
+    </div>
+  {/if}
 
-        <ol class="hidden list-decimal overflow-hidden xs:block">
-          {#each results as entry (entry.character)}
-            <li class="list-inside font-anuphan text-lg">
-              <span class="font-bold">{entry.character}</span>
-              <span> was chosen </span>
-              <span class="font-bold">{entry.value} times</span>
-            </li>
-          {/each}
-        </ol>
+  {#if question.length === 0 && leaders.length > 0}
+    <div class="container flex flex-col items-center justify-center">
+      <h3 class="mb-4 font-anuphan text-2xl font-bold">
+        Winner{#if leaders.length > 1}s{/if}!
+      </h3>
+
+      <div class="flex flex-row items-center justify-center gap-4">
+        {#each leaders as character}
+          <CharacterPortrait {character} class="pointer-events-none max-h-[300px]" />
+        {/each}
       </div>
-    {/if}
-  </div>
+
+      <div class="mt-6">
+        <button
+          class="rounded bg-transparent px-2 py-1 font-anuphan text-sm font-medium text-zinc-600 duration-150 hover:bg-zinc-800 hover:text-zinc-400"
+          on:click={() => (showScoresModal = true)}
+        >
+          Click here to view scores
+        </button>
+
+        <Modal bind:showModal={showScoresModal}>
+          <h4 class="mb-4 font-anuphan text-2xl font-bold">Characters Scores</h4>
+          <ol class="list-inside list-disc font-anuphan text-zinc-300">
+            {#each results as entry}
+              <li>
+                <span class="font-semibold">{entry.character}</span>
+                <span> with </span>
+                <span class="font-semibold">{entry.value} pts</span>
+              </li>
+            {/each}
+          </ol>
+        </Modal>
+      </div>
+    </div>
+  {/if}
 </main>
