@@ -4,8 +4,24 @@ import uniq from "lodash.uniq";
 export interface Character {
   id?: string;
   name: string;
-  portraitPath?: string | null;
+  portraitPath?: string;
 }
+
+export const isCharacter = (obj: unknown): obj is Character => {
+  if (obj == null || typeof obj !== "object") {
+    return false;
+  }
+
+  const isNameValid = "name" in obj && typeof obj.name === "string";
+  const isIdValid = "id" in obj ? typeof obj.id === "string" : true;
+  const isPortraitPathValid = "portraitPath" in obj ? typeof obj.portraitPath === "string" : true;
+
+  return isNameValid && isIdValid && isPortraitPathValid;
+};
+
+export const isCharacterArray = (arr: unknown[]): arr is Character[] => {
+  return arr.every((item) => isCharacter(item));
+};
 
 export const STELLARON_HUNTERS: Character[] = [
   {
