@@ -38,12 +38,12 @@ export const ASTRAL_EXPRESS: Character[] = [
   {
     id: "8002",
     name: "Stelle",
-    portraitPath: "/img/v4/portraits/8002.webp"
+    portraitPath: "/img/v4/portraits/8002.webp",
   },
   {
     id: "8001",
     name: "Caelus",
-    portraitPath: "/img/v4/portraits/8001.webp"
+    portraitPath: "/img/v4/portraits/8001.webp",
   },
   {
     id: "1002",
@@ -94,7 +94,7 @@ export const BELOBOG: Character[] = [
     portraitPath: "/img/v4/portraits/1111.webp",
   },
   {
-    id: '1110',
+    id: "1110",
     name: "Lynx",
     portraitPath: "/img/v4/portraits/1110.webp",
   },
@@ -137,7 +137,7 @@ export const TEN_STONEHEARTS: Character[] = [
   {
     id: "1304",
     name: "Aventurine",
-    portraitPath: "/img/v4/portraits/1304.webp"
+    portraitPath: "/img/v4/portraits/1304.webp",
   },
   {
     id: "1112",
@@ -150,10 +150,10 @@ export const LUOFU_XIANZHOU: Character[] = [
   {
     id: "1211",
     name: "Bailu",
-    portraitPath: "/img/v4/portraits/1211.webp"
+    portraitPath: "/img/v4/portraits/1211.webp",
   },
   {
-    id: '1208',
+    id: "1208",
     name: "Fu Xuan",
     portraitPath: "/img/v4/portraits/1208.webp",
   },
