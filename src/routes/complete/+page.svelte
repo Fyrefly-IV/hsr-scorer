@@ -3,17 +3,20 @@
   import { randomElement } from "$lib/arrays";
   import { ExcludedCharacters } from "@/stores/characters";
   import CharacterPortrait from "@/components/CharacterPortrait.svelte";
-  import difference from "lodash.difference";
   import Modal from "@/components/Modal.svelte";
 
   let showScoresModal = false;
   let scores: Record<string, { character: string; value: number; changedAt: number }> = {};
+
   $: results = Object.values(scores).toSorted((a, b) => b.value - a.value);
   $: leaders = results
     .filter((entry) => entry.value === results.at(0)?.value)
     .map((entry) => CHARACTERS.find((ch) => ch.name === entry.character)!);
 
-  let comparisonGraph = new ComparisonGraph(difference(CHARACTERS, $ExcludedCharacters));
+  let comparisonGraph = new ComparisonGraph(
+    CHARACTERS.filter((ch) => !$ExcludedCharacters.some((exCh) => exCh.name === ch.name)),
+  );
+
   let notConnectedNodes = comparisonGraph.findNonAdjacentPairs();
 
   $: question = randomElement(notConnectedNodes) ?? [];
