@@ -1,10 +1,11 @@
 import { isCharacterArray, type Character } from "@/data/characters";
-import { writable, type Writable } from "svelte/store";
+import { derived, writable, type Writable } from "svelte/store";
 import { browser } from "$app/environment";
 
 const STORAGE_KEY = "excluded-characters";
 
 export const ExcludedCharacters: Writable<Character[]> = writable(getInitialState());
+export const excludedCharacterIds = derived(ExcludedCharacters, ($arr) => $arr.map((ch) => ch.id));
 
 ExcludedCharacters.subscribe((value) => localStorage.setItem(STORAGE_KEY, JSON.stringify(value)));
 
