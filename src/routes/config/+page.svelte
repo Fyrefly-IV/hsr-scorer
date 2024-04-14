@@ -64,7 +64,7 @@
       >
         <CharacterPortrait
           {character}
-          class="transition-transform group-data-[excluded=true]:translate-y-2 group-data-[excluded=true]:opacity-30 md:h-[300px]"
+          class="transition-all group-data-[excluded=true]:translate-y-2 group-data-[excluded=true]:opacity-30 md:h-[300px]"
         />
       </button>
     {/each}
