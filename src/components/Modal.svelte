@@ -16,7 +16,10 @@
   bind:this={dialog}
   on:close={() => (showModal = false)}
   on:click|self={() => dialog.close()}
-  class={cn("max-w-[32em] w-full rounded bg-zinc-800 p-4 outline outline-1 outline-zinc-600 backdrop-blur-sm", classes)}
+  class={cn(
+    "relative w-full max-w-[32em] rounded bg-zinc-800 p-4 outline outline-1 outline-zinc-600 backdrop-blur-sm",
+    classes,
+  )}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div on:click|stopPropagation class="flex flex-col">
@@ -24,7 +27,7 @@
 
     <button
       on:click={() => dialog.close()}
-      class="block self-end rounded bg-zinc-900 px-4 py-2 font-anuphan font-medium transition-colors duration-150 hover:bg-zinc-900/70"
+      class="absolute bottom-2 right-2 block self-end rounded bg-zinc-900 px-4 py-2 font-anuphan text-sm font-medium transition-colors duration-150 hover:bg-zinc-900/70 sm:bottom-4 sm:right-4"
     >
       close
     </button>
