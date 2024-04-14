@@ -1,8 +1,8 @@
-import { permutations } from "@/lib/arrays";
+import { combinations } from "@/lib/arrays";
 import uniq from "lodash.uniq";
 
 export interface Character {
-  id?: string;
+  id: string;
   name: string;
   portraitPath?: string;
 }
@@ -12,8 +12,8 @@ export const isCharacter = (obj: unknown): obj is Character => {
     return false;
   }
 
+  const isIdValid = "id" in obj && typeof obj.id === "string";
   const isNameValid = "name" in obj && typeof obj.name === "string";
-  const isIdValid = "id" in obj ? typeof obj.id === "string" : true;
   const isPortraitPathValid = "portraitPath" in obj ? typeof obj.portraitPath === "string" : true;
 
   return isNameValid && isIdValid && isPortraitPathValid;
@@ -25,6 +25,7 @@ export const isCharacterArray = (arr: unknown[]): arr is Character[] => {
 
 export const STELLARON_HUNTERS: Character[] = [
   {
+    id: "firefly",
     name: "Firefly",
     portraitPath: "/img/v4/portraits/Firefly.webp",
   },
@@ -311,21 +312,36 @@ export const OTHER: Character[] = [
   },
 ];
 
-export const CHARACTERS: Character[] = [
-  ...STELLARON_HUNTERS,
-  ...ASTRAL_EXPRESS,
-  ...BELOBOG,
-  ...HERTA_SPACE_STATION,
-  ...TEN_STONEHEARTS,
-  ...LUOFU_XIANZHOU,
-  ...PENACONY,
-  ...GARDEN_OF_RECOLLECTION,
-  ...GENIUS_SOCIETY,
-  ...MASKED_FOOLS,
-  ...GALAXY_RANGERS,
-  ...SELF_ANNIHILATORS,
-  ...OTHER,
-];
+export const CHARACTERS = Object.freeze(
+  [
+    ...STELLARON_HUNTERS,
+    ...ASTRAL_EXPRESS,
+    ...BELOBOG,
+    ...HERTA_SPACE_STATION,
+    ...TEN_STONEHEARTS,
+    ...LUOFU_XIANZHOU,
+    ...PENACONY,
+    ...GARDEN_OF_RECOLLECTION,
+    ...GENIUS_SOCIETY,
+    ...MASKED_FOOLS,
+    ...GALAXY_RANGERS,
+    ...SELF_ANNIHILATORS,
+    ...OTHER,
+  ].map((ch) => Object.freeze(ch)),
+);
+
+export const characterById = (id: Character["id"] | undefined | null): Character | null => {
+  if (id == null) {
+    return null;
+  }
+
+  const index = CHARACTERS.findIndex((ch) => ch.id === id);
+  if (index < 0) {
+    return null;
+  }
+
+  return CHARACTERS[index];
+};
 
 export const characterByIndex = (idx: number): Character | null => {
   if (idx < 0 || idx >= CHARACTERS.length) {
@@ -352,7 +368,7 @@ export class ComparisonGraph {
   public adjList: Record<string, string[]> = {};
   private keys: string[] = [];
 
-  constructor(characters: Character[] = CHARACTERS) {
+  constructor(characters: readonly Character[] = CHARACTERS) {
     for (let idx = 0; idx < characters.length; idx++) {
       this.adjList[characters[idx].name] = [];
       this.keys.push(characters[idx].name);
@@ -373,7 +389,7 @@ export class ComparisonGraph {
     const nonAdjacentPairs: string[][] = [];
 
     const vertices = Object.keys(this.adjList);
-    const allPairs = permutations(vertices, 2);
+    const allPairs = combinations(vertices, 2);
 
     for (const pair of allPairs) {
       const adjacentVertices = this.adjList[pair[0]];
