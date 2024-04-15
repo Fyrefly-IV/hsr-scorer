@@ -1,27 +1,14 @@
 import { combinations } from "@/lib/arrays";
 import uniq from "lodash.uniq";
+import { z } from "zod";
 
-export interface Character {
-  id: string;
-  name: string;
-  portraitPath?: string;
-}
+export const CharacterSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  portraitPath: z.string().optional(),
+});
 
-export const isCharacter = (obj: unknown): obj is Character => {
-  if (obj == null || typeof obj !== "object") {
-    return false;
-  }
-
-  const isIdValid = "id" in obj && typeof obj.id === "string";
-  const isNameValid = "name" in obj && typeof obj.name === "string";
-  const isPortraitPathValid = "portraitPath" in obj ? typeof obj.portraitPath === "string" : true;
-
-  return isNameValid && isIdValid && isPortraitPathValid;
-};
-
-export const isCharacterArray = (arr: unknown[]): arr is Character[] => {
-  return arr.every((item) => isCharacter(item));
-};
+export type Character = z.infer<typeof CharacterSchema>;
 
 export const STELLARON_HUNTERS: Character[] = [
   {
