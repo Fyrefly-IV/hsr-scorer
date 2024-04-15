@@ -1,6 +1,7 @@
-import { isCharacterArray, type Character } from "@/data/characters";
+import type { Character } from "@/data/characters";
 import { derived, writable, type Writable } from "svelte/store";
 import { browser } from "$app/environment";
+import { CharacterSchema } from "@/data/characters";
 
 const STORAGE_KEY = "excluded-characters";
 
@@ -29,9 +30,11 @@ function getInitialState(): Character[] {
     return [];
   }
 
-  if (!isCharacterArray(savedJsonData)) {
+  const parseResult = CharacterSchema.array().safeParse(savedJsonData);
+  if (!parseResult.success) {
+    console.error(parseResult.error);
     return [];
   }
 
-  return savedJsonData;
+  return parseResult.data;
 }
