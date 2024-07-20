@@ -1,38 +1,17 @@
-# create-svelte
+<img src="static/img/meta/scorer-v2.webp?raw=true">
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+# Honkai Scorer
 
-## Creating a project
+Small web application allowing Honkai Star Rail fans to compare game characters with each other.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## How to setup development environment
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+I highly recommend using Node Version Manager (nvm), otheriwse check `.nvmrc` and make sure your Node's version is matching it.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+1.  Install dependencies `npm install`
+2.  Start dev server `npm run dev`
 
-## Developing
+A coupe of words for those, who'd like to contribute!
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1.  Make sure to follow ESLint rules, try not to ignore them, please.
+2.  Try to avoid big commits and split changes across multiple commits or maybe even pull requests.
