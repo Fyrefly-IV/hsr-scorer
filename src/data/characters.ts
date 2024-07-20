@@ -148,6 +148,11 @@ export const TEN_STONEHEARTS: Character[] = [
     name: "Topaz",
     portraitPath: "/img/v4/portraits/1112.webp",
   },
+  {
+    id: "1314",
+    name: "Jade",
+    portraitPath: "/img/v4/portraits/1314.webp",
+  },
 ];
 
 export const LUOFU_XIANZHOU: Character[] = [
