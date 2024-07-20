@@ -14,7 +14,7 @@ export const STELLARON_HUNTERS: Character[] = [
   {
     id: "firefly",
     name: "Firefly",
-    portraitPath: "/img/v4/portraits/Firefly.webp",
+    portraitPath: "/img/v4/portraits/1310.webp",
   },
   {
     id: "1005",
