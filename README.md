@@ -1,4 +1,4 @@
-<img src="static/img/meta/scorer-v2.webp?raw=true">
+<img src="public/img/meta/scorer-v2.webp?raw=true">
 
 # Honkai Scorer
 
