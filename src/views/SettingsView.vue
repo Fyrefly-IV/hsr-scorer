@@ -17,7 +17,7 @@ const characterClickHandler = (id: Character["id"]) => {
 
 <template>
   <Main class="flex flex-col">
-    <div class="font-anuphan container mt-9">
+    <div class="font-anuphan container mt-10">
       <h1 class="text-2xl md:text-4xl font-bold">Settings</h1>
       <p class="text-lg">
         In settings you can pick characters which you want to be present in your comparisons by
