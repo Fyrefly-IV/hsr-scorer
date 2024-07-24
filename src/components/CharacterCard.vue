@@ -30,7 +30,8 @@ const clickHandler = (e: MouseEvent) => {
   >
     <img
       :src="character.portraitPath"
-      class="aspect-[294/400] w-full duration-300 ease-in-out group-data-[hoverable=true]:group-hover:scale-110"
+      class="aspect-[294/400] w-full select-none duration-300 ease-in-out group-data-[hoverable=true]:group-hover:scale-110"
+      draggable="false"
       decoding="async"
       loading="eager"
     />
