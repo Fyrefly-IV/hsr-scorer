@@ -6,19 +6,15 @@ import { z } from "zod";
 import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 
-export const START_SCREEN = "start" as const;
-export const PROGRESS_SCREEN = "progress" as const;
-export const RESULTS_SCREEN = "results" as const;
-
 const QueueEntrySchema = z.tuple([StarRailCharacterSchema, StarRailCharacterSchema]);
 const ChoiceEntrySchema = z.object({
   pair: QueueEntrySchema,
   winnerId: StarRailCharacterSchema.shape.id,
 });
 const ScreenStateSchema = z.union([
-  z.literal(START_SCREEN),
-  z.literal(PROGRESS_SCREEN),
-  z.literal(RESULTS_SCREEN),
+  z.literal("start"),
+  z.literal("progress"),
+  z.literal("results"),
 ]);
 
 type QueueEntry = z.infer<typeof QueueEntrySchema>;
@@ -31,9 +27,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
   const choices = useLocalStorage<ChoiceEntry[]>("choices", []);
   const scores = useLocalStorage<Scores>("scores", {});
 
-  // we can't have visibility modifiers, 
-  // readonly computed ref is here for public use
-  const privateScreen = useLocalStorage<ScreenState>("screen", START_SCREEN);
+  const privateScreen = useLocalStorage<ScreenState>("screen", "start");
   const screen = computed(() => privateScreen.value);
 
   const currentPair = computed(() => {
@@ -59,7 +53,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     queue.value = queue.value.slice(1);
 
     if (autoFinish === true && queue.value.length === 0) {
-      privateScreen.value = RESULTS_SCREEN;
+      privateScreen.value = "results";
     }
   }
 
@@ -90,7 +84,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     shuffleArray(combos);
 
     queue.value = QueueEntrySchema.array().parse(combos);
-    privateScreen.value = PROGRESS_SCREEN;
+    privateScreen.value = "progress";
   }
 
   return {
