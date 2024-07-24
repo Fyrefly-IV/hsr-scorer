@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import CharacterCard from "@/components/CharacterCard.vue";
 import Main from "@/components/Main.vue";
+import Dialog from "@/components/Dialog.vue";
 import H1 from "@/components/typography/H1.vue";
+import H2 from "@/components/typography/H2.vue";
 import P from "@/components/typography/P.vue";
 import Button from "@/components/ui/Button.vue";
 import type { StarRailCharacter } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
+import { ref } from "vue";
 
 const fullMode = useFullModeStore();
+const modalOpen = ref<boolean>(false);
 
 const start = () => {
   fullMode.start();
@@ -17,6 +21,15 @@ const start = () => {
 const pick = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
   fullMode.choose(winnerId);
 }, 200);
+
+const confirmReset = () => {
+  modalOpen.value = true;
+};
+
+const reset = () => {
+  modalOpen.value = false;
+  fullMode.reset();
+};
 </script>
 
 <template>
@@ -53,8 +66,21 @@ const pick = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
       <div class="auto mt-4 grid w-full grid-flow-dense grid-cols-1 gap-2 gap-x-4 md:grid-cols-3">
         <Button variant="secondary">Undo</Button>
         <Button variant="secondary">Skip</Button>
-        <Button variant="secondary">Stop</Button>
+        <Button variant="secondary" @click="confirmReset">Stop</Button>
       </div>
     </div>
   </Main>
+
+  <Dialog v-model="modalOpen">
+    <H2 class="font-bold">Are you sure?</H2>
+    <P>
+      You are about to completely reset current comparison progress!
+      <br />
+      This means, you will not be able to revert this action!
+    </P>
+    <div class="mt-4 flex flex-row gap-2 self-end">
+      <Button size="sm" @click="modalOpen = false">Cancel</Button>
+      <Button size="sm" variant="destructive" @click="reset">Confirm</Button>
+    </div>
+  </Dialog>
 </template>
