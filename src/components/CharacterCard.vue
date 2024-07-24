@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import type { StarRailCharacter } from "@/data/characters";
+import { cn } from "@/lib/cn";
+import type { ClassValue } from "clsx";
+import { useAttrs } from "vue";
+
+defineOptions({ inheritAttrs: false });
+
+const attrs = useAttrs();
 
 type Props = {
   character: StarRailCharacter;
@@ -23,8 +30,14 @@ const clickHandler = (e: MouseEvent) => {
 
 <template>
   <picture
+    v-bind="{ ...attrs, class: null }"
     @click="clickHandler"
-    class="group relative box-border block aspect-[294/400] w-[220px] overflow-hidden bg-neutral-800 outline outline-1 outline-neutral-700 transition-all data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30"
+    :class="
+      cn(
+        'group relative box-border block aspect-[294/400] w-[220px] overflow-hidden bg-neutral-800 outline outline-1 outline-neutral-700 transition-all data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
+        attrs.class as ClassValue,
+      )
+    "
     :data-excluded="excluded"
     :data-hoverable="hoverable"
   >
