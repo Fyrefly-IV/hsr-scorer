@@ -1,5 +1,3 @@
-import { combinations } from "@/lib/arrays";
-import uniq from "lodash.uniq";
 import { z } from "zod";
 
 export const StarRailCharacterSchema = z.object({
@@ -353,47 +351,3 @@ export const characterByName = (name: string | undefined | null): StarRailCharac
 
   return CHARACTERS[idx];
 };
-
-export class ComparisonGraph {
-  public adjList: Record<string, string[]> = {};
-  private keys: string[] = [];
-
-  constructor(characters: readonly StarRailCharacter[] = CHARACTERS) {
-    for (let idx = 0; idx < characters.length; idx++) {
-      this.adjList[characters[idx].name] = [];
-      this.keys.push(characters[idx].name);
-    }
-  }
-
-  public connectByName(a: string, b: string) {
-    if (!(a in this.adjList) || !(b in this.adjList)) {
-      throw Error(`${a} or ${b} are unknown nodes`);
-    }
-
-    this.adjList[a] = uniq([...this.adjList[a], b]);
-    this.adjList[b] = uniq([...this.adjList[b], a]);
-  }
-
-  // this is probably some very shitty and unoptimized code
-  public findNonAdjacentPairs(): string[][] {
-    const nonAdjacentPairs: string[][] = [];
-
-    const vertices = Object.keys(this.adjList);
-    const allPairs = combinations(vertices, 2);
-
-    for (const pair of allPairs) {
-      const adjacentVertices = this.adjList[pair[0]];
-
-      if (adjacentVertices.findIndex((adjVertex) => adjVertex === pair[1]) === -1) {
-        nonAdjacentPairs.push(pair);
-      }
-    }
-
-    console.debug("-----");
-    console.debug(allPairs);
-    console.debug(nonAdjacentPairs);
-    console.debug("-----");
-
-    return nonAdjacentPairs;
-  }
-}
