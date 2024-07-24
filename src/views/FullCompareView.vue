@@ -9,10 +9,12 @@ import Button from "@/components/ui/Button.vue";
 import type { StarRailCharacter } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const fullMode = useFullModeStore();
 const modalOpen = ref<boolean>(false);
+
+const canUndo = computed(() => fullMode.choices.length > 0);
 
 const start = () => {
   fullMode.start();
@@ -21,6 +23,12 @@ const start = () => {
 const pick = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
   fullMode.choose(winnerId);
 }, 200);
+
+const undo = () => {
+  if (canUndo.value) {
+    fullMode.undo();
+  }
+};
 
 const confirmReset = () => {
   modalOpen.value = true;
@@ -53,6 +61,11 @@ const reset = () => {
     </div>
 
     <div v-if="fullMode.screen === 'progress'" class="flex max-w-[800px] flex-col">
+      <div class="mb-2 grid grid-cols-[1fr_auto_1fr] grid-rows-1 items-center gap-2">
+        <div class="h-1 bg-gradient-to-r from-transparent to-neutral-700"></div>
+        <span class="text-sm text-neutral-500">{{ fullMode.queue.length }} pairs left</span>
+        <div class="h-1 bg-gradient-to-l from-transparent to-neutral-700"></div>
+      </div>
       <div v-if="fullMode.currentPair != null" class="flex flex-col gap-6 md:flex-row">
         <CharacterCard
           v-for="ch in fullMode.currentPair"
@@ -64,8 +77,8 @@ const reset = () => {
         />
       </div>
       <div class="auto mt-4 grid w-full grid-flow-dense grid-cols-1 gap-2 gap-x-4 md:grid-cols-3">
-        <Button variant="secondary">Undo</Button>
-        <Button variant="secondary">Skip</Button>
+        <Button variant="secondary" @click="undo" :disabled="!canUndo">Undo</Button>
+        <Button variant="secondary" disabled>Skip</Button>
         <Button variant="secondary" @click="confirmReset">Stop</Button>
       </div>
     </div>
