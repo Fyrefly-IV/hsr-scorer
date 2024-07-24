@@ -93,9 +93,9 @@ export const useFullModeStore = defineStore("full-mode", () => {
   }
 
   function reset() {
-    queue.value = []
-    choices.value = []
-    scores.value = {}
+    queue.value = [];
+    choices.value = [];
+    scores.value = {};
     _screen.value = "start";
   }
 
