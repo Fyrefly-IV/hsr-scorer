@@ -6,14 +6,24 @@ import { z } from "zod";
 import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 
+export const START_SCREEN = "start" as const;
+export const PROGRESS_SCREEN = "progress" as const;
+export const RESULTS_SCREEN = "results" as const;
+
 const QueueEntrySchema = z.tuple([StarRailCharacterSchema, StarRailCharacterSchema]);
 const ChoiceEntrySchema = z.object({
   pair: QueueEntrySchema,
   winnerId: StarRailCharacterSchema.shape.id,
 });
+const ScreenStateSchema = z.union([
+  z.literal(START_SCREEN),
+  z.literal(PROGRESS_SCREEN),
+  z.literal(RESULTS_SCREEN),
+]);
 
 type QueueEntry = z.infer<typeof QueueEntrySchema>;
 type ChoiceEntry = z.infer<typeof ChoiceEntrySchema>;
+type ScreenState = z.infer<typeof ScreenStateSchema>;
 type Scores = { [Key in StarRailCharacter["id"]]?: number };
 
 export const useFullModeStore = defineStore("full-mode", () => {
@@ -21,8 +31,10 @@ export const useFullModeStore = defineStore("full-mode", () => {
   const choices = useLocalStorage<ChoiceEntry[]>("choices", []);
   const scores = useLocalStorage<Scores>("scores", {});
 
-  const isStarted = useLocalStorage<boolean>("is-started", false);
-  const isFinished = useLocalStorage<boolean>("is-finished", false);
+  // we can't have visibility modifiers, 
+  // readonly computed ref is here for public use
+  const privateScreen = useLocalStorage<ScreenState>("screen", START_SCREEN);
+  const screen = computed(() => privateScreen.value);
 
   const currentPair = computed(() => {
     if (queue.value.length === 0) {
@@ -73,8 +85,18 @@ export const useFullModeStore = defineStore("full-mode", () => {
     const combos = combinations(pool, 2);
     shuffleArray(combos);
 
-    isStarted.value = true;
+    queue.value = QueueEntrySchema.array().parse(combos);
+    privateScreen.value = PROGRESS_SCREEN;
   }
 
-  return { queue, choices, scores, isStarted, isFinished, currentPair, choose, undo, start };
+  return {
+    queue,
+    choices,
+    scores,
+    currentPair,
+    screen,
+    choose,
+    undo,
+    start,
+  };
 });
