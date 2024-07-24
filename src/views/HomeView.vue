@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import { useCounterStore } from "@/stores/counter";
-
-const counter = useCounterStore();
+import Main from "@/components/Main.vue";
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <main class="flex flex-col items-center justify-center min-h-screen">
-    <h2 class="text-lg font-black">{{ counter.count }}</h2>
+  <Main class="flex flex-col items-center justify-center">
+    <div class="flex flex-col">
+      <h1 class="text-5xl font-black">Honkai Scorer</h1>
+      <div class="mt-4 flex flex-col gap-2">
+        <RouterLink
+          to="/settings"
+          class="flex h-9 items-center justify-center rounded-md bg-neutral-200 text-sm font-bold text-neutral-800 duration-100 hover:bg-neutral-300"
+        >
+          Settings
+        </RouterLink>
 
-    <button
-      @click="counter.increment"
-      class="bg-neutral-200 text-neutral-800 cursor-pointer px-4 py-2"
-    >
-      increment
-    </button>
-  </main>
+        <RouterLink
+          to="/full-compare"
+          class="flex h-9 items-center justify-center rounded-md bg-neutral-200 text-sm font-bold text-neutral-800 duration-100 hover:bg-neutral-300"
+        >
+          Full Compare
+        </RouterLink>
+      </div>
+    </div>
+  </Main>
 </template>
