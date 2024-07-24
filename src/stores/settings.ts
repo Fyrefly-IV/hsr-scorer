@@ -2,6 +2,7 @@ import { CHARACTERS, type StarRailCharacter } from "@/data/characters";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
+import uniq from "lodash.uniq";
 
 export const useSettingsStore = defineStore("settings", () => {
   const excludedIds = useLocalStorage<StarRailCharacter["id"][]>("excluded-ids", []);
@@ -10,17 +11,17 @@ export const useSettingsStore = defineStore("settings", () => {
     return CHARACTERS.filter((c) => !excludedIds.value.includes(c.id));
   });
 
-  function excludeId(characterId: StarRailCharacter["id"]) {
-    excludedIds.value = [characterId, ...excludedIds.value];
+  function excludeIds(...characterIds: StarRailCharacter["id"][]) {
+    excludedIds.value = uniq([...characterIds, ...excludedIds.value]);
   }
 
-  function includeId(characterId: StarRailCharacter["id"]) {
-    excludedIds.value = excludedIds.value.filter((id) => id !== characterId);
+  function includeIds(...characterIds: StarRailCharacter["id"][]) {
+    excludedIds.value = excludedIds.value.filter((id) => !characterIds.includes(id));
   }
 
   function isExcludedId(characterId: StarRailCharacter["id"]): boolean {
     return excludedIds.value.includes(characterId);
   }
 
-  return { excludedIds, characterPool, excludeId, includeId, isExcludedId };
+  return { excludedIds, characterPool, excludeIds, includeIds, isExcludedId };
 });
