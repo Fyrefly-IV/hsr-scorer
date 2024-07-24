@@ -27,8 +27,8 @@ export const useFullModeStore = defineStore("full-mode", () => {
   const choices = useLocalStorage<ChoiceEntry[]>("choices", []);
   const scores = useLocalStorage<Scores>("scores", {});
 
-  const privateScreen = useLocalStorage<ScreenState>("screen", "start");
-  const screen = computed(() => privateScreen.value);
+  const _screen = useLocalStorage<ScreenState>("screen", "start");
+  const screen = computed(() => _screen.value);
 
   const currentPair = computed(() => {
     if (queue.value.length === 0) {
@@ -53,7 +53,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     queue.value = queue.value.slice(1);
 
     if (autoFinish === true && queue.value.length === 0) {
-      privateScreen.value = "results";
+      _screen.value = "results";
     }
   }
 
@@ -84,7 +84,14 @@ export const useFullModeStore = defineStore("full-mode", () => {
     shuffleArray(combos);
 
     queue.value = QueueEntrySchema.array().parse(combos);
-    privateScreen.value = "progress";
+    _screen.value = "progress";
+  }
+
+  function reset() {
+    queue.value = []
+    choices.value = []
+    scores.value = {}
+    _screen.value = "start";
   }
 
   return {
@@ -96,5 +103,6 @@ export const useFullModeStore = defineStore("full-mode", () => {
     choose,
     undo,
     start,
+    reset,
   };
 });
