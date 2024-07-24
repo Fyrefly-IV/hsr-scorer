@@ -44,7 +44,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     return queue.value[0];
   });
 
-  function choose(winnerId: StarRailCharacter["id"]) {
+  function choose(winnerId: StarRailCharacter["id"], autoFinish: boolean = true) {
     const pair = currentPair.value;
     if (pair == null) {
       throw Error("there is no current pair, cannot make a choice!");
@@ -57,6 +57,10 @@ export const useFullModeStore = defineStore("full-mode", () => {
     scores.value[winnerId] = (scores.value[winnerId] ?? 0) + 1;
     choices.value = [{ pair, winnerId }, ...choices.value];
     queue.value = queue.value.slice(1);
+
+    if (autoFinish === true && queue.value.length === 0) {
+      privateScreen.value = RESULTS_SCREEN;
+    }
   }
 
   function undo() {
