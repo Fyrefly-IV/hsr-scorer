@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 import type { ClassValue } from "clsx";
 
 type Props = {
-  variant?: "default" | "outline" | "secondary";
+  variant?: "default" | "outline" | "secondary" | "destructive";
   size?: "default" | "sm" | "lg" | "icon";
   disabled?: boolean;
 };
@@ -36,6 +36,7 @@ const clickHandler = (e: MouseEvent) => {
         props.variant === 'secondary'
           ? 'bg-neutral-800 text-neutral-200 hover:bg-neutral-800/75'
           : null,
+        props.variant === 'destructive' ? 'bg-red-700 hover:bg-red-800' : null,
         props.size === 'default' ? 'h-9 px-4 py-2' : null,
         props.size === 'sm' ? 'h-8 px-3 text-xs' : null,
         props.size === 'lg' ? 'h-10 px-8' : null,
