@@ -1,24 +1,24 @@
-import { CHARACTERS, type Character } from "@/data/characters";
+import { CHARACTERS, type StarRailCharacter } from "@/data/characters";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
 
 export const useSettingsStore = defineStore("settings", () => {
-  const excludedIds = useLocalStorage<Character["id"][]>("excluded-ids", []);
+  const excludedIds = useLocalStorage<StarRailCharacter["id"][]>("excluded-ids", []);
 
   const characterPool = computed(() => {
     return CHARACTERS.filter((c) => !excludedIds.value.includes(c.id));
   });
 
-  function excludeId(characterId: Character["id"]) {
+  function excludeId(characterId: StarRailCharacter["id"]) {
     excludedIds.value = [characterId, ...excludedIds.value];
   }
 
-  function includeId(characterId: Character["id"]) {
+  function includeId(characterId: StarRailCharacter["id"]) {
     excludedIds.value = excludedIds.value.filter((id) => id !== characterId);
   }
 
-  function isExcludedId(characterId: Character["id"]): boolean {
+  function isExcludedId(characterId: StarRailCharacter["id"]): boolean {
     return excludedIds.value.includes(characterId);
   }
 
