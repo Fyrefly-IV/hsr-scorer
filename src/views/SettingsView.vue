@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import CharacterCard from "@/components/CharacterCard.vue";
 import Main from "@/components/Main.vue";
-import { CHARACTERS, type Character } from "@/data/characters";
+import { CHARACTERS, type StarRailCharacter } from "@/data/characters";
 import { useSettingsStore } from "@/stores/settings";
 
 const settings = useSettingsStore();
 
-const characterClickHandler = (id: Character["id"]) => {
+const characterClickHandler = (id: StarRailCharacter["id"]) => {
   if (!settings.isExcludedId(id)) {
     settings.excludeId(id);
   } else {

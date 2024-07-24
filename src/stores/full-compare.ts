@@ -1,4 +1,4 @@
-import { CharacterSchema, type Character } from "@/data/characters";
+import { StarRailCharacterSchema, type StarRailCharacter } from "@/data/characters";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
@@ -6,15 +6,15 @@ import { z } from "zod";
 import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 
-const QueueEntrySchema = z.tuple([CharacterSchema, CharacterSchema]);
+const QueueEntrySchema = z.tuple([StarRailCharacterSchema, StarRailCharacterSchema]);
 const ChoiceEntrySchema = z.object({
   pair: QueueEntrySchema,
-  winnerId: CharacterSchema.shape.id,
+  winnerId: StarRailCharacterSchema.shape.id,
 });
 
 type QueueEntry = z.infer<typeof QueueEntrySchema>;
 type ChoiceEntry = z.infer<typeof ChoiceEntrySchema>;
-type Scores = { [Key in Character["id"]]?: number };
+type Scores = { [Key in StarRailCharacter["id"]]?: number };
 
 export const useFullModeStore = defineStore("full-mode", () => {
   const queue = useLocalStorage<QueueEntry[]>("queue", []);
@@ -32,7 +32,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     return queue.value[0];
   });
 
-  function choose(winnerId: Character["id"]) {
+  function choose(winnerId: StarRailCharacter["id"]) {
     const pair = currentPair.value;
     if (pair == null) {
       throw Error("there is no current pair, cannot make a choice!");

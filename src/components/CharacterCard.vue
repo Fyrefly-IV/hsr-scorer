@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Character } from "@/data/characters";
+import type { StarRailCharacter } from "@/data/characters";
 
 type Props = {
-  character: Character;
+  character: StarRailCharacter;
   hideName?: boolean;
   excluded?: boolean;
   hoverable?: boolean;
