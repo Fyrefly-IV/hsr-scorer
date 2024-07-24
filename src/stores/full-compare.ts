@@ -84,6 +84,10 @@ export const useFullModeStore = defineStore("full-mode", () => {
     const combos = combinations(pool, 2);
     shuffleArray(combos);
 
+    pool.forEach((c) => {
+      scores.value[c.id] = 0;
+    });
+
     queue.value = QueueEntrySchema.array().parse(combos);
     _screen.value = "progress";
   }
