@@ -45,6 +45,7 @@ const clickHandler = (e: MouseEvent) => {
       )
     "
     @click="clickHandler"
+    :disabled="disabled"
   >
     <slot></slot>
   </button>
