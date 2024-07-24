@@ -5,6 +5,7 @@ import { computed } from "vue";
 import { z } from "zod";
 import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
+import { getObjectValue } from "@/lib/get-object-value";
 
 const QueueEntrySchema = z.tuple([StarRailCharacterSchema, StarRailCharacterSchema]);
 const ChoiceEntrySchema = z.object({
@@ -20,7 +21,7 @@ const ScreenStateSchema = z.union([
 type QueueEntry = z.infer<typeof QueueEntrySchema>;
 type ChoiceEntry = z.infer<typeof ChoiceEntrySchema>;
 type ScreenState = z.infer<typeof ScreenStateSchema>;
-type Scores = { [Key in StarRailCharacter["id"]]?: number };
+type Scores = { [Key in StarRailCharacter["id"]]: number };
 
 export const useFullModeStore = defineStore("full-mode", () => {
   const queue = useLocalStorage<QueueEntry[]>("queue", []);
@@ -48,7 +49,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
       throw Error(`provided winnerId is not present in current pair ${pair}`);
     }
 
-    scores.value[winnerId] = (scores.value[winnerId] ?? 0) + 1;
+    scores.value[winnerId] = (getObjectValue(scores.value, winnerId) ?? 0) + 1;
     choices.value = [{ pair, winnerId }, ...choices.value];
     queue.value = queue.value.slice(1);
 
@@ -67,7 +68,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     choices.value = choices.value.slice(1);
     queue.value = [latestChoice.pair, ...queue.value];
 
-    const score = scores.value[latestChoice.winnerId];
+    const score = getObjectValue(scores.value, latestChoice.winnerId);
     if (score != null) {
       scores.value[latestChoice.winnerId] = score - 1;
     }
