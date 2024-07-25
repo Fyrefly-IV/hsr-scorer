@@ -3,11 +3,17 @@ import CharacterCard from "@/components/CharacterCard.vue";
 import Main from "@/components/Main.vue";
 import H1 from "@/components/typography/H1.vue";
 import P from "@/components/typography/P.vue";
+import Alert from "@/components/ui/alert/Alert.vue";
+import AlertDescription from "@/components/ui/alert/AlertDescription.vue";
+import AlertTitle from "@/components/ui/alert/AlertTitle.vue";
 import Button from "@/components/ui/Button.vue";
 import { CHARACTERS, type StarRailCharacter } from "@/data/characters";
+import { useFullModeStore } from "@/stores/full-compare";
 import { useSettingsStore } from "@/stores/settings";
+import { TriangleAlertIcon } from "lucide-vue-next";
 
 const settings = useSettingsStore();
+const fullMode = useFullModeStore();
 
 const characterClickHandler = (id: StarRailCharacter["id"]) => {
   if (!settings.isExcludedId(id)) {
@@ -28,23 +34,36 @@ const handleStarRailExcludeAll = () => {
 
 <template>
   <Main class="flex flex-col">
-    <div class="container mt-10 font-anuphan">
+    <div class="font-anuphan container mt-10">
       <H1>Settings</H1>
       <P class="text-lg">
         In settings you can pick characters which you want to be present in your comparisons by
         simply clicking on them!
       </P>
+
+      <Alert v-if="fullMode.screen === 'progress'" variant="destructive" class="mt-4">
+        <AlertTitle class="flex flex-row items-center gap-2">
+          <TriangleAlertIcon class="inline size-6" />
+          <span>WARNING!</span>
+        </AlertTitle>
+        <AlertDescription>
+          You are currently in progress of comparing characters, if you select or deselect
+          characters right now these changes will take effect only once you start comparing again!
+        </AlertDescription>
+      </Alert>
     </div>
 
     <div class="container mt-10">
       <div>
         <H1>Star Rail</H1>
         <div class="mt-4 flex flex-row gap-2">
-          <Button @click="handleStarRailIncludeAll">Select All</Button>
-          <Button @click="handleStarRailExcludeAll">Deselect All</Button>
+          <Button variant="secondary" @click="handleStarRailIncludeAll">Select All</Button>
+          <Button variant="secondary" @click="handleStarRailExcludeAll">Deselect All</Button>
         </div>
       </div>
-      <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">
+      <div
+        class="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      >
         <CharacterCard
           v-for="c in CHARACTERS"
           :key="c.id"
