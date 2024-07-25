@@ -69,7 +69,7 @@ const reset = () => {
 </script>
 
 <template>
-  <Main class="bg-background flex min-h-screen flex-col items-center justify-center">
+  <Main class="flex min-h-screen flex-col items-center justify-center bg-background pt-16 sm:pt-0">
     <div v-if="fullMode.screen === 'start'" class="flex max-w-[800px] flex-col">
       <H1 class="text-center">Full Compare</H1>
       <P class="text-justify">
@@ -88,9 +88,9 @@ const reset = () => {
       </button>
     </div>
 
-    <div v-if="fullMode.screen === 'progress'" class="w-full max-w-[600px] px-4 sm:px-6 lg:px-8">
+    <div v-if="fullMode.screen === 'progress'" class="w-ful w-fit max-w-[600px]">
       <div
-        class="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2"
+        class="grid w-fit grid-cols-1 place-items-center gap-4 sm:grid-cols-2"
         v-if="fullMode.currentPair != null"
       >
         <CharacterCard
@@ -98,17 +98,17 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
-          class="cursor-pointer"
+          class="max-w-[270px] cursor-pointer sm:max-w-none"
           hoverable
         />
       </div>
-      <div class="mt-6 flex items-center justify-between">
+      <div class="mt-6 flex w-full items-center justify-between">
         <Button variant="ghost" size="icon" @click="undo" :disabled="!canUndo">
           <UndoIcon class="size-6" />
           <span class="sr-only">Undo</span>
         </Button>
 
-        <span class="text-muted-foreground text-sm sm:text-base">
+        <span class="text-sm text-muted-foreground sm:text-base">
           <span>{{ fullMode.queue.length }}</span>
           <span class="hidden sm:inline"> pairs</span>
           <span> left</span>
