@@ -98,6 +98,7 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
+          class="cursor-pointer"
           hoverable
         />
       </div>
@@ -140,7 +141,7 @@ const reset = () => {
           />
         </div>
 
-        <Button variant="secondary" @click="confirmReset" class="w-fit self-center">Reset</Button>
+        <Button variant="outline" @click="confirmReset" class="w-fit self-center">Reset</Button>
 
         <button
           class="mt-6 w-fit self-center rounded-md px-2 py-1 text-sm text-neutral-600 hover:bg-neutral-700 hover:text-neutral-400"
@@ -152,15 +153,15 @@ const reset = () => {
 
       <div
         v-if="showScores"
-        class="container mt-8 flex w-full flex-shrink-0 flex-row flex-wrap justify-center gap-8"
+        class="container mt-8 flex w-full flex-shrink-0 flex-row flex-wrap justify-center gap-8 px-0"
       >
-        <div v-for="(entry, i) in scores" :key="`scores-${i}`" class="flex flex-col">
-          <span class="mb-2 self-center text-sm font-semibold">{{ entry.score }} points</span>
-          <CharacterCard
-            :character="entry.character"
-            class="w-[150px] [&_div:has(h4)]:mb-2 [&_h4]:text-lg"
-          />
-        </div>
+        <CharacterCard
+          v-for="(entry, i) in scores"
+          :key="`scores-${i}`"
+          :character="entry.character"
+          :text-under-name="`${entry.score} points`"
+          class="w-[150px] md:w-[170px] [&_h3]:text-base [&_p]:text-xs"
+        />
       </div>
     </div>
   </Main>
