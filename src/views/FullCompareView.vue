@@ -98,6 +98,7 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
+          hoverable
         />
       </div>
       <div class="mt-6 flex items-center justify-between">
