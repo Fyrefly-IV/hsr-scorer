@@ -11,6 +11,7 @@ const attrs = useAttrs();
 type Props = {
   character: StarRailCharacter;
   hideName?: boolean;
+  textUnderName?: string;
   excluded?: boolean;
   hoverable?: boolean;
   width?: number;
@@ -39,7 +40,7 @@ const clickHandler = (e: MouseEvent) => {
     @click="clickHandler"
     :class="
       cn(
-        'bg-secondary/30 border-border group relative cursor-pointer overflow-hidden rounded-lg border data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
+        'bg-secondary/30 border-border group relative overflow-hidden rounded-lg border data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
         attrs.class as ClassValue,
       )
     "
@@ -61,6 +62,9 @@ const clickHandler = (e: MouseEvent) => {
       <h3 class="font-anuphane text-lg font-semibold">
         {{ character.name }}
       </h3>
+      <p v-if="typeof textUnderName === 'string'" class="font-anuphane text-sm">
+        {{ textUnderName }}
+      </p>
     </figcaption>
   </figure>
 </template>
