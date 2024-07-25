@@ -119,8 +119,8 @@ const reset = () => {
           </Button>
           <Button variant="destructive" size="icon" @click="confirmReset">
             <XIcon class="size-6" />
-            <span class="sr-only">End Game</span></Button
-          >
+            <span class="sr-only">Stop Comparing</span>
+          </Button>
         </div>
       </div>
     </div>
