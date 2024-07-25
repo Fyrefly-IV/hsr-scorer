@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Main from "@/components/Main.vue";
+import Button from "@/components/ui/Button.vue";
 import { RouterLink } from "vue-router";
+import { SettingsIcon } from "lucide-vue-next";
 </script>
 
 <template>
@@ -8,18 +10,15 @@ import { RouterLink } from "vue-router";
     <div class="flex flex-col">
       <h1 class="text-5xl font-black">Honkai Scorer</h1>
       <div class="mt-4 flex flex-col gap-2">
-        <RouterLink
-          to="/settings"
-          class="flex h-9 items-center justify-center rounded-md bg-neutral-200 text-sm font-bold text-neutral-800 duration-100 hover:bg-neutral-300"
-        >
-          Settings
+        <RouterLink to="/settings">
+          <Button variant="outline" size="lg" class="w-full gap-2">
+            <SettingsIcon class="size-4" />
+            <span>Settings</span>
+          </Button>
         </RouterLink>
 
-        <RouterLink
-          to="/full-compare"
-          class="flex h-9 items-center justify-center rounded-md bg-neutral-200 text-sm font-bold text-neutral-800 duration-100 hover:bg-neutral-300"
-        >
-          Full Compare
+        <RouterLink to="/full-compare">
+          <Button size="lg" class="w-full">Full Compare</Button>
         </RouterLink>
       </div>
     </div>
