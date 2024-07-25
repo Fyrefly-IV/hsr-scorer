@@ -10,6 +10,7 @@ import { characterById, type StarRailCharacter } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
 import { computed, ref } from "vue";
+import { UndoIcon, SkipForwardIcon, XIcon } from "lucide-vue-next";
 
 const fullMode = useFullModeStore();
 const showModal = ref<boolean>(false);
@@ -46,7 +47,7 @@ const start = () => {
   fullMode.start();
 };
 
-const pick = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
+const chooseThrottled = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
   fullMode.choose(winnerId);
 }, 200);
 
@@ -68,7 +69,7 @@ const reset = () => {
 </script>
 
 <template>
-  <Main class="flex w-full items-center justify-center py-14">
+  <Main class="bg-background flex min-h-screen flex-col items-center justify-center">
     <div v-if="fullMode.screen === 'start'" class="flex max-w-[800px] flex-col">
       <H1 class="text-center">Full Compare</H1>
       <P class="text-justify">
@@ -87,26 +88,40 @@ const reset = () => {
       </button>
     </div>
 
-    <div v-if="fullMode.screen === 'progress'" class="flex max-w-[800px] flex-col">
-      <div class="mb-2 grid grid-cols-[1fr_auto_1fr] grid-rows-1 items-center gap-2">
-        <div class="h-1 bg-gradient-to-r from-transparent to-neutral-700"></div>
-        <span class="text-sm text-neutral-500">{{ fullMode.queue.length }} pairs left</span>
-        <div class="h-1 bg-gradient-to-l from-transparent to-neutral-700"></div>
-      </div>
-      <div v-if="fullMode.currentPair != null" class="flex flex-col gap-6 md:flex-row">
+    <div v-if="fullMode.screen === 'progress'" class="w-full max-w-[600px] px-4 sm:px-6 lg:px-8">
+      <div
+        class="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2"
+        v-if="fullMode.currentPair != null"
+      >
         <CharacterCard
           v-for="ch in fullMode.currentPair"
-          :key="ch.id"
+          :key="`pair-${ch.id}`"
+          @click="() => chooseThrottled(ch.id)"
           :character="ch"
-          @click="() => pick(ch.id)"
-          class="cursor-pointer"
-          hoverable
         />
       </div>
-      <div class="auto mt-4 grid w-full grid-flow-dense grid-cols-1 gap-2 gap-x-4 md:grid-cols-3">
-        <Button variant="secondary" @click="undo" :disabled="!canUndo">Undo</Button>
-        <Button variant="secondary" disabled>Skip</Button>
-        <Button variant="secondary" @click="confirmReset">Stop</Button>
+      <div class="mt-6 flex items-center justify-between">
+        <Button variant="ghost" size="icon" @click="undo" :disabled="!canUndo">
+          <UndoIcon class="size-6" />
+          <span class="sr-only">Undo</span>
+        </Button>
+
+        <span class="text-muted-foreground text-sm sm:text-base">
+          <span>{{ fullMode.queue.length }}</span>
+          <span class="hidden sm:inline"> pairs</span>
+          <span> left</span>
+        </span>
+        <div className="flex items-center gap-4">
+          <!-- TODO: implement skip -->
+          <Button variant="ghost" size="icon" disabled>
+            <SkipForwardIcon class="size-6" />
+            <span className="sr-only">Skip</span>
+          </Button>
+          <Button variant="destructive" size="icon" @click="confirmReset">
+            <XIcon class="size-6" />
+            <span class="sr-only">End Game</span></Button
+          >
+        </div>
       </div>
     </div>
 
