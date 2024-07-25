@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HomeIcon from "@/components/icons/HomeIcon.vue";
-import GearIcon from "@/components/icons/GearIcon.vue";
+import Button from "./ui/Button.vue";
+import { HomeIcon, SettingsIcon } from "lucide-vue-next";
 
 const nav = [
   {
@@ -9,7 +9,7 @@ const nav = [
     href: "/",
   },
   {
-    icon: GearIcon,
+    icon: SettingsIcon,
     name: "Settings",
     href: "/settings",
   },
@@ -18,13 +18,10 @@ const nav = [
 
 <template>
   <nav class="fixed left-4 top-4 z-[10] flex flex-row gap-3">
-    <RouterLink
-      v-for="endpoint in nav"
-      :key="endpoint.href"
-      :to="endpoint.href"
-      class="box-border flex h-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 px-3 transition-all duration-200 ease-in-out hover:bg-neutral-800"
-    >
-      <component :is="endpoint.icon" />
+    <RouterLink v-for="endpoint in nav" :key="endpoint.href" :to="endpoint.href">
+      <Button variant="outline" size="icon">
+        <component :is="endpoint.icon" class="size-4" />
+      </Button>
     </RouterLink>
   </nav>
 </template>
