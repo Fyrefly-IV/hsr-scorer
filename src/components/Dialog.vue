@@ -32,9 +32,7 @@ watch(
       v-if="open === true"
       v-on-click-outside="close"
       :class="
-        cn(
-          'flex w-full max-w-[600px] flex-col rounded-md border border-neutral-700 bg-neutral-800 p-4 text-neutral-200',
-        )
+        cn('border-border bg-background flex w-full max-w-[600px] flex-col rounded-md border p-4')
       "
     >
       <slot></slot>
@@ -44,7 +42,7 @@ watch(
 
 <style lang="css">
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 dialog[open] {
