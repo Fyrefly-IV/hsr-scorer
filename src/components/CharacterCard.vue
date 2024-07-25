@@ -13,9 +13,14 @@ type Props = {
   hideName?: boolean;
   excluded?: boolean;
   hoverable?: boolean;
+  width?: number;
+  height?: number;
 };
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  width: 200,
+  height: 300,
+});
 
 type Emits = {
   click: [payload?: MouseEvent];
@@ -29,12 +34,12 @@ const clickHandler = (e: MouseEvent) => {
 </script>
 
 <template>
-  <picture
+  <figure
     v-bind="{ ...attrs, class: null }"
     @click="clickHandler"
     :class="
       cn(
-        'group relative box-border block aspect-[294/400] w-[220px] overflow-hidden bg-neutral-800 outline outline-1 outline-neutral-700 transition-all data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
+        'bg-secondary/30 border-border group relative cursor-pointer overflow-hidden rounded-lg border data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
         attrs.class as ClassValue,
       )
     "
@@ -43,15 +48,19 @@ const clickHandler = (e: MouseEvent) => {
   >
     <img
       :src="character.portraitPath"
-      class="aspect-[294/400] w-full select-none duration-300 ease-in-out group-data-[hoverable=true]:group-hover:scale-110"
+      :style="{ aspectRatio: `${width}/${height}` }"
+      class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-data-[hoverable=true]:hover:scale-110"
       draggable="false"
       decoding="async"
       loading="eager"
     />
-    <div class="absolute bottom-0 mb-4 w-full text-center" v-if="hideName !== true">
-      <h4 class="font-anuphan text-xl font-bold md:text-2xl">
+    <figcaption
+      class="absolute inset-x-0 bottom-0 bg-gradient-to-b from-black/30 to-black/50 px-4 py-3 text-center text-white"
+      v-if="hideName !== true"
+    >
+      <h3 class="font-anuphane text-lg font-semibold">
         {{ character.name }}
-      </h4>
-    </div>
-  </picture>
+      </h3>
+    </figcaption>
+  </figure>
 </template>
