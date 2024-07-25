@@ -17,8 +17,10 @@
     "@vueuse/core": "^10.11.0",
     "clsx": "^2.1.1",
     "lodash.uniq": "^4.5.0",
+    "lucide-vue-next": "^0.416.0",
     "pinia": "^2.1.7",
     "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
     "zod": "^3.23.8"
