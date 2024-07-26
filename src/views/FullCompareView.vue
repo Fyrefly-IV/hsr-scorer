@@ -133,7 +133,7 @@ const reset = () => {
         <H2 class="mb-4 text-center font-bold">
           Most chosen character<span v-if="winners.length > 1">s</span>
         </H2>
-        <div class="mb-4 flex flex-row flex-wrap justify-center">
+        <div class="mb-4 gap-2 flex flex-row flex-wrap justify-center">
           <CharacterCard
             v-for="(entry, i) in winners"
             :key="`winner-${i}`"
