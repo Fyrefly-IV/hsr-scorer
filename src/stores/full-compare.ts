@@ -1,4 +1,5 @@
-import { StarRailCharacterSchema, type StarRailCharacter } from "@/data/characters";
+import { CHARACTERS_MAP, CharacterSchema } from "@/data/characters";
+import type { Character } from "@/data/characters";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
@@ -7,10 +8,10 @@ import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 import { getObjectValue } from "@/lib/get-object-value";
 
-const QueueEntrySchema = z.tuple([StarRailCharacterSchema, StarRailCharacterSchema]);
+const QueueIDsEntrySchema = z.tuple([CharacterSchema.shape.id, CharacterSchema.shape.id]);
 const ChoiceEntrySchema = z.object({
-  pair: QueueEntrySchema,
-  winnerId: StarRailCharacterSchema.shape.id,
+  pair: QueueIDsEntrySchema,
+  winnerId: CharacterSchema.shape.id.nullable(),
 });
 const ScreenStateSchema = z.union([
   z.literal("start"),
@@ -18,42 +19,59 @@ const ScreenStateSchema = z.union([
   z.literal("results"),
 ]);
 
-type QueueEntry = z.infer<typeof QueueEntrySchema>;
+type QueueIDsEntry = z.infer<typeof QueueIDsEntrySchema>;
 type ChoiceEntry = z.infer<typeof ChoiceEntrySchema>;
 type ScreenState = z.infer<typeof ScreenStateSchema>;
-type Scores = { [Key in StarRailCharacter["id"]]: number };
+type Scores = { [Key in Character["id"]]: number };
 
 export const useFullModeStore = defineStore("full-mode", () => {
-  const queue = useLocalStorage<QueueEntry[]>("queue", []);
+  const queueIDs = useLocalStorage<QueueIDsEntry[]>("queue-ids", []);
   const choices = useLocalStorage<ChoiceEntry[]>("choices", []);
   const scores = useLocalStorage<Scores>("scores", {});
 
   const _screen = useLocalStorage<ScreenState>("screen", "start");
   const screen = computed(() => _screen.value);
 
-  const currentPair = computed(() => {
-    if (queue.value.length === 0) {
+  const currentIdPair = computed(() => {
+    if (queueIDs.value.length === 0) {
       return null;
     }
 
-    return queue.value[0];
+    return queueIDs.value[0];
   });
 
-  function choose(winnerId: StarRailCharacter["id"], autoFinish: boolean = true) {
-    const pair = currentPair.value;
+  const currentPair = computed<[Character, Character] | null>(() => {
+    if (queueIDs.value.length === 0) {
+      return null;
+    }
+
+    const [a, b] = queueIDs.value[0];
+
+    const characterA = CHARACTERS_MAP.get(a);
+    const characterB = CHARACTERS_MAP.get(b);
+
+    if (characterA == null || characterB == null) {
+      return null;
+    }
+
+    return [characterA, characterB];
+  });
+
+  function choose(winnerId: Character["id"], autoFinish: boolean = true) {
+    const pair = currentIdPair.value;
     if (pair == null) {
       throw Error("there is no current pair, cannot make a choice!");
     }
 
-    if (!pair.some((c) => c.id === winnerId)) {
+    if (!pair.some((id) => id === winnerId)) {
       throw Error(`provided winnerId is not present in current pair ${pair}`);
     }
 
     scores.value[winnerId] = (getObjectValue(scores.value, winnerId) ?? 0) + 1;
     choices.value = [{ pair, winnerId }, ...choices.value];
-    queue.value = queue.value.slice(1);
+    queueIDs.value = queueIDs.value.slice(1);
 
-    if (autoFinish === true && queue.value.length === 0) {
+    if (autoFinish === true && queueIDs.value.length === 0) {
       _screen.value = "results";
     }
   }
@@ -66,7 +84,11 @@ export const useFullModeStore = defineStore("full-mode", () => {
     const latestChoice = choices.value[0];
 
     choices.value = choices.value.slice(1);
-    queue.value = [latestChoice.pair, ...queue.value];
+    queueIDs.value = [latestChoice.pair, ...queueIDs.value];
+
+    if (latestChoice.winnerId == null) {
+      return;
+    }
 
     const score = getObjectValue(scores.value, latestChoice.winnerId);
     if (score != null) {
@@ -75,34 +97,40 @@ export const useFullModeStore = defineStore("full-mode", () => {
   }
 
   function start() {
-    const pool = [...useSettingsStore().characterPool];
+    const settings = useSettingsStore();
+    const excludedIds = settings.excludedIds;
 
-    if (pool.length === 0) {
+    const poolIds = [...CHARACTERS_MAP.keys()].filter((id) => !excludedIds.includes(id));
+
+    if (poolIds.length === 0) {
       throw Error("character pool is empty");
     }
 
-    const combos = combinations(pool, 2);
+    const combos = combinations(poolIds, 2);
     shuffleArray(combos);
 
-    pool.forEach((c) => {
-      scores.value[c.id] = 0;
+    poolIds.forEach((id) => {
+      scores.value[id] = 0;
     });
 
-    queue.value = QueueEntrySchema.array().parse(combos);
+    console.log(combos);
+
+    queueIDs.value = QueueIDsEntrySchema.array().parse(combos);
     _screen.value = "progress";
   }
 
   function reset() {
-    queue.value = [];
+    queueIDs.value = [];
     choices.value = [];
     scores.value = {};
     _screen.value = "start";
   }
 
   return {
-    queue,
+    queueIDs,
     choices,
     scores,
+    currentIdPair,
     currentPair,
     screen,
     choose,

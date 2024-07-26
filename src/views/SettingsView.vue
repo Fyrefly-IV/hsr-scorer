@@ -7,7 +7,7 @@ import Alert from "@/components/ui/alert/Alert.vue";
 import AlertDescription from "@/components/ui/alert/AlertDescription.vue";
 import AlertTitle from "@/components/ui/alert/AlertTitle.vue";
 import Button from "@/components/ui/Button.vue";
-import { CHARACTERS, type StarRailCharacter } from "@/data/characters";
+import { STAR_RAIL_CHARACTERS, type Character } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useSettingsStore } from "@/stores/settings";
 import { TriangleAlertIcon } from "lucide-vue-next";
@@ -15,7 +15,7 @@ import { TriangleAlertIcon } from "lucide-vue-next";
 const settings = useSettingsStore();
 const fullMode = useFullModeStore();
 
-const characterClickHandler = (id: StarRailCharacter["id"]) => {
+const characterClickHandler = (id: Character["id"]) => {
   if (!settings.isExcludedId(id)) {
     settings.excludeIds(id);
   } else {
@@ -24,11 +24,11 @@ const characterClickHandler = (id: StarRailCharacter["id"]) => {
 };
 
 const handleStarRailIncludeAll = () => {
-  settings.includeIds(...CHARACTERS.map((c) => c.id));
+  settings.includeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
 };
 
 const handleStarRailExcludeAll = () => {
-  settings.excludeIds(...CHARACTERS.map((c) => c.id));
+  settings.excludeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
 };
 </script>
 
@@ -65,7 +65,7 @@ const handleStarRailExcludeAll = () => {
         class="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
       >
         <CharacterCard
-          v-for="c in CHARACTERS"
+          v-for="c in STAR_RAIL_CHARACTERS"
           :key="c.id"
           :character="c"
           @click="() => characterClickHandler(c.id)"
