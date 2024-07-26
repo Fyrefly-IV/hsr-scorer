@@ -7,7 +7,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Firefly",
     association: "Stellaron Hunters",
     assets: {
-      portrait: "/img/v4/portraits/1310.webp",
+      portrait: "/img/hsr/portraits/1310.webp",
     },
   },
   {
@@ -16,7 +16,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Kafka",
     association: "Stellaron Hunters",
     assets: {
-      portrait: "/img/v4/portraits/1005.webp",
+      portrait: "/img/hsr/portraits/1005.webp",
     },
   },
   {
@@ -25,7 +25,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Silver Wolf",
     association: "Stellaron Hunters",
     assets: {
-      portrait: "/img/v4/portraits/1006.webp",
+      portrait: "/img/hsr/portraits/1006.webp",
     },
   },
   {
@@ -34,7 +34,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Blade",
     association: "Stellaron Hunters",
     assets: {
-      portrait: "/img/v4/portraits/1205.webp",
+      portrait: "/img/hsr/portraits/1205.webp",
     },
   },
   {
@@ -43,7 +43,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "March 7th",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/1001.webp",
+      portrait: "/img/hsr/portraits/1001.webp",
     },
   },
   {
@@ -52,7 +52,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Stelle",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/8002.webp",
+      portrait: "/img/hsr/portraits/8002.webp",
     },
   },
   {
@@ -61,7 +61,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Caelus",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/8001.webp",
+      portrait: "/img/hsr/portraits/8001.webp",
     },
   },
   {
@@ -70,7 +70,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Dan Heng",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/1002.webp",
+      portrait: "/img/hsr/portraits/1002.webp",
     },
   },
   {
@@ -79,7 +79,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Himeko",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/1003.webp",
+      portrait: "/img/hsr/portraits/1003.webp",
     },
   },
   {
@@ -88,7 +88,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Welt",
     association: "Astral Express",
     assets: {
-      portrait: "/img/v4/portraits/1004.webp",
+      portrait: "/img/hsr/portraits/1004.webp",
     },
   },
   {
@@ -97,7 +97,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Bronya",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1101.webp",
+      portrait: "/img/hsr/portraits/1101.webp",
     },
   },
   {
@@ -106,7 +106,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Seele",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1102.webp",
+      portrait: "/img/hsr/portraits/1102.webp",
     },
   },
   {
@@ -115,7 +115,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Clara",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1107.webp",
+      portrait: "/img/hsr/portraits/1107.webp",
     },
   },
   {
@@ -124,7 +124,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Pela",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1106.webp",
+      portrait: "/img/hsr/portraits/1106.webp",
     },
   },
   {
@@ -133,7 +133,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Gepard",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1104.webp",
+      portrait: "/img/hsr/portraits/1104.webp",
     },
   },
   {
@@ -142,7 +142,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Luka",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1111.webp",
+      portrait: "/img/hsr/portraits/1111.webp",
     },
   },
   {
@@ -151,7 +151,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Lynx",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1110.webp",
+      portrait: "/img/hsr/portraits/1110.webp",
     },
   },
   {
@@ -160,7 +160,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Natasha",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1105.webp",
+      portrait: "/img/hsr/portraits/1105.webp",
     },
   },
   {
@@ -169,7 +169,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Hook",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1109.webp",
+      portrait: "/img/hsr/portraits/1109.webp",
     },
   },
   {
@@ -178,7 +178,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Sampo",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1108.webp",
+      portrait: "/img/hsr/portraits/1108.webp",
     },
   },
   {
@@ -187,7 +187,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Serval",
     association: "Belobog",
     assets: {
-      portrait: "/img/v4/portraits/1103.webp",
+      portrait: "/img/hsr/portraits/1103.webp",
     },
   },
   {
@@ -196,7 +196,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Arlan",
     association: "Herta Space Station",
     assets: {
-      portrait: "/img/v4/portraits/1008.webp",
+      portrait: "/img/hsr/portraits/1008.webp",
     },
   },
   {
@@ -205,7 +205,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Asta",
     association: "Herta Space Station",
     assets: {
-      portrait: "/img/v4/portraits/1009.webp",
+      portrait: "/img/hsr/portraits/1009.webp",
     },
   },
   {
@@ -214,7 +214,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Aventurine",
     association: "Ten Stonehearts",
     assets: {
-      portrait: "/img/v4/portraits/1304.webp",
+      portrait: "/img/hsr/portraits/1304.webp",
     },
   },
   {
@@ -223,7 +223,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Topaz",
     association: "Ten Stonehearts",
     assets: {
-      portrait: "/img/v4/portraits/1112.webp",
+      portrait: "/img/hsr/portraits/1112.webp",
     },
   },
   {
@@ -232,7 +232,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Jade",
     association: "Ten Stonehearts",
     assets: {
-      portrait: "/img/v4/portraits/1314.webp",
+      portrait: "/img/hsr/portraits/1314.webp",
     },
   },
   {
@@ -241,7 +241,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Bailu",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1211.webp",
+      portrait: "/img/hsr/portraits/1211.webp",
     },
   },
   {
@@ -250,7 +250,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Fu Xuan",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1208.webp",
+      portrait: "/img/hsr/portraits/1208.webp",
     },
   },
   {
@@ -259,7 +259,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Guinaifen",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1210.webp",
+      portrait: "/img/hsr/portraits/1210.webp",
     },
   },
   {
@@ -268,7 +268,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Hanya",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1215.webp",
+      portrait: "/img/hsr/portraits/1215.webp",
     },
   },
   {
@@ -277,7 +277,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Huohuo",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1217.webp",
+      portrait: "/img/hsr/portraits/1217.webp",
     },
   },
   {
@@ -286,7 +286,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Jing Yuan",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1204.webp",
+      portrait: "/img/hsr/portraits/1204.webp",
     },
   },
   {
@@ -295,7 +295,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Jingliu",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1212.webp",
+      portrait: "/img/hsr/portraits/1212.webp",
     },
   },
   {
@@ -304,7 +304,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Qingque",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1201.webp",
+      portrait: "/img/hsr/portraits/1201.webp",
     },
   },
   {
@@ -313,7 +313,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Sushang",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1206.webp",
+      portrait: "/img/hsr/portraits/1206.webp",
     },
   },
   {
@@ -322,7 +322,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Tingyun",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1202.webp",
+      portrait: "/img/hsr/portraits/1202.webp",
     },
   },
   {
@@ -331,7 +331,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Xueyi",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1214.webp",
+      portrait: "/img/hsr/portraits/1214.webp",
     },
   },
   {
@@ -340,7 +340,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Yanqing",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1209.webp",
+      portrait: "/img/hsr/portraits/1209.webp",
     },
   },
   {
@@ -349,7 +349,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Yukong",
     association: "Luofu Xianzhou",
     assets: {
-      portrait: "/img/v4/portraits/1207.webp",
+      portrait: "/img/hsr/portraits/1207.webp",
     },
   },
   {
@@ -358,7 +358,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Robin",
     association: "Penacony",
     assets: {
-      portrait: "/img/v4/portraits/1309.webp",
+      portrait: "/img/hsr/portraits/1309.webp",
     },
   },
   {
@@ -367,7 +367,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Gallagher",
     association: "Penacony",
     assets: {
-      portrait: "/img/v4/portraits/1301.webp",
+      portrait: "/img/hsr/portraits/1301.webp",
     },
   },
   {
@@ -376,7 +376,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Misha",
     association: "Penacony",
     assets: {
-      portrait: "/img/v4/portraits/1312.webp",
+      portrait: "/img/hsr/portraits/1312.webp",
     },
   },
   {
@@ -385,7 +385,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Black Swan",
     association: "Garden of Recollection",
     assets: {
-      portrait: "/img/v4/portraits/1307.webp",
+      portrait: "/img/hsr/portraits/1307.webp",
     },
   },
   {
@@ -394,7 +394,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Herta",
     association: "Genius Society",
     assets: {
-      portrait: "/img/v4/portraits/1013.webp",
+      portrait: "/img/hsr/portraits/1013.webp",
     },
   },
   {
@@ -403,7 +403,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Dr. Ratio",
     association: "Genius Society",
     assets: {
-      portrait: "/img/v4/portraits/1305.webp",
+      portrait: "/img/hsr/portraits/1305.webp",
     },
   },
   {
@@ -412,7 +412,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Ruan Mei",
     association: "Genius Society",
     assets: {
-      portrait: "/img/v4/portraits/1303.webp",
+      portrait: "/img/hsr/portraits/1303.webp",
     },
   },
   {
@@ -421,7 +421,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Sparkle",
     association: "Masked Fools",
     assets: {
-      portrait: "/img/v4/portraits/1306.webp",
+      portrait: "/img/hsr/portraits/1306.webp",
     },
   },
   {
@@ -430,7 +430,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Boothill",
     association: "Galaxy Rangers",
     assets: {
-      portrait: "/img/v4/portraits/1315.webp",
+      portrait: "/img/hsr/portraits/1315.webp",
     },
   },
   {
@@ -439,7 +439,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     name: "Acheron",
     association: "Self-Annihilators",
     assets: {
-      portrait: "/img/v4/portraits/1308.webp",
+      portrait: "/img/hsr/portraits/1308.webp",
     },
   },
   {
@@ -447,7 +447,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     game: GAME_STAR_RAIL,
     name: "Argenti",
     assets: {
-      portrait: "/img/v4/portraits/1302.webp",
+      portrait: "/img/hsr/portraits/1302.webp",
     },
   },
   {
@@ -455,7 +455,7 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
     game: GAME_STAR_RAIL,
     name: "Luocha",
     assets: {
-      portrait: "/img/v4/portraits/1203.webp",
+      portrait: "/img/hsr/portraits/1203.webp",
     },
   },
 ];
