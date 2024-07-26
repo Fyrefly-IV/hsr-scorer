@@ -200,7 +200,7 @@ const reset = () => {
   <Dialog v-model="showModalSmallPool">
     <H2 class="font-bold">Chracter pool is too small!</H2>
     <P>
-      Looks like your character pool doesn't contain <strong>at least two character!</strong>
+      Looks like your character pool doesn't contain <strong>at least two characters!</strong>
       Head over to settings and select some of the to continue.
     </P>
     <div class="flwx-row mt-4 flex gap-2 self-end">
