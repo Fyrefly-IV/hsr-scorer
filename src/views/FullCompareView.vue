@@ -56,6 +56,10 @@ const chooseThrottled = useThrottleFn((winnerId: Character["id"]) => {
   fullMode.choose(winnerId);
 }, 200);
 
+const skipThrottled = useThrottleFn(() => {
+  fullMode.skip();
+}, 200);
+
 const undo = () => {
   if (canUndo.value) {
     fullMode.undo();
@@ -119,8 +123,7 @@ const reset = () => {
           <span> left</span>
         </span>
         <div className="flex items-center gap-4">
-          <!-- TODO: implement skip -->
-          <Button variant="ghost" size="icon" disabled>
+          <Button variant="ghost" size="icon" @click="skipThrottled">
             <SkipForwardIcon class="size-6" />
             <span className="sr-only">Skip</span>
           </Button>

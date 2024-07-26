@@ -8,6 +8,7 @@ import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 import { getObjectValue } from "@/lib/get-object-value";
 import { CharacterSchema } from "@/data/schemas";
+import { isNil } from "@/lib/is-nil";
 
 const QueueIDsEntrySchema = z.tuple([CharacterSchema.shape.id, CharacterSchema.shape.id]);
 const ChoiceEntrySchema = z.object({
@@ -51,30 +52,37 @@ export const useFullModeStore = defineStore("full-mode", () => {
     const characterA = CHARACTERS_MAP.get(a);
     const characterB = CHARACTERS_MAP.get(b);
 
-    if (characterA == null || characterB == null) {
+    if (isNil(characterA) || isNil(characterB)) {
       return null;
     }
 
     return [characterA, characterB];
   });
 
-  function choose(winnerId: Character["id"], autoFinish: boolean = true) {
+  // when winnerId is null that means user skips pair
+  function choose(winnerId: Character["id"] | null, autoFinish: boolean = true) {
     const pair = currentIdPair.value;
-    if (pair == null) {
+    if (isNil(pair)) {
       throw Error("there is no current pair, cannot make a choice!");
     }
 
-    if (!pair.some((id) => id === winnerId)) {
+    if (!pair.some((id) => id === winnerId) && !isNil(winnerId)) {
       throw Error(`provided winnerId is not present in current pair ${pair}`);
     }
 
-    scores.value[winnerId] = (getObjectValue(scores.value, winnerId) ?? 0) + 1;
+    if (!isNil(winnerId)) {
+      scores.value[winnerId] = (getObjectValue(scores.value, winnerId) ?? 0) + 1;
+    }
     choices.value = [{ pair, winnerId }, ...choices.value];
     queueIDs.value = queueIDs.value.slice(1);
 
     if (autoFinish === true && queueIDs.value.length === 0) {
       _screen.value = "results";
     }
+  }
+
+  function skip(autoFinish: boolean = true) {
+    choose(null, autoFinish);
   }
 
   function undo() {
@@ -87,7 +95,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     choices.value = choices.value.slice(1);
     queueIDs.value = [latestChoice.pair, ...queueIDs.value];
 
-    if (latestChoice.winnerId == null) {
+    if (isNil(latestChoice.winnerId)) {
       return;
     }
 
@@ -133,6 +141,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
     currentPair,
     screen,
     choose,
+    skip,
     undo,
     start,
     reset,
