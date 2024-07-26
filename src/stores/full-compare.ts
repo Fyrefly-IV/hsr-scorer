@@ -10,6 +10,13 @@ import { getObjectValue } from "@/lib/get-object-value";
 import { CharacterSchema } from "@/data/schemas";
 import { isNil } from "@/lib/is-nil";
 
+export class TooSmallCharacterPool extends Error {
+  constructor() {
+    super();
+    this.name = "TooSmallPool";
+  }
+}
+
 const QueueIDsEntrySchema = z.tuple([CharacterSchema.shape.id, CharacterSchema.shape.id]);
 const ChoiceEntrySchema = z.object({
   pair: QueueIDsEntrySchema,
@@ -111,8 +118,8 @@ export const useFullModeStore = defineStore("full-mode", () => {
 
     const poolIds = [...CHARACTERS_MAP.keys()].filter((id) => !excludedIds.includes(id));
 
-    if (poolIds.length === 0) {
-      throw Error("character pool is empty");
+    if (poolIds.length < 2) {
+      throw new TooSmallCharacterPool();
     }
 
     const combos = combinations(poolIds, 2);
