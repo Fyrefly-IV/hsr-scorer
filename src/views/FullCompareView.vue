@@ -6,11 +6,12 @@ import H1 from "@/components/typography/H1.vue";
 import H2 from "@/components/typography/H2.vue";
 import P from "@/components/typography/P.vue";
 import Button from "@/components/ui/Button.vue";
-import { getCharacterById, type Character } from "@/data/characters";
+import { getCharacterById } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
 import { computed, ref } from "vue";
 import { UndoIcon, SkipForwardIcon, XIcon } from "lucide-vue-next";
+import type { Character } from "@/data/schemas";
 
 const fullMode = useFullModeStore();
 const showModal = ref<boolean>(false);

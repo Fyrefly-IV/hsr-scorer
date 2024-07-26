@@ -1,4 +1,4 @@
-import type { Character } from "@/data/characters";
+import type { Character } from "@/data/schemas";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import uniq from "lodash.uniq";
