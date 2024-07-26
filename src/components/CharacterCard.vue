@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StarRailCharacter } from "@/data/characters";
+import type { Character } from "@/data/characters";
 import { cn } from "@/lib/cn";
 import type { ClassValue } from "clsx";
 import { useAttrs } from "vue";
@@ -9,7 +9,7 @@ defineOptions({ inheritAttrs: false });
 const attrs = useAttrs();
 
 type Props = {
-  character: StarRailCharacter;
+  character: Character;
   hideName?: boolean;
   textUnderName?: string;
   excluded?: boolean;
@@ -40,7 +40,7 @@ const clickHandler = (e: MouseEvent) => {
     @click="clickHandler"
     :class="
       cn(
-        'bg-secondary/30 border-border group relative overflow-hidden rounded-lg border data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
+        'group relative overflow-hidden rounded-lg border border-border bg-secondary/30 data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
         attrs.class as ClassValue,
       )
     "
@@ -48,7 +48,7 @@ const clickHandler = (e: MouseEvent) => {
     :data-hoverable="hoverable"
   >
     <img
-      :src="character.portraitPath"
+      :src="character.assets.portrait ?? undefined"
       :style="{ aspectRatio: `${width}/${height}` }"
       class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-data-[hoverable=true]:hover:scale-110"
       draggable="false"

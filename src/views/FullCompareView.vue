@@ -6,7 +6,7 @@ import H1 from "@/components/typography/H1.vue";
 import H2 from "@/components/typography/H2.vue";
 import P from "@/components/typography/P.vue";
 import Button from "@/components/ui/Button.vue";
-import { characterById, type StarRailCharacter } from "@/data/characters";
+import { getCharacterById, type Character } from "@/data/characters";
 import { useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
 import { computed, ref } from "vue";
@@ -23,7 +23,7 @@ const scores = computed(() => {
   scoresSorted.sort((a, b) => b[1] - a[1]);
 
   const scoresWithCharacters = scoresSorted.map(([id, score]) => {
-    const character = characterById(id);
+    const character = getCharacterById(id);
     if (character == null) {
       throw TypeError("character with score was not found");
     }
@@ -47,7 +47,7 @@ const start = () => {
   fullMode.start();
 };
 
-const chooseThrottled = useThrottleFn((winnerId: StarRailCharacter["id"]) => {
+const chooseThrottled = useThrottleFn((winnerId: Character["id"]) => {
   fullMode.choose(winnerId);
 }, 200);
 
@@ -109,7 +109,7 @@ const reset = () => {
         </Button>
 
         <span class="text-sm text-muted-foreground sm:text-base">
-          <span>{{ fullMode.queue.length }}</span>
+          <span>{{ fullMode.queueIDs.length }}</span>
           <span class="hidden sm:inline"> pairs</span>
           <span> left</span>
         </span>

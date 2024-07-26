@@ -1,353 +1,493 @@
 import { z } from "zod";
 
-export const StarRailCharacterSchema = z.object({
-  id: z.string(),
-  portraitPath: z.string().optional(),
-  name: z.string(),
-  association: z.string().nullish(),
+export const GAME_STAR_RAIL = "hsr" as const;
+export const GAME_GENSHIN = "gi" as const;
+export const GAME_ZENLESS = "zzz" as const;
+
+export const GameSchema = z.union([
+  z.literal(GAME_STAR_RAIL),
+  z.literal(GAME_GENSHIN),
+  z.literal(GAME_ZENLESS),
+]);
+
+export const CharacterAssetsSchema = z.object({
+  portrait: z.string().optional().nullable(),
 });
 
-export type StarRailCharacter = z.infer<typeof StarRailCharacterSchema>;
+export const CharacterSchema = z.object({
+  id: z.string(),
+  game: GameSchema,
+  name: z.string(),
+  association: z.string().nullish(),
+  assets: CharacterAssetsSchema,
+});
 
-export const CHARACTERS: StarRailCharacter[] = [
+export type Character = z.infer<typeof CharacterSchema>;
+
+export const STAR_RAIL_CHARACTERS: Character[] = [
   {
     id: "firefly",
+    game: GAME_STAR_RAIL,
     name: "Firefly",
     association: "Stellaron Hunters",
-    portraitPath: "/img/v4/portraits/1310.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1310.webp",
+    },
   },
   {
     id: "1005",
+    game: GAME_STAR_RAIL,
     name: "Kafka",
     association: "Stellaron Hunters",
-    portraitPath: "/img/v4/portraits/1005.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1005.webp",
+    },
   },
   {
     id: "1006",
+    game: GAME_STAR_RAIL,
     name: "Silver Wolf",
     association: "Stellaron Hunters",
-    portraitPath: "/img/v4/portraits/1006.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1006.webp",
+    },
   },
   {
     id: "1205",
+    game: GAME_STAR_RAIL,
     name: "Blade",
     association: "Stellaron Hunters",
-    portraitPath: "/img/v4/portraits/1205.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1205.webp",
+    },
   },
   {
     id: "1001",
+    game: GAME_STAR_RAIL,
     name: "March 7th",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/1001.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1001.webp",
+    },
   },
   {
     id: "8002",
+    game: GAME_STAR_RAIL,
     name: "Stelle",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/8002.webp",
+    assets: {
+      portrait: "/img/v4/portraits/8002.webp",
+    },
   },
   {
     id: "8001",
+    game: GAME_STAR_RAIL,
     name: "Caelus",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/8001.webp",
+    assets: {
+      portrait: "/img/v4/portraits/8001.webp",
+    },
   },
   {
     id: "1002",
+    game: GAME_STAR_RAIL,
     name: "Dan Heng",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/1002.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1002.webp",
+    },
   },
   {
     id: "1003",
+    game: GAME_STAR_RAIL,
     name: "Himeko",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/1003.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1003.webp",
+    },
   },
   {
     id: "1004",
+    game: GAME_STAR_RAIL,
     name: "Welt",
     association: "Astral Express",
-    portraitPath: "/img/v4/portraits/1004.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1004.webp",
+    },
   },
   {
     id: "1101",
+    game: GAME_STAR_RAIL,
     name: "Bronya",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1101.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1101.webp",
+    },
   },
   {
     id: "1102",
+    game: GAME_STAR_RAIL,
     name: "Seele",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1102.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1102.webp",
+    },
   },
   {
     id: "1107",
+    game: GAME_STAR_RAIL,
     name: "Clara",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1107.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1107.webp",
+    },
   },
   {
     id: "1106",
+    game: GAME_STAR_RAIL,
     name: "Pela",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1106.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1106.webp",
+    },
   },
   {
     id: "1104",
+    game: GAME_STAR_RAIL,
     name: "Gepard",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1104.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1104.webp",
+    },
   },
   {
     id: "1111",
+    game: GAME_STAR_RAIL,
     name: "Luka",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1111.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1111.webp",
+    },
   },
   {
     id: "1110",
+    game: GAME_STAR_RAIL,
     name: "Lynx",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1110.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1110.webp",
+    },
   },
   {
     id: "1105",
+    game: GAME_STAR_RAIL,
     name: "Natasha",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1105.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1105.webp",
+    },
   },
   {
     id: "1109",
+    game: GAME_STAR_RAIL,
     name: "Hook",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1109.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1109.webp",
+    },
   },
   {
     id: "1108",
+    game: GAME_STAR_RAIL,
     name: "Sampo",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1108.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1108.webp",
+    },
   },
   {
     id: "1103",
+    game: GAME_STAR_RAIL,
     name: "Serval",
     association: "Belobog",
-    portraitPath: "/img/v4/portraits/1103.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1103.webp",
+    },
   },
   {
     id: "1008",
+    game: GAME_STAR_RAIL,
     name: "Arlan",
     association: "Herta Space Station",
-    portraitPath: "/img/v4/portraits/1008.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1008.webp",
+    },
   },
   {
     id: "1009",
+    game: GAME_STAR_RAIL,
     name: "Asta",
     association: "Herta Space Station",
-    portraitPath: "/img/v4/portraits/1009.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1009.webp",
+    },
   },
   {
     id: "1304",
+    game: GAME_STAR_RAIL,
     name: "Aventurine",
     association: "Ten Stonehearts",
-    portraitPath: "/img/v4/portraits/1304.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1304.webp",
+    },
   },
   {
     id: "1112",
+    game: GAME_STAR_RAIL,
     name: "Topaz",
     association: "Ten Stonehearts",
-    portraitPath: "/img/v4/portraits/1112.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1112.webp",
+    },
   },
   {
     id: "1314",
+    game: GAME_STAR_RAIL,
     name: "Jade",
     association: "Ten Stonehearts",
-    portraitPath: "/img/v4/portraits/1314.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1314.webp",
+    },
   },
   {
     id: "1211",
+    game: GAME_STAR_RAIL,
     name: "Bailu",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1211.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1211.webp",
+    },
   },
   {
     id: "1208",
+    game: GAME_STAR_RAIL,
     name: "Fu Xuan",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1208.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1208.webp",
+    },
   },
   {
     id: "1210",
+    game: GAME_STAR_RAIL,
     name: "Guinaifen",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1210.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1210.webp",
+    },
   },
   {
     id: "1215",
+    game: GAME_STAR_RAIL,
     name: "Hanya",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1215.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1215.webp",
+    },
   },
   {
     id: "1217",
+    game: GAME_STAR_RAIL,
     name: "Huohuo",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1217.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1217.webp",
+    },
   },
   {
     id: "1204",
+    game: GAME_STAR_RAIL,
     name: "Jing Yuan",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1204.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1204.webp",
+    },
   },
   {
     id: "1212",
+    game: GAME_STAR_RAIL,
     name: "Jingliu",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1212.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1212.webp",
+    },
   },
   {
     id: "1201",
+    game: GAME_STAR_RAIL,
     name: "Qingque",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1201.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1201.webp",
+    },
   },
   {
     id: "1206",
+    game: GAME_STAR_RAIL,
     name: "Sushang",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1206.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1206.webp",
+    },
   },
   {
     id: "1202",
+    game: GAME_STAR_RAIL,
     name: "Tingyun",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1202.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1202.webp",
+    },
   },
   {
     id: "1214",
+    game: GAME_STAR_RAIL,
     name: "Xueyi",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1214.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1214.webp",
+    },
   },
   {
     id: "1209",
+    game: GAME_STAR_RAIL,
     name: "Yanqing",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1209.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1209.webp",
+    },
   },
   {
     id: "1207",
+    game: GAME_STAR_RAIL,
     name: "Yukong",
     association: "Luofu Xianzhou",
-    portraitPath: "/img/v4/portraits/1207.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1207.webp",
+    },
   },
   {
     id: "1309",
+    game: GAME_STAR_RAIL,
     name: "Robin",
     association: "Penacony",
-    portraitPath: "/img/v4/portraits/1309.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1309.webp",
+    },
   },
   {
     id: "1301",
+    game: GAME_STAR_RAIL,
     name: "Gallagher",
     association: "Penacony",
-    portraitPath: "/img/v4/portraits/1301.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1301.webp",
+    },
   },
   {
     id: "1312",
+    game: GAME_STAR_RAIL,
     name: "Misha",
     association: "Penacony",
-    portraitPath: "/img/v4/portraits/1312.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1312.webp",
+    },
   },
   {
     id: "1307",
+    game: GAME_STAR_RAIL,
     name: "Black Swan",
     association: "Garden of Recollection",
-    portraitPath: "/img/v4/portraits/1307.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1307.webp",
+    },
   },
   {
     id: "1013",
+    game: GAME_STAR_RAIL,
     name: "Herta",
     association: "Genius Society",
-    portraitPath: "/img/v4/portraits/1013.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1013.webp",
+    },
   },
   {
     id: "1305",
+    game: GAME_STAR_RAIL,
     name: "Dr. Ratio",
     association: "Genius Society",
-    portraitPath: "/img/v4/portraits/1305.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1305.webp",
+    },
   },
   {
     id: "1303",
+    game: GAME_STAR_RAIL,
     name: "Ruan Mei",
     association: "Genius Society",
-    portraitPath: "/img/v4/portraits/1303.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1303.webp",
+    },
   },
   {
     id: "1306",
+    game: GAME_STAR_RAIL,
     name: "Sparkle",
     association: "Masked Fools",
-    portraitPath: "/img/v4/portraits/1306.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1306.webp",
+    },
   },
   {
     id: "1315",
+    game: GAME_STAR_RAIL,
     name: "Boothill",
     association: "Galaxy Rangers",
-    portraitPath: "/img/v4/portraits/1315.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1315.webp",
+    },
   },
   {
     id: "1308",
+    game: GAME_STAR_RAIL,
     name: "Acheron",
     association: "Self-Annihilators",
-    portraitPath: "/img/v4/portraits/1308.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1308.webp",
+    },
   },
   {
     id: "1302",
+    game: GAME_STAR_RAIL,
     name: "Argenti",
-    portraitPath: "/img/v4/portraits/1302.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1302.webp",
+    },
   },
   {
     id: "1203",
+    game: GAME_STAR_RAIL,
     name: "Luocha",
-    portraitPath: "/img/v4/portraits/1203.webp",
+    assets: {
+      portrait: "/img/v4/portraits/1203.webp",
+    },
   },
 ];
 
-export const characterById = (
-  id: StarRailCharacter["id"] | undefined | null,
-): StarRailCharacter | null => {
-  if (id == null) {
-    return null;
-  }
+export const CHARACTERS_MAP: Map<Character["id"], Character> = new Map(
+  [...STAR_RAIL_CHARACTERS].map((c) => [c.id, c]),
+);
 
-  const index = CHARACTERS.findIndex((ch) => ch.id === id);
-  if (index < 0) {
-    return null;
-  }
-
-  return CHARACTERS[index];
-};
-
-export const characterByIndex = (idx: number): StarRailCharacter | null => {
-  if (idx < 0 || idx >= CHARACTERS.length) {
-    return null;
-  }
-
-  return CHARACTERS[idx];
-};
-
-export const characterByName = (name: string | undefined | null): StarRailCharacter | null => {
-  if (name == null) {
-    return null;
-  }
-
-  const idx = CHARACTERS.findIndex((ch) => ch.name === name);
-  if (idx === -1) {
-    return null;
-  }
-
-  return CHARACTERS[idx];
+export const getCharacterById = (id: Character["id"]): Character | undefined => {
+  return CHARACTERS_MAP.get(id);
 };
