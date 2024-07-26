@@ -114,8 +114,6 @@ export const useFullModeStore = defineStore("full-mode", () => {
       scores.value[id] = 0;
     });
 
-    console.log(combos);
-
     queueIDs.value = QueueIDsEntrySchema.array().parse(combos);
     _screen.value = "progress";
   }
