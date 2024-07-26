@@ -7,14 +7,16 @@ import H2 from "@/components/typography/H2.vue";
 import P from "@/components/typography/P.vue";
 import Button from "@/components/ui/Button.vue";
 import { getCharacterById } from "@/data/characters";
-import { useFullModeStore } from "@/stores/full-compare";
+import { TooSmallCharacterPool, useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
 import { computed, ref } from "vue";
 import { UndoIcon, SkipForwardIcon, XIcon } from "lucide-vue-next";
 import type { Character } from "@/data/schemas";
 
 const fullMode = useFullModeStore();
-const showModal = ref<boolean>(false);
+
+const showModalResetWarning = ref<boolean>(false);
+const showModalSmallPool = ref<boolean>(false);
 const showScores = ref<boolean>(false);
 
 const canUndo = computed(() => fullMode.choices.length > 0);
@@ -49,7 +51,13 @@ const isWinnerId = (id: Character["id"]): boolean => {
 };
 
 const start = () => {
-  fullMode.start();
+  try {
+    fullMode.start();
+  } catch (err) {
+    if (err instanceof TooSmallCharacterPool) {
+      showModalSmallPool.value = true;
+    }
+  }
 };
 
 const chooseThrottled = useThrottleFn((winnerId: Character["id"]) => {
@@ -67,11 +75,11 @@ const undo = () => {
 };
 
 const confirmReset = () => {
-  showModal.value = true;
+  showModalResetWarning.value = true;
 };
 
 const reset = () => {
-  showModal.value = false;
+  showModalResetWarning.value = false;
   showScores.value = false;
   fullMode.reset();
 };
@@ -176,7 +184,7 @@ const reset = () => {
     </div>
   </Main>
 
-  <Dialog v-model="showModal">
+  <Dialog v-model="showModalResetWarning">
     <H2 class="font-bold">Are you sure?</H2>
     <P>
       You are about to completely reset current comparison progress!
@@ -184,8 +192,19 @@ const reset = () => {
       This means, you will not be able to revert this action!
     </P>
     <div class="mt-4 flex flex-row gap-2 self-end">
-      <Button size="sm" @click="showModal = false">Cancel</Button>
+      <Button size="sm" @click="showModalResetWarning = false">Cancel</Button>
       <Button size="sm" variant="destructive" @click="reset">Confirm</Button>
+    </div>
+  </Dialog>
+
+  <Dialog v-model="showModalSmallPool">
+    <H2 class="font-bold">Chracter pool is too small!</H2>
+    <P>
+      Looks like your character pool doesn't contain <strong>at least two character!</strong>
+      Head over to settings and select some of the to continue.
+    </P>
+    <div class="flwx-row mt-4 flex gap-2 self-end">
+      <Button size="sm" @click="showModalSmallPool = false">Ok</Button>
     </div>
   </Dialog>
 </template>
