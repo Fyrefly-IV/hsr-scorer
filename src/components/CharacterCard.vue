@@ -3,6 +3,7 @@ import type { Character } from "@/data/schemas";
 import { cn } from "@/lib/cn";
 import type { ClassValue } from "clsx";
 import { useAttrs } from "vue";
+import { SparklesIcon } from "lucide-vue-next";
 
 defineOptions({ inheritAttrs: false });
 
@@ -16,6 +17,7 @@ type Props = {
   hoverable?: boolean;
   width?: number;
   height?: number;
+  decoration?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
@@ -56,11 +58,15 @@ const clickHandler = (e: MouseEvent) => {
       loading="eager"
     />
     <figcaption
-      class="absolute inset-x-0 bottom-0 bg-gradient-to-b from-black/30 to-black/50 px-4 py-3 text-center text-white"
+      class="absolute inset-x-0 bottom-0 flex flex-col items-center rounded-b-md bg-gradient-to-b from-black/40 to-black/60 px-4 pb-3 pt-2 text-center text-white"
       v-if="hideName !== true"
     >
-      <h3 class="font-anuphane text-lg font-semibold">
-        {{ character.name }}
+      <h3 class="relative w-fit font-anuphane text-lg font-semibold">
+        <SparklesIcon
+          v-if="decoration === true"
+          class="absolute -right-3 -top-1 size-4 -scale-x-100 scale-y-100 stroke-emerald-300 opacity-75"
+        />
+        <span>{{ character.name }}</span>
       </h3>
       <p v-if="typeof textUnderName === 'string'" class="font-anuphane text-sm">
         {{ textUnderName }}
