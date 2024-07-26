@@ -44,6 +44,10 @@ const winners = computed(() => {
   return scores.value.filter((entry) => entry.score === bestScore);
 });
 
+const isWinnerId = (id: Character["id"]): boolean => {
+  return winners.value.some((winner) => winner.character.id === id);
+};
+
 const start = () => {
   fullMode.start();
 };
@@ -99,7 +103,7 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
-          class="max-w-[270px] cursor-pointer sm:max-w-none"
+          class="max-w-[270px] cursor-pointer select-none sm:max-w-none"
           hoverable
         />
       </div>
@@ -133,12 +137,13 @@ const reset = () => {
         <H2 class="mb-4 text-center font-bold">
           Most chosen character<span v-if="winners.length > 1">s</span>
         </H2>
-        <div class="mb-4 gap-2 flex flex-row flex-wrap justify-center">
+        <div class="mb-4 flex flex-row flex-wrap justify-center gap-2">
           <CharacterCard
             v-for="(entry, i) in winners"
             :key="`winner-${i}`"
             :character="entry.character"
             class="w-[250px]"
+            decoration
           />
         </div>
 
@@ -162,6 +167,7 @@ const reset = () => {
           :character="entry.character"
           :text-under-name="`${entry.score} points`"
           class="w-[150px] md:w-[170px] [&_h3]:text-base [&_p]:text-xs"
+          :decoration="isWinnerId(entry.character.id)"
         />
       </div>
     </div>
