@@ -1,5 +1,5 @@
-import { CHARACTERS_MAP, CharacterSchema } from "@/data/characters";
-import type { Character } from "@/data/characters";
+import { CHARACTERS_MAP } from "@/data/characters";
+import type { Character } from "@/data/schemas";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
@@ -7,6 +7,7 @@ import { z } from "zod";
 import { useSettingsStore } from "./settings";
 import { combinations, shuffleArray } from "@/lib/arrays";
 import { getObjectValue } from "@/lib/get-object-value";
+import { CharacterSchema } from "@/data/schemas";
 
 const QueueIDsEntrySchema = z.tuple([CharacterSchema.shape.id, CharacterSchema.shape.id]);
 const ChoiceEntrySchema = z.object({

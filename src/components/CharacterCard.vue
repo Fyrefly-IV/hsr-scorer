@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Character } from "@/data/characters";
+import type { Character } from "@/data/schemas";
 import { cn } from "@/lib/cn";
 import type { ClassValue } from "clsx";
 import { useAttrs } from "vue";
