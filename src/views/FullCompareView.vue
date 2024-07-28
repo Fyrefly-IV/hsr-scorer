@@ -115,7 +115,7 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
-          class="max-w-[270px] cursor-pointer select-none sm:max-w-none"
+          class="max-w-[250px] cursor-pointer select-none"
           hoverable
         />
       </div>
