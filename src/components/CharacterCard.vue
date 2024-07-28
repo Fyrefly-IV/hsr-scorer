@@ -42,7 +42,7 @@ const clickHandler = (e: MouseEvent) => {
     @click="clickHandler"
     :class="
       cn(
-        'group relative overflow-hidden rounded-lg border border-border bg-secondary/30 data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
+        'group relative overflow-hidden rounded-lg border border-border bg-secondary/30 transition-transform data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
         attrs.class as ClassValue,
       )
     "
