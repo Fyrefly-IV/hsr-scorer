@@ -84,15 +84,8 @@ const handleStarRailExcludeAll = () => {
           <Input v-model="hsrSearchValue" />
         </div>
       </div>
-      <TransitionGroup
-        tag="dev"
+      <div
         class="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
-        enter-active-class="duration-200 transition-all"
-        enter-from-class="transform opacity-0 scale-70"
-        enter-to-class="opacity-100 scale-100"
-        leave-active-class="duration-200 transition-all"
-        leave-from-class="opacity-100 scale-100"
-        leave-to-class="transform opacity-0 scale-70"
       >
         <CharacterCard
           v-for="c in shownHsrCharacters"
@@ -103,7 +96,7 @@ const handleStarRailExcludeAll = () => {
           :excluded="settings.isExcludedId(c.id)"
           hoverable
         />
-      </TransitionGroup>
+      </div>
     </div>
   </Main>
 </template>
