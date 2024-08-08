@@ -107,7 +107,7 @@ const reset = () => {
 
     <div v-if="fullMode.screen === 'progress'" class="w-ful w-fit max-w-[600px]">
       <div
-        class="grid w-fit grid-cols-1 place-items-center gap-4 sm:grid-cols-2"
+        class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
         v-if="fullMode.currentPair != null"
       >
         <CharacterCard
@@ -115,7 +115,7 @@ const reset = () => {
           :key="`pair-${ch.id}`"
           @click="() => chooseThrottled(ch.id)"
           :character="ch"
-          class="max-w-[250px] cursor-pointer select-none"
+          class="w-full cursor-pointer select-none"
           hoverable
         />
       </div>
