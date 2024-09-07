@@ -458,4 +458,36 @@ export const STAR_RAIL_CHARACTERS: Character[] = [
       portrait: "/img/hsr/portraits/1203.webp",
     },
   },
+  {
+    id: "1221",
+    game: GAME_STAR_RAIL,
+    name: "Yunli",
+    assets: {
+      portrait: "/img/hsr/portraits/1221.webp",
+    },
+  },
+  {
+    id: "1218",
+    game: GAME_STAR_RAIL,
+    name: "Jiaoqiu",
+    assets: {
+      portrait: "/img/hsr/portraits/1218.webp",
+    },
+  },
+  {
+    id: "1222",
+    game: GAME_STAR_RAIL,
+    name: "Lingsha",
+    assets: {
+      portrait: "/img/hsr/portraits/1222.webp",
+    },
+  },
+  {
+    id: "1220",
+    game: GAME_STAR_RAIL,
+    name: "Feixiao",
+    assets: {
+      portrait: "/img/hsr/portraits/1220.webp",
+    },
+  },
 ];
