@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { cn } from "@/lib/cn";
 import { vOnClickOutside } from "@vueuse/components";
-import { effect, ref, watch } from "vue";
+import { effect, ref, Teleport, watch } from "vue";
 
 const open = defineModel<boolean>({ required: true });
 const dialog = ref<HTMLDialogElement>();
@@ -27,17 +27,19 @@ watch(
 </script>
 
 <template>
-  <dialog :open="open" ref="dialog">
-    <div
-      v-if="open === true"
-      v-on-click-outside="close"
-      :class="
-        cn('border-border bg-background flex w-full max-w-[600px] flex-col rounded-md border p-4')
-      "
-    >
-      <slot></slot>
-    </div>
-  </dialog>
+  <Teleport to="body">
+    <dialog :open="open" ref="dialog">
+      <div
+        v-if="open === true"
+        v-on-click-outside="close"
+        :class="
+          cn('flex w-full max-w-[600px] flex-col rounded-md border border-border bg-background p-4')
+        "
+      >
+        <slot></slot>
+      </div>
+    </dialog>
+  </Teleport>
 </template>
 
 <style lang="css">
