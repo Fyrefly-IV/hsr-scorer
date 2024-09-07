@@ -81,7 +81,7 @@ const handleStarRailExcludeAll = () => {
           <Button size="icon" variant="secondary" class="size-10" @click="hsrSearchValue = ''">
             <XIcon />
           </Button>
-          <Input v-model="hsrSearchValue" />
+          <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
         </div>
       </div>
       <div
