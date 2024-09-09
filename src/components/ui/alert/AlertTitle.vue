@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import { cn } from "@/lib/cn";
-import type { ClassValue } from "clsx";
-import { useAttrs } from "vue";
 
-defineOptions({ inheritAttrs: false });
-
-const attrs = useAttrs();
+const props = defineProps({
+  class: { type: String, default: "" },
+});
 </script>
 
 <template>
-  <h5
-    v-bind="{ ...attrs, class: null }"
-    :class="cn('mb-1 font-bold text-lg leading-none tracking-tight', attrs.class as ClassValue)"
-  >
+  <h5 :class="cn('mb-1 text-lg font-bold leading-none tracking-tight', props.class)">
     <slot></slot>
   </h5>
 </template>

@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import type { Character } from "@/data/schemas";
 import { cn } from "@/lib/cn";
-import type { ClassValue } from "clsx";
-import { useAttrs } from "vue";
 import { SparklesIcon } from "lucide-vue-next";
-
-defineOptions({ inheritAttrs: false });
-
-const attrs = useAttrs();
 
 type Props = {
   character: Character;
@@ -18,9 +12,10 @@ type Props = {
   width?: number;
   height?: number;
   decoration?: boolean;
+  class?: string;
 };
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   width: 200,
   height: 300,
 });
@@ -38,12 +33,11 @@ const clickHandler = (e: MouseEvent) => {
 
 <template>
   <figure
-    v-bind="{ ...attrs, class: null }"
     @click="clickHandler"
     :class="
       cn(
         'group relative overflow-hidden rounded-lg border border-border bg-secondary/30 transition-transform data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
-        attrs.class as ClassValue,
+        props.class,
       )
     "
     :data-excluded="excluded"
