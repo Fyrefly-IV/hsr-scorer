@@ -47,6 +47,17 @@
         }
       }
     </style>
+
+    <script>
+      if (localStorage != null && document != null && document.documentElement != null) {
+        const theme = localStorage.getItem("scorer-theme");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+    </script>
   </head>
   <body class="bg-background text-foreground">
     <div id="app"></div>
