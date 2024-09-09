@@ -86,7 +86,7 @@ const reset = () => {
 </script>
 
 <template>
-  <Main class="flex min-h-screen flex-col items-center justify-center bg-background pt-16 sm:pt-0">
+  <Main class="flex flex-col items-center justify-center bg-background pt-4 sm:pt-0">
     <div v-if="fullMode.screen === 'start'" class="flex max-w-[800px] flex-col">
       <H1 class="text-center">Full Compare</H1>
       <P class="text-justify">
