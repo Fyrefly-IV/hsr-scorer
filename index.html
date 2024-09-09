@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
@@ -42,11 +42,13 @@
 
     <style>
       :root {
-        color-scheme: dark;
+        .dark {
+          color-scheme: dark;
+        }
       }
     </style>
   </head>
-  <body class="bg-background dark">
+  <body class="bg-background text-foreground">
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
