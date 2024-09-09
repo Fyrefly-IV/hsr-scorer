@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { cn } from "@/lib/cn";
-import type { ClassValue } from "clsx";
-import { useAttrs } from "vue";
 
-defineOptions({ inheritAttrs: false });
-
-const attrs = useAttrs();
+const props = defineProps({
+  class: {
+    type: String,
+    default: "",
+  },
+});
 </script>
 
 <template>
-  <p
-    v-bind="{ ...attrs, class: null }"
-    :class="cn('text-sm [&_p]:leading-relaxed', attrs.class as ClassValue)"
-  >
+  <p :class="cn('text-sm [&_p]:leading-relaxed', props.class)">
     <slot></slot>
   </p>
 </template>

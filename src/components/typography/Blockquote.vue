@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { cn } from "@/lib/cn";
-import type { ClassValue } from "clsx";
+
+const props = defineProps({
+  class: { type: String, default: "" },
+});
 </script>
 
 <template>
-  <blockquote :class="cn('mt-6 border-l-2 pl-6 italic', $attrs.class as ClassValue)">
+  <blockquote :class="cn('mt-6 border-l-2 pl-6 italic', props.class)">
     <slot></slot>
   </blockquote>
 </template>
