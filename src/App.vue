@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import Navigation from "@/components/Navigation.vue";
+import Header from "@/components/Header.vue";
 </script>
 
 <template>
-  <Navigation />
+  <Header />
   <RouterView />
 </template>
