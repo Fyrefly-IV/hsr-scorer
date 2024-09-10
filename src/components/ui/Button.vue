@@ -42,11 +42,11 @@ const clickHandler = (e: MouseEvent) => {
           ? 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90'
           : null,
         props.variant === 'ghost' ? 'hover:bg-accent hover:text-accent-foreground' : null,
-        props.variant === 'link' ? '' : null,
+        props.variant === 'link' ? 'text-primary underline-offset-4 hover:underline' : null,
         props.size === 'default' ? 'h-9 px-4 py-2' : null,
-        props.size === 'sm' ? 'h-8 px-3 text-xs' : null,
-        props.size === 'lg' ? 'h-10 px-8' : null,
-        props.size === 'icon' ? 'h-9 w-9' : null,
+        props.size === 'sm' ? 'h-8 rounded-md px-3 text-xs' : null,
+        props.size === 'lg' ? 'h-10 rounded-md px-8' : null,
+        props.size === 'icon' ? 'aspect-square h-9 w-9' : null,
         props.class,
       )
     "
