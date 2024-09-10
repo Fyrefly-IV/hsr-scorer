@@ -2,7 +2,6 @@
 import { HomeIcon, SettingsIcon } from "lucide-vue-next";
 import Button from "@/components/ui/Button.vue";
 import GithubIcon from "@/components/icons/GithubIcon.vue";
-import LightSwitch from "./LightSwitch.vue";
 
 const nav = [
   {
@@ -37,8 +36,6 @@ const nav = [
             <GithubIcon class="size-4" />
           </Button>
         </a>
-
-        <LightSwitch />
       </div>
     </div>
   </header>
