@@ -51,7 +51,7 @@ const handleStarRailExcludeAll = () => {
 
 <template>
   <Main class="flex flex-col">
-    <div class="font-anuphan container mt-10">
+    <div class="font-anuphan container">
       <H1>Settings</H1>
       <P class="text-lg">
         In settings you can pick characters which you want to be present in your comparisons by
@@ -78,8 +78,8 @@ const handleStarRailExcludeAll = () => {
           <Button variant="secondary" @click="handleStarRailExcludeAll">Deselect All</Button>
         </div>
         <div class="mt-4 flex gap-2">
-          <Button size="icon" variant="secondary" class="size-10" @click="hsrSearchValue = ''">
-            <XIcon />
+          <Button size="icon" variant="secondary" @click="hsrSearchValue = ''">
+            <XIcon class="size-4" />
           </Button>
           <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
         </div>
