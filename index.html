@@ -41,23 +41,10 @@
     <meta property="twitter:image" content="/img/meta/scorer-v2.webp" />
 
     <style>
-      @media (prefers-color-scheme: dark) {
-        :root {
-          color-scheme: dark;
-        }
+      :root {
+        color-scheme: dark;
       }
     </style>
-
-    <script>
-      if (localStorage != null && document != null && document.documentElement != null) {
-        const theme = localStorage.getItem("scorer-theme");
-        if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-      }
-    </script>
   </head>
   <body class="bg-background text-foreground">
     <div id="app"></div>
