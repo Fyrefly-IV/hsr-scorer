@@ -10,7 +10,7 @@ import { getCharacterById } from "@/data/characters";
 import { TooSmallCharacterPool, useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";
 import { computed, ref } from "vue";
-import { UndoIcon, SkipForwardIcon, XIcon } from "lucide-vue-next";
+import { UndoIcon, SkipForwardIcon, XIcon, PlayIcon } from "lucide-vue-next";
 import type { Character } from "@/data/schemas";
 
 const fullMode = useFullModeStore();
@@ -89,20 +89,22 @@ const reset = () => {
   <Main class="flex flex-col items-center justify-center bg-background pt-4 sm:pt-0">
     <div v-if="fullMode.screen === 'start'" class="flex max-w-[800px] flex-col">
       <H1 class="text-center">Full Compare</H1>
-      <P class="text-justify">
-        In this mode you will be comparing characters that can select in the settings (or have
-        selected them already). This comparison might take a while, so make sure you have excluded
-        characters that you don't want to be present in the comparison process, as it might take a
-        while! Also, don't worry, the progress will not reset if you close the window or your
-        browser as it's all being stored in your browser's local storage.
+      <P class="text-center">
+        In this mode, you will be comparing characters that you can choose from a list in the
+        settings. The process may take a significant amount of time, so we recommend ensuring that
+        you exclude any characters from the list that you do not wish to compare.
       </P>
 
-      <button
-        @click="start"
-        class="mt-8 h-9 w-fit self-center rounded-md bg-neutral-200 px-4 text-sm font-bold text-neutral-800 duration-100 hover:bg-neutral-400"
-      >
-        Start Comparing
-      </button>
+      <Button @click="start" class="mt-4 w-fit gap-2 self-center">
+        <PlayIcon class="w-4" />
+        <span>Start Comparing</span>
+      </Button>
+
+      <P class="text-center">
+        You don't need to worry about the progress of the comparison; if you haven't disabled
+        cookies or are not using incognito mode in your browser, each step is saved in the browser
+        itself, and you will be able to return to this page to continue the process!
+      </P>
     </div>
 
     <div v-if="fullMode.screen === 'progress'" class="w-ful w-fit max-w-[600px]">
