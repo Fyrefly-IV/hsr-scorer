@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Main from "@/components/Main.vue";
-import Button from "@/components/ui/Button.vue";
+import Main from "@/shared/ui/main/Main.vue";
+import Button from "@/shared/ui/button/ui/Button.vue";
 import { RouterLink } from "vue-router";
 import { PlayIcon, SettingsIcon } from "lucide-vue-next";
 </script>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import CharacterCard from "@/components/CharacterCard.vue";
-import Main from "@/components/Main.vue";
-import Dialog from "@/components/Dialog.vue";
-import H1 from "@/components/typography/H1.vue";
-import H2 from "@/components/typography/H2.vue";
-import P from "@/components/typography/P.vue";
-import Button from "@/components/ui/Button.vue";
+import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
+import Main from "@/shared/ui/main/Main.vue";
+import { Dialog } from "@/shared/ui/dialog";
+import H1 from "@/shared/ui/typography/H1.vue";
+import H2 from "@/shared/ui/typography/H2.vue";
+import P from "@/shared/ui/typography/P.vue";
+import Button from "@/shared/ui/button/ui/Button.vue";
 import { getCharacterById } from "@/data/characters";
 import { TooSmallCharacterPool, useFullModeStore } from "@/stores/full-compare";
 import { useThrottleFn } from "@vueuse/core";

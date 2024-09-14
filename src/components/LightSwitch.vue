@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLocalStorage } from "@vueuse/core";
-import Button from "./ui/Button.vue";
+import Button from "../shared/ui/button/ui/Button.vue";
 import { MoonStarIcon, SunIcon } from "lucide-vue-next";
 import { computed, watch } from "vue";
 
