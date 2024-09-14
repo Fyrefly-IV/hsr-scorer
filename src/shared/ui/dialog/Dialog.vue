@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cn } from "@/lib/cn";
+import { cn } from "@/shared/lib/cn";
 import { vOnClickOutside } from "@vueuse/components";
 import { effect, ref, watch } from "vue";
 

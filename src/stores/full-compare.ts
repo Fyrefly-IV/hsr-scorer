@@ -5,10 +5,10 @@ import { defineStore } from "pinia";
 import { computed } from "vue";
 import { z } from "zod";
 import { useSettingsStore } from "./settings";
-import { combinations, shuffleArray } from "@/lib/arrays";
-import { getObjectValue } from "@/lib/get-object-value";
+import { getObjectValue } from "@/shared/lib/get-object-value";
 import { CharacterSchema } from "@/data/schemas";
-import { isNil } from "@/lib/is-nil";
+import { isNil } from "@/shared/lib/is-nil";
+import { combinations, shuffleArray } from "@/shared/lib/arrays";
 
 export class TooSmallCharacterPool extends Error {
   constructor() {

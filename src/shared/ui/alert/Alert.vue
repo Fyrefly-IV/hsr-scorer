@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { cn } from "@/lib/cn";
+import { cn } from "@/shared/lib/cn";
 
 type Props = {
   variant?: "default" | "destructive";
