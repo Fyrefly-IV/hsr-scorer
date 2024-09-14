@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
-import SettingsView from "@/views/SettingsView.vue";
-import FullCompareView from "@/views/FullCompareView.vue";
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,17 +6,18 @@ export const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: () => import("@/pages/home"),
     },
     {
       path: "/settings",
       name: "settings",
-      component: SettingsView,
+      component: () => import("@/pages/settings"),
     },
     {
       path: "/full-compare",
-      name: "full-compate",
-      component: FullCompareView,
+      alias: "/play",
+      name: "full-compare",
+      component: () => import("@/pages/play"),
     },
   ],
 });
