@@ -16,6 +16,11 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     outDir: "build",
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true,
+      },
+    },
   },
 });
 
