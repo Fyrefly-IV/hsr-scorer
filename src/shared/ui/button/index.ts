@@ -1,3 +1,3 @@
-import Button from "./ui/Button.vue";
+import Button from "./Button.vue";
 
 export { Button };

@@ -1,14 +1,14 @@
-import { CHARACTERS_MAP } from "@/data/characters";
-import type { Character } from "@/data/schemas";
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { computed } from "vue";
-import { z } from "zod";
-import { useSettingsStore } from "./settings";
-import { getObjectValue } from "@/shared/lib/get-object-value";
-import { CharacterSchema } from "@/data/schemas";
-import { isNil } from "@/shared/lib/is-nil";
+import { CHARACTERS_MAP } from "@/entities/character/data/characters";
+import { useExcludedCharacters } from "@/entities/character/model/stores";
+import type { Character } from "@/entities/character/model/types";
 import { combinations, shuffleArray } from "@/shared/lib/arrays";
+import { getObjectValue } from "@/shared/lib/get-object-value";
+import { isNil } from "@/shared/lib/is-nil";
+import { QueueIDsEntrySchema } from "./schemas";
+import type { ChoiceEntry, QueueIDsEntry, Scores, ScreenState } from "./types";
 
 export class TooSmallCharacterPool extends Error {
   constructor() {
@@ -17,23 +17,7 @@ export class TooSmallCharacterPool extends Error {
   }
 }
 
-const QueueIDsEntrySchema = z.tuple([CharacterSchema.shape.id, CharacterSchema.shape.id]);
-const ChoiceEntrySchema = z.object({
-  pair: QueueIDsEntrySchema,
-  winnerId: CharacterSchema.shape.id.nullable(),
-});
-const ScreenStateSchema = z.union([
-  z.literal("start"),
-  z.literal("progress"),
-  z.literal("results"),
-]);
-
-type QueueIDsEntry = z.infer<typeof QueueIDsEntrySchema>;
-type ChoiceEntry = z.infer<typeof ChoiceEntrySchema>;
-type ScreenState = z.infer<typeof ScreenStateSchema>;
-type Scores = { [Key in Character["id"]]: number };
-
-export const useFullModeStore = defineStore("full-mode", () => {
+export const useGameStore = defineStore("game", () => {
   const queueIDs = useLocalStorage<QueueIDsEntry[]>("queue-ids", []);
   const choices = useLocalStorage<ChoiceEntry[]>("choices", []);
   const scores = useLocalStorage<Scores>("scores", {});
@@ -113,7 +97,7 @@ export const useFullModeStore = defineStore("full-mode", () => {
   }
 
   function start() {
-    const settings = useSettingsStore();
+    const settings = useExcludedCharacters();
     const excludedIds = settings.excludedIds;
 
     const poolIds = [...CHARACTERS_MAP.keys()].filter((id) => !excludedIds.includes(id));

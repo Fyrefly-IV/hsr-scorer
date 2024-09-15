@@ -1,22 +1,22 @@
 <script setup lang="ts">
+import { refDebounced } from "@vueuse/core";
+import { TriangleAlertIcon, XIcon } from "lucide-vue-next";
+import { computed, ref } from "vue";
+import { useGameStore } from "@/features/game/model/game";
+import { STAR_RAIL_CHARACTERS } from "@/entities/character/data/star-rail";
+import { useExcludedCharacters } from "@/entities/character/model/stores";
+import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import Alert from "@/shared/ui/alert/Alert.vue";
 import AlertDescription from "@/shared/ui/alert/AlertDescription.vue";
 import AlertTitle from "@/shared/ui/alert/AlertTitle.vue";
-import Button from "@/shared/ui/button/ui/Button.vue";
-import { STAR_RAIL_CHARACTERS } from "@/data/star-rail";
-import type { Character } from "@/data/schemas";
-import { useFullModeStore } from "@/stores/full-compare";
-import { useSettingsStore } from "@/stores/settings";
-import { TriangleAlertIcon, XIcon } from "lucide-vue-next";
-import { computed, ref } from "vue";
-import { refDebounced } from "@vueuse/core";
-import { H1, P } from "@/shared/ui/typography";
-import { Main } from "@/shared/ui/main";
+import Button from "@/shared/ui/button/Button.vue";
 import { Input } from "@/shared/ui/input";
+import { Main } from "@/shared/ui/main";
+import { H1, P } from "@/shared/ui/typography";
 
-const settings = useSettingsStore();
-const fullMode = useFullModeStore();
+const settings = useExcludedCharacters();
+const fullMode = useGameStore();
 
 const characterClickHandler = (id: Character["id"]) => {
   if (!settings.isExcludedId(id)) {

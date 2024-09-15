@@ -1,19 +1,19 @@
 <script setup lang="ts">
+import { useThrottleFn } from "@vueuse/core";
+import { UndoIcon, SkipForwardIcon, XIcon, PlayIcon } from "lucide-vue-next";
+import { computed, ref } from "vue";
+import { TooSmallCharacterPool, useGameStore } from "@/features/game/model/game";
+import { getCharacterById } from "@/entities/character/data/characters";
+import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
-import Main from "@/shared/ui/main/Main.vue";
+import Button from "@/shared/ui/button/Button.vue";
 import { Dialog } from "@/shared/ui/dialog";
+import Main from "@/shared/ui/main/Main.vue";
 import H1 from "@/shared/ui/typography/H1.vue";
 import H2 from "@/shared/ui/typography/H2.vue";
 import P from "@/shared/ui/typography/P.vue";
-import Button from "@/shared/ui/button/ui/Button.vue";
-import { getCharacterById } from "@/data/characters";
-import { TooSmallCharacterPool, useFullModeStore } from "@/stores/full-compare";
-import { useThrottleFn } from "@vueuse/core";
-import { computed, ref } from "vue";
-import { UndoIcon, SkipForwardIcon, XIcon, PlayIcon } from "lucide-vue-next";
-import type { Character } from "@/data/schemas";
 
-const fullMode = useFullModeStore();
+const fullMode = useGameStore();
 
 const showModalResetWarning = ref<boolean>(false);
 const showModalSmallPool = ref<boolean>(false);

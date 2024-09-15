@@ -1,4 +1,5 @@
-import { GAME_STAR_RAIL, type Character } from "./schemas";
+import { GAME_STAR_RAIL } from "@/shared/config/games";
+import type { Character } from "../model/types";
 
 export const STAR_RAIL_CHARACTERS: Character[] = [
   {

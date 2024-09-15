@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Main from "@/shared/ui/main/Main.vue";
-import Button from "@/shared/ui/button/ui/Button.vue";
-import { RouterLink } from "vue-router";
 import { PlayIcon, SettingsIcon } from "lucide-vue-next";
+import { RouterLink } from "vue-router";
+import Button from "@/shared/ui/button/Button.vue";
+import Main from "@/shared/ui/main/Main.vue";
 </script>
 
 <template>

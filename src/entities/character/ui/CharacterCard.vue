@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Character } from "@/data/schemas";
 import { SparklesIcon } from "lucide-vue-next";
 import { cn } from "@/shared/lib/cn";
+import type { Character } from "../model/types";
 
 type Props = {
   character: Character;

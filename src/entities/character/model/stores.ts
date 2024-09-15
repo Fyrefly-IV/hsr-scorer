@@ -1,9 +1,9 @@
-import type { Character } from "@/data/schemas";
 import { useLocalStorage } from "@vueuse/core";
-import { defineStore } from "pinia";
 import uniq from "lodash.uniq";
+import { defineStore } from "pinia";
+import type { Character } from "./types";
 
-export const useSettingsStore = defineStore("settings", () => {
+export const useExcludedCharacters = defineStore("exlcuded-characters", () => {
   const excludedIds = useLocalStorage<Character["id"][]>("excluded-ids", []);
 
   function excludeIds(...characterIds: Character["id"][]) {
