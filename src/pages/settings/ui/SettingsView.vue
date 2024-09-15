@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from "@unhead/vue";
 import { refDebounced } from "@vueuse/core";
 import { TriangleAlertIcon, XIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
@@ -47,6 +48,10 @@ const handleStarRailIncludeAll = () => {
 const handleStarRailExcludeAll = () => {
   settings.excludeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
 };
+
+useHead({
+  title: "Honkai Scorer | Settings",
+});
 </script>
 
 <template>
