@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { HomeIcon, SettingsIcon } from "lucide-vue-next";
-import { Button } from "@/shared/ui/button";
-import { GithubIcon } from "@/shared/ui/icons";
+import Button from "@/shared/ui/button/Button.vue";
+import GithubIcon from "@/shared/ui/icons/GithubIcon.vue";
 
 const nav = [
   {

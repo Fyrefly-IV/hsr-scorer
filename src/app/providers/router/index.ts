@@ -6,18 +6,18 @@ export const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("@/pages/home"),
+      component: () => import("@/pages/home/ui/HomeView.vue"),
     },
     {
       path: "/settings",
       name: "settings",
-      component: () => import("@/pages/settings"),
+      component: () => import("@/pages/settings/ui/SettingsView.vue"),
     },
     {
       path: "/full-compare",
       alias: "/play",
       name: "full-compare",
-      component: () => import("@/pages/play"),
+      component: () => import("@/pages/play/ui/FullCompareView.vue"),
     },
   ],
 });

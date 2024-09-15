@@ -11,9 +11,10 @@ import Alert from "@/shared/ui/alert/Alert.vue";
 import AlertDescription from "@/shared/ui/alert/AlertDescription.vue";
 import AlertTitle from "@/shared/ui/alert/AlertTitle.vue";
 import Button from "@/shared/ui/button/Button.vue";
-import { Input } from "@/shared/ui/input";
-import { Main } from "@/shared/ui/main";
-import { H1, P } from "@/shared/ui/typography";
+import Input from "@/shared/ui/input/Input.vue";
+import Main from "@/shared/ui/main/Main.vue";
+import H1 from "@/shared/ui/typography/H1.vue";
+import P from "@/shared/ui/typography/P.vue";
 
 const settings = useExcludedCharacters();
 const fullMode = useGameStore();

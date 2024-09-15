@@ -7,7 +7,7 @@ import { getCharacterById } from "@/entities/character/data/characters";
 import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import Button from "@/shared/ui/button/Button.vue";
-import { Dialog } from "@/shared/ui/dialog";
+import Dialog from "@/shared/ui/dialog/Dialog.vue";
 import Main from "@/shared/ui/main/Main.vue";
 import H1 from "@/shared/ui/typography/H1.vue";
 import H2 from "@/shared/ui/typography/H2.vue";

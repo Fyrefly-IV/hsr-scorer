@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { cn } from "@/shared/lib/cn";
 import { vOnClickOutside } from "@vueuse/components";
 import { effect, ref, watch } from "vue";
+import { cn } from "@/shared/lib/cn";
 
 const open = defineModel<boolean>({ required: true });
 const dialog = ref<HTMLDialogElement>();
