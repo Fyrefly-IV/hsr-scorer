@@ -3,6 +3,14 @@ import type { Character } from "../model/types";
 
 export const STAR_RAIL_CHARACTERS: Character[] = [
   {
+    id: "1317",
+    game: GAME_STAR_RAIL,
+    name: "Rappa",
+    assets: {
+      portrait: "/img/hsr/portraits/1317.webp",
+    },
+  },
+  {
     id: "1220",
     game: GAME_STAR_RAIL,
     name: "Feixiao",
