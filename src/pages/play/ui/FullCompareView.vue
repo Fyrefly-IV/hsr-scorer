@@ -4,6 +4,7 @@ import { UndoIcon, SkipForwardIcon, XIcon, PlayIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import { TooSmallCharacterPool, useGameStore } from "@/features/game/model/game";
 import { getCharacterById } from "@/entities/character/data/characters";
+import { useCharacterCardsOptions } from "@/entities/character/model/stores";
 import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import Button from "@/shared/ui/button/Button.vue";
@@ -14,6 +15,7 @@ import H2 from "@/shared/ui/typography/H2.vue";
 import P from "@/shared/ui/typography/P.vue";
 
 const fullMode = useGameStore();
+const cardOptions = useCharacterCardsOptions();
 
 const showModalResetWarning = ref<boolean>(false);
 const showModalSmallPool = ref<boolean>(false);
@@ -115,9 +117,11 @@ const reset = () => {
         <CharacterCard
           v-for="ch in fullMode.currentPair"
           :key="`pair-${ch.id}`"
-          @click="() => chooseThrottled(ch.id)"
-          :character="ch"
           class="w-full cursor-pointer select-none"
+          @click="() => chooseThrottled(ch.id)"
+          :show-path="cardOptions.showPaths"
+          :show-type="cardOptions.showTypes"
+          :character="ch"
           hoverable
         />
       </div>

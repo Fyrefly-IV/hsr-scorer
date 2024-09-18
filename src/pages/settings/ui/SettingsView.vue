@@ -4,10 +4,12 @@ import { refDebounced } from "@vueuse/core";
 import { TriangleAlertIcon, XIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import { useGameStore } from "@/features/game/model/game";
+import { CHARACTER_PATHS, CHARACTER_TYPES } from "@/entities/character/config/constants";
 import { STAR_RAIL_CHARACTERS } from "@/entities/character/data/star-rail";
-import { useExcludedCharacters } from "@/entities/character/model/stores";
-import type { Character } from "@/entities/character/model/types";
+import { useCharacterCardsOptions, useExcludedCharacters } from "@/entities/character/model/stores";
+import type { Character, StarRailPaths, StarRailTypes } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
+import { cn } from "@/shared/lib/cn";
 import Alert from "@/shared/ui/alert/Alert.vue";
 import AlertDescription from "@/shared/ui/alert/AlertDescription.vue";
 import AlertTitle from "@/shared/ui/alert/AlertTitle.vue";
@@ -18,6 +20,7 @@ import H1 from "@/shared/ui/typography/H1.vue";
 import P from "@/shared/ui/typography/P.vue";
 
 const settings = useExcludedCharacters();
+const cardOptions = useCharacterCardsOptions();
 const fullMode = useGameStore();
 
 const characterClickHandler = (id: Character["id"]) => {
@@ -31,22 +34,64 @@ const characterClickHandler = (id: Character["id"]) => {
 const hsrSearchValue = ref<string>("");
 const hsrSearchDebounced = refDebounced(hsrSearchValue, 200);
 
+const filtersByPaths = ref<StarRailPaths[]>([]);
+const filtersByTypes = ref<StarRailTypes[]>([]);
+
 const shownHsrCharacters = computed(() => {
-  if (hsrSearchDebounced.value.length === 0) {
-    return STAR_RAIL_CHARACTERS;
+  let result = STAR_RAIL_CHARACTERS;
+
+  if (filtersByPaths.value.length > 0) {
+    result = result.filter((c) => filtersByPaths.value.includes(c.path));
   }
 
-  return STAR_RAIL_CHARACTERS.filter((c) =>
-    c.name.toLowerCase().includes(hsrSearchDebounced.value.toLowerCase()),
-  );
+  if (filtersByTypes.value.length > 0) {
+    result = result.filter((c) => filtersByTypes.value.includes(c.type));
+  }
+
+  if (hsrSearchDebounced.value.length > 0) {
+    result = result.filter((c) =>
+      c.name.toLowerCase().includes(hsrSearchDebounced.value.toLowerCase()),
+    );
+  }
+
+  return result;
 });
 
-const handleStarRailIncludeAll = () => {
-  settings.includeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
+const isPathFiltered = (value: StarRailPaths) => {
+  return filtersByPaths.value.includes(value);
 };
 
-const handleStarRailExcludeAll = () => {
-  settings.excludeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
+const isTypeFiltered = (value: StarRailTypes) => {
+  return filtersByTypes.value.includes(value);
+};
+
+const togglePathFilter = (value: StarRailPaths) => {
+  if (filtersByPaths.value.includes(value)) {
+    filtersByPaths.value = filtersByPaths.value.filter((filter) => filter !== value);
+  } else {
+    filtersByPaths.value.push(value);
+  }
+};
+
+const toggleTypeFilter = (value: StarRailTypes) => {
+  if (filtersByTypes.value.includes(value)) {
+    filtersByTypes.value = filtersByTypes.value.filter((filter) => filter !== value);
+  } else {
+    filtersByTypes.value.push(value);
+  }
+};
+
+const resetFilters = () => {
+  filtersByPaths.value = [];
+  filtersByTypes.value = [];
+};
+
+const includeAllShownCharacters = () => {
+  settings.includeIds(...shownHsrCharacters.value.map((c) => c.id));
+};
+
+const excludeAllShownCharacters = () => {
+  settings.excludeIds(...shownHsrCharacters.value.map((c) => c.id));
 };
 
 useHead({
@@ -59,8 +104,8 @@ useHead({
     <div class="font-anuphan container">
       <H1>Settings</H1>
       <P class="text-lg">
-        In settings you can pick characters which you want to be present in your comparisons by
-        simply clicking on them!
+        Here you can adjust your pool of characters you are comparing and also modify the cards
+        looks just a little bit!
       </P>
 
       <Alert v-if="fullMode.screen === 'progress'" variant="destructive" class="mt-4">
@@ -75,18 +120,60 @@ useHead({
       </Alert>
     </div>
 
+    <div class="font-anuphan container mt-10">
+      <div>
+        <H1>Cards</H1>
+      </div>
+      <div class="mt-4 flex flex-col gap-2 [&_button]:w-fit">
+        <Button @click="cardOptions.showTypes = !cardOptions.showTypes">show/hide types</Button>
+        <Button @click="cardOptions.showPaths = !cardOptions.showPaths">show/hide paths</Button>
+      </div>
+    </div>
+
     <div class="container mt-10">
       <div>
-        <H1>Star Rail</H1>
+        <H1>Characters</H1>
         <div class="mt-4 grid grid-cols-2 flex-row gap-2 md:flex">
-          <Button variant="secondary" @click="handleStarRailIncludeAll">Select All</Button>
-          <Button variant="secondary" @click="handleStarRailExcludeAll">Deselect All</Button>
+          <Button variant="secondary" @click="includeAllShownCharacters">Select All</Button>
+          <Button variant="secondary" @click="excludeAllShownCharacters">Deselect All</Button>
         </div>
-        <div class="mt-4 flex gap-2">
-          <Button size="icon" variant="secondary" @click="hsrSearchValue = ''">
-            <XIcon class="size-4" />
-          </Button>
-          <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
+        <div class="mt-4 flex flex-col gap-2">
+          <div class="flex gap-2">
+            <Button size="icon" variant="secondary" @click="hsrSearchValue = ''">
+              <XIcon class="size-4" />
+            </Button>
+            <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <Button
+              @click="resetFilters"
+              class="aspect-square size-10 overflow-hidden p-0"
+              variant="secondary"
+            >
+              <XIcon class="size-4" />
+            </Button>
+            <Button
+              v-for="path in CHARACTER_PATHS"
+              :key="path"
+              class="aspect-square size-10 overflow-hidden p-0"
+              :class="cn(isPathFiltered(path) && 'border border-primary')"
+              variant="secondary"
+              @click="togglePathFilter(path)"
+            >
+              <img :src="`/img/hsr/ui/${path.toLowerCase()}.webp`" class="size-7" />
+            </Button>
+
+            <Button
+              v-for="type in CHARACTER_TYPES"
+              :key="type"
+              class="aspect-square size-10 overflow-hidden p-0"
+              :class="cn(isTypeFiltered(type) && 'border border-primary')"
+              variant="secondary"
+              @click="toggleTypeFilter(type)"
+            >
+              <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
+            </Button>
+          </div>
         </div>
       </div>
       <div
@@ -99,6 +186,8 @@ useHead({
           @click="() => characterClickHandler(c.id)"
           class="cursor-pointer"
           :excluded="settings.isExcludedId(c.id)"
+          :show-path="cardOptions.showPaths"
+          :show-type="cardOptions.showTypes"
           hoverable
         />
       </div>
