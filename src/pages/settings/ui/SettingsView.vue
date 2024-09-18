@@ -144,13 +144,13 @@ useHead({
             </Button>
             <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
           </div>
-          <div class="flex gap-2 flex-wrap">
+          <div class="flex flex-wrap gap-2">
             <Button
               @click="resetFilters"
-              class="aspect-square size-10 overflow-hidden"
+              class="aspect-square size-10 overflow-hidden p-0"
               variant="secondary"
             >
-              x
+              <XIcon class="size-4" />
             </Button>
             <Button
               v-for="path in CHARACTER_PATHS"
