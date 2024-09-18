@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { computed } from "vue";
 import { CHARACTERS_MAP } from "@/entities/character/data/characters";
 import { useExcludedCharacters } from "@/entities/character/model/stores";
-import type { Character } from "@/entities/character/model/types";
+import type { StarRailCharacter } from "@/entities/character/model/types";
 import { combinations, shuffleArray } from "@/shared/lib/arrays";
 import { getObjectValue } from "@/shared/lib/get-object-value";
 import { isNil } from "@/shared/lib/is-nil";
@@ -33,7 +33,7 @@ export const useGameStore = defineStore("game", () => {
     return queueIDs.value[0];
   });
 
-  const currentPair = computed<[Character, Character] | null>(() => {
+  const currentPair = computed<[StarRailCharacter, StarRailCharacter] | null>(() => {
     if (queueIDs.value.length === 0) {
       return null;
     }
@@ -51,7 +51,7 @@ export const useGameStore = defineStore("game", () => {
   });
 
   // when winnerId is null that means user skips pair
-  function choose(winnerId: Character["id"] | null, autoFinish: boolean = true) {
+  function choose(winnerId: StarRailCharacter["id"] | null, autoFinish: boolean = true) {
     const pair = currentIdPair.value;
     if (isNil(pair)) {
       throw Error("there is no current pair, cannot make a choice!");
