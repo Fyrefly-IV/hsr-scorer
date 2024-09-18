@@ -16,6 +16,7 @@ import AlertTitle from "@/shared/ui/alert/AlertTitle.vue";
 import Button from "@/shared/ui/button/Button.vue";
 import Input from "@/shared/ui/input/Input.vue";
 import Main from "@/shared/ui/main/Main.vue";
+import Switch from "@/shared/ui/switch/Switch.vue";
 import H1 from "@/shared/ui/typography/H1.vue";
 import P from "@/shared/ui/typography/P.vue";
 
@@ -124,9 +125,15 @@ useHead({
       <div>
         <H1>Cards</H1>
       </div>
-      <div class="mt-4 flex flex-col gap-2 [&_button]:w-fit">
-        <Button @click="cardOptions.showTypes = !cardOptions.showTypes">show/hide types</Button>
-        <Button @click="cardOptions.showPaths = !cardOptions.showPaths">show/hide paths</Button>
+      <div class="mt-4 flex w-fit flex-col gap-2">
+        <label class="flex items-center justify-center gap-2">
+          <Switch v-model="cardOptions.showTypes" />
+          <span>Show types</span>
+        </label>
+        <label class="flex items-center justify-center gap-2">
+          <Switch v-model="cardOptions.showPaths" />
+          <span>Show paths</span>
+        </label>
       </div>
     </div>
 
