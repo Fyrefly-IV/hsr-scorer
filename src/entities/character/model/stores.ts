@@ -20,3 +20,10 @@ export const useExcludedCharacters = defineStore("exlcuded-characters", () => {
 
   return { excludedIds, excludeIds, includeIds, isExcludedId };
 });
+
+export const useCharacterCardsOptions = defineStore("character-cards-options", () => {
+  const showTypes = useLocalStorage<boolean>("character-cards-show-types", true);
+  const showPaths = useLocalStorage<boolean>("character-cards-show-paths", false);
+
+  return { showTypes, showPaths };
+});
