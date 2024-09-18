@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { SparklesIcon } from "lucide-vue-next";
 import { cn } from "@/shared/lib/cn";
-import type { Character } from "../model/types";
+import type { StarRailCharacter } from "../model/types";
 
 type Props = {
-  character: Character;
+  character: StarRailCharacter;
   hideName?: boolean;
   textUnderName?: string;
   excluded?: boolean;
@@ -12,6 +12,8 @@ type Props = {
   width?: number;
   height?: number;
   decoration?: boolean;
+  showType?: boolean;
+  showPath?: boolean;
   class?: string;
 };
 
@@ -66,5 +68,20 @@ const clickHandler = (e: MouseEvent) => {
         {{ textUnderName }}
       </p>
     </figcaption>
+    <div
+      v-if="showPath === true || showType === true"
+      class="absolute left-0 top-0 flex w-full justify-between px-1 pt-1 [&_img]:drop-shadow-[0_1px_1px_#000]"
+    >
+      <img
+        v-if="showType"
+        :src="`/img/hsr/ui/${character.type.toLowerCase()}.webp`"
+        class="aspect-square size-8"
+      />
+      <img
+        v-if="showPath"
+        :src="`/img/hsr/ui/${character.path.toLowerCase()}.webp`"
+        class="aspect-square size-8"
+      />
+    </div>
   </figure>
 </template>
