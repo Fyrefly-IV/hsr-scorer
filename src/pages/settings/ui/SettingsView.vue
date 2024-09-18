@@ -86,12 +86,12 @@ const resetFilters = () => {
   filtersByTypes.value = [];
 };
 
-const handleStarRailIncludeAll = () => {
-  settings.includeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
+const includeAllShownCharacters = () => {
+  settings.includeIds(...shownHsrCharacters.value.map((c) => c.id));
 };
 
-const handleStarRailExcludeAll = () => {
-  settings.excludeIds(...STAR_RAIL_CHARACTERS.map((c) => c.id));
+const excludeAllShownCharacters = () => {
+  settings.excludeIds(...shownHsrCharacters.value.map((c) => c.id));
 };
 
 useHead({
@@ -134,8 +134,8 @@ useHead({
       <div>
         <H1>Characters</H1>
         <div class="mt-4 grid grid-cols-2 flex-row gap-2 md:flex">
-          <Button variant="secondary" @click="handleStarRailIncludeAll">Select All</Button>
-          <Button variant="secondary" @click="handleStarRailExcludeAll">Deselect All</Button>
+          <Button variant="secondary" @click="includeAllShownCharacters">Select All</Button>
+          <Button variant="secondary" @click="excludeAllShownCharacters">Deselect All</Button>
         </div>
         <div class="mt-4 flex flex-col gap-2">
           <div class="flex gap-2">
