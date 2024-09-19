@@ -85,6 +85,7 @@ const toggleTypeFilter = (value: StarRailTypes) => {
 const resetFilters = () => {
   filtersByPaths.value = [];
   filtersByTypes.value = [];
+  hsrSearchValue.value = "";
 };
 
 const includeAllShownCharacters = () => {
@@ -128,11 +129,11 @@ useHead({
       <div class="mt-4 flex w-fit flex-col gap-2">
         <label class="flex items-center justify-center gap-2">
           <Switch v-model="cardOptions.showTypes" />
-          <span>Show types</span>
+          <span class="text-sm leading-none">Show types</span>
         </label>
         <label class="flex items-center justify-center gap-2">
           <Switch v-model="cardOptions.showPaths" />
-          <span>Show paths</span>
+          <span class="text-sm leading-none">Show paths</span>
         </label>
       </div>
     </div>
@@ -145,40 +146,41 @@ useHead({
           <Button variant="secondary" @click="excludeAllShownCharacters">Deselect All</Button>
         </div>
         <div class="mt-4 flex flex-col gap-2">
-          <div class="flex gap-2">
-            <Button size="icon" variant="secondary" @click="hsrSearchValue = ''">
-              <XIcon class="size-4" />
-            </Button>
-            <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" />
-          </div>
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-3">
+            <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10 md:max-w-64" />
+
+            <div class="flex flex-wrap gap-2">
+              <Button
+                v-for="path in CHARACTER_PATHS"
+                :key="path"
+                class="aspect-square size-10 overflow-hidden p-0"
+                :class="cn(isPathFiltered(path) && 'border border-primary')"
+                variant="secondary"
+                @click="togglePathFilter(path)"
+              >
+                <img :src="`/img/hsr/ui/${path.toLowerCase()}.webp`" class="size-7" />
+              </Button>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <Button
+                v-for="type in CHARACTER_TYPES"
+                :key="type"
+                class="aspect-square size-10 overflow-hidden p-0"
+                :class="cn(isTypeFiltered(type) && 'border border-primary')"
+                variant="secondary"
+                @click="toggleTypeFilter(type)"
+              >
+                <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
+              </Button>
+            </div>
+
             <Button
               @click="resetFilters"
               class="aspect-square size-10 overflow-hidden p-0"
               variant="secondary"
             >
               <XIcon class="size-4" />
-            </Button>
-            <Button
-              v-for="path in CHARACTER_PATHS"
-              :key="path"
-              class="aspect-square size-10 overflow-hidden p-0"
-              :class="cn(isPathFiltered(path) && 'border border-primary')"
-              variant="secondary"
-              @click="togglePathFilter(path)"
-            >
-              <img :src="`/img/hsr/ui/${path.toLowerCase()}.webp`" class="size-7" />
-            </Button>
-
-            <Button
-              v-for="type in CHARACTER_TYPES"
-              :key="type"
-              class="aspect-square size-10 overflow-hidden p-0"
-              :class="cn(isTypeFiltered(type) && 'border border-primary')"
-              variant="secondary"
-              @click="toggleTypeFilter(type)"
-            >
-              <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
             </Button>
           </div>
         </div>
