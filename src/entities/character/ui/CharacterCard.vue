@@ -48,7 +48,7 @@ const clickHandler = (e: MouseEvent) => {
     <img
       :src="character.assets.portrait ?? undefined"
       :style="{ aspectRatio: `${width}/${height}` }"
-      class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-data-[hoverable=true]:hover:scale-110"
+      class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-data-[hoverable=true]:hover:scale-105"
       draggable="false"
       decoding="async"
       loading="eager"
