@@ -8,6 +8,13 @@ import {
   PATH_HUNT,
   PATH_NIHILITY,
   PATH_PRESERVATION,
+  TYPE_FIRE,
+  TYPE_ICE,
+  TYPE_IMAGINARY,
+  TYPE_LIGHTNING,
+  TYPE_PHYSICAL,
+  TYPE_QUANTUM,
+  TYPE_WIND,
 } from "../config/constants";
 
 export const CharacterAssetsSchema = z.object({
@@ -34,13 +41,13 @@ export const StarRailPathsSchema = z.union([
 ]);
 
 export const StarRailTypesSchema = z.union([
-  z.literal("Physical"),
-  z.literal("Fire"),
-  z.literal("Ice"),
-  z.literal("Lightning"),
-  z.literal("Wind"),
-  z.literal("Quantum"),
-  z.literal("Imaginary"),
+  z.literal(TYPE_PHYSICAL),
+  z.literal(TYPE_FIRE),
+  z.literal(TYPE_ICE),
+  z.literal(TYPE_LIGHTNING),
+  z.literal(TYPE_WIND),
+  z.literal(TYPE_QUANTUM),
+  z.literal(TYPE_IMAGINARY),
 ]);
 
 export const StarRailCharacterSchema = CharacterSchema.extend({
