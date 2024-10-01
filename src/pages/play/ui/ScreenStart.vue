@@ -25,14 +25,14 @@ const start = () => {
 
 <template>
   <div v-if="fullMode.screen === 'start'" class="flex max-w-[800px] flex-col">
-    <H1 class="text-center">Full Compare</H1>
+    <H1 class="text-center"> Full Compare </H1>
     <P class="text-center">
       In this mode, you will be comparing characters that you can choose from a list in the
       settings. The process may take a significant amount of time, so we recommend ensuring that you
       exclude any characters from the list that you do not wish to compare.
     </P>
 
-    <Button @click="start" class="mt-4 w-fit gap-2 self-center">
+    <Button class="mt-4 w-fit gap-2 self-center" @click="start">
       <PlayIcon class="w-4" />
       <span>Start Comparing</span>
     </Button>
@@ -45,13 +45,13 @@ const start = () => {
   </div>
 
   <Dialog v-model="showModalSmallPool">
-    <H2 class="font-bold">Chracter pool is too small!</H2>
+    <H2 class="font-bold"> Chracter pool is too small! </H2>
     <P>
       Looks like your character pool doesn't contain <strong>at least two characters!</strong>
       Head over to settings and select some of the to continue.
     </P>
     <div class="flwx-row mt-4 flex gap-2 self-end">
-      <Button size="sm" @click="showModalSmallPool = false">Ok</Button>
+      <Button size="sm" @click="showModalSmallPool = false"> Ok </Button>
     </div>
   </Dialog>
 </template>

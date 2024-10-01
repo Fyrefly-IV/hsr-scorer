@@ -11,6 +11,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   variant: "default",
   size: "default",
+  class: "",
 });
 
 type Emits = {
@@ -50,9 +51,9 @@ const clickHandler = (e: MouseEvent) => {
         props.class,
       )
     "
-    @click="clickHandler"
     :disabled="disabled"
+    @click="clickHandler"
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>

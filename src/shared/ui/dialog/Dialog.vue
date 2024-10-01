@@ -28,7 +28,7 @@ watch(
 
 <template>
   <Teleport to="body">
-    <dialog :open="open" ref="dialog">
+    <dialog ref="dialog" :open="open">
       <div
         v-if="open === true"
         v-on-click-outside="close"
@@ -36,7 +36,7 @@ watch(
           cn('flex w-full max-w-[600px] flex-col rounded-md border border-border bg-background p-4')
         "
       >
-        <slot></slot>
+        <slot />
       </div>
     </dialog>
   </Teleport>

@@ -8,6 +8,6 @@ const props = defineProps({
 
 <template>
   <h4 :class="cn('scroll-m-20 text-xl font-semibold tracking-tight', props.class)">
-    <slot></slot>
+    <slot />
   </h4>
 </template>

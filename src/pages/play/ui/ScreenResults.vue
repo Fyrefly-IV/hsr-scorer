@@ -59,7 +59,7 @@ const isWinnerId = (id: Character["id"]): boolean => {
         />
       </div>
 
-      <Button variant="outline" @click="emit('confirmReset')" class="w-fit self-center">
+      <Button variant="outline" class="w-fit self-center" @click="emit('confirmReset')">
         Reset
       </Button>
 

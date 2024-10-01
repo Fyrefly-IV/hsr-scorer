@@ -8,6 +8,6 @@ const props = defineProps({
 
 <template>
   <main :class="cn('min-h-[--height-main] bg-background p-4', props.class)">
-    <slot></slot>
+    <slot />
   </main>
 </template>

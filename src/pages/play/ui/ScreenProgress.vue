@@ -33,22 +33,22 @@ const undo = () => {
 <template>
   <div class="w-ful w-fit max-w-[600px]">
     <div
-      class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
       v-if="fullMode.currentPair != null"
+      class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
     >
       <CharacterCard
         v-for="ch in fullMode.currentPair"
         :key="`pair-${ch.id}`"
         class="w-full cursor-pointer select-none"
-        @click="() => chooseThrottled(ch.id)"
         :show-path="cardOptions.showPaths"
         :show-type="cardOptions.showTypes"
         :character="ch"
         hoverable
+        @click="() => chooseThrottled(ch.id)"
       />
     </div>
     <div class="mt-6 flex w-full items-center justify-between">
-      <Button variant="ghost" size="icon" @click="undo" :disabled="!canUndo">
+      <Button variant="ghost" size="icon" :disabled="!canUndo" @click="undo">
         <UndoIcon class="size-6" />
         <span class="sr-only">Undo</span>
       </Button>

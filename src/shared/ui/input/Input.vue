@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { cn } from "@/shared/lib/cn";
 
-const model = defineModel();
+const model = defineModel<string | number>();
 
 const props = defineProps({
-  class: {
-    type: String,
-    default: "",
-  },
+  class: { type: String, default: "" },
 });
 </script>
 

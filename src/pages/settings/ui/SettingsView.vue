@@ -176,9 +176,9 @@ useHead({
             </div>
 
             <Button
-              @click="resetFilters"
               class="aspect-square size-10 overflow-hidden p-0"
               variant="secondary"
+              @click="resetFilters"
             >
               <XIcon class="size-4" />
             </Button>
@@ -192,12 +192,12 @@ useHead({
           v-for="c in shownHsrCharacters"
           :key="c.id"
           :character="c"
-          @click="() => characterClickHandler(c.id)"
           class="cursor-pointer"
           :excluded="settings.isExcludedId(c.id)"
           :show-path="cardOptions.showPaths"
           :show-type="cardOptions.showTypes"
           hoverable
+          @click="() => characterClickHandler(c.id)"
         />
       </div>
     </div>

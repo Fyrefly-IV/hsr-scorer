@@ -8,6 +8,7 @@ type Props = {
 
 const props = withDefaults(defineProps<Props>(), {
   variant: "default",
+  class: "",
 });
 </script>
 
@@ -25,6 +26,6 @@ const props = withDefaults(defineProps<Props>(), {
       )
     "
   >
-    <slot></slot>
+    <slot />
   </div>
 </template>

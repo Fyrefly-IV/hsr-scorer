@@ -20,6 +20,8 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   width: 200,
   height: 300,
+  textUnderName: undefined,
+  class: "",
 });
 
 type Emits = {
@@ -35,7 +37,6 @@ const clickHandler = (e: MouseEvent) => {
 
 <template>
   <figure
-    @click="clickHandler"
     :class="
       cn(
         'group relative overflow-hidden rounded-lg border border-border bg-secondary/30 transition-transform data-[excluded=true]:translate-y-2 data-[excluded=true]:opacity-30',
@@ -44,6 +45,7 @@ const clickHandler = (e: MouseEvent) => {
     "
     :data-excluded="excluded"
     :data-hoverable="hoverable"
+    @click="clickHandler"
   >
     <img
       :src="character.assets.portrait ?? undefined"
@@ -54,8 +56,8 @@ const clickHandler = (e: MouseEvent) => {
       loading="eager"
     />
     <figcaption
-      class="absolute inset-x-0 bottom-0 flex flex-col items-center rounded-b-md bg-gradient-to-b from-black/40 to-black/60 px-4 pb-3 pt-2 text-center text-white"
       v-if="hideName !== true"
+      class="absolute inset-x-0 bottom-0 flex flex-col items-center rounded-b-md bg-gradient-to-b from-black/40 to-black/60 px-4 pb-3 pt-2 text-center text-white"
     >
       <h3 class="relative w-fit font-anuphane text-lg font-semibold">
         <SparklesIcon
