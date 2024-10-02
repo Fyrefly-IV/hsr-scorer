@@ -36,16 +36,18 @@ const undo = () => {
       v-if="fullMode.currentPair != null"
       class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
     >
-      <CharacterCard
+      <button
         v-for="ch in fullMode.currentPair"
         :key="`pair-${ch.id}`"
-        class="w-full cursor-pointer select-none"
-        :show-path="cardOptions.showPaths"
-        :show-type="cardOptions.showTypes"
-        :character="ch"
-        hoverable
+        class="size-full"
         @click="() => chooseThrottled(ch.id)"
-      />
+      >
+        <CharacterCard
+          :character="ch"
+          :show-path="cardOptions.showPaths"
+          :show-type="cardOptions.showTypes"
+        />
+      </button>
     </div>
     <div class="mt-6 flex w-full items-center justify-between">
       <Button variant="ghost" size="icon" :disabled="!canUndo" @click="undo">
