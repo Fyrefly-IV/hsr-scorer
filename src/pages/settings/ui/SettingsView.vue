@@ -103,7 +103,7 @@ useHead({
 
 <template>
   <Main class="flex flex-col">
-    <div class="font-anuphan container">
+    <section class="font-anuphan container">
       <H1>Settings</H1>
       <P class="text-lg">
         Here you can adjust your pool of characters you are comparing and also modify the cards
@@ -120,9 +120,9 @@ useHead({
           characters right now these changes will take effect only once you start comparing again!
         </AlertDescription>
       </Alert>
-    </div>
+    </section>
 
-    <div class="font-anuphan container mt-10">
+    <section class="font-anuphan container mt-10">
       <div>
         <H1>Cards</H1>
       </div>
@@ -136,9 +136,9 @@ useHead({
           <span class="text-sm leading-none">Show paths</span>
         </label>
       </div>
-    </div>
+    </section>
 
-    <div class="container mt-10">
+    <section class="container mt-10">
       <div>
         <H1>Characters</H1>
         <div class="mt-4 grid grid-cols-2 flex-row gap-2 md:flex">
@@ -185,21 +185,25 @@ useHead({
           </div>
         </div>
       </div>
-      <div
-        class="mt-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      <ul
+        class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
       >
-        <CharacterCard
-          v-for="c in shownHsrCharacters"
-          :key="c.id"
-          :character="c"
-          class="cursor-pointer"
-          :excluded="settings.isExcludedId(c.id)"
-          :show-path="cardOptions.showPaths"
-          :show-type="cardOptions.showTypes"
-          hoverable
-          @click="() => characterClickHandler(c.id)"
-        />
-      </div>
-    </div>
+        <li v-for="c in shownHsrCharacters" :key="c.id">
+          <button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
+            <CharacterCard
+              :character="c"
+              :show-path="cardOptions.showPaths"
+              :show-type="cardOptions.showTypes"
+              :class="
+                cn(
+                  'transition-transform',
+                  settings.isExcludedId(c.id) && 'translate-y-1 opacity-60',
+                )
+              "
+            />
+          </button>
+        </li>
+      </ul>
+    </section>
   </Main>
 </template>
