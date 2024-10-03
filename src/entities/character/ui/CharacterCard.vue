@@ -20,7 +20,11 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <article :class="cn('relative overflow-hidden rounded-md border border-border', props.class)">
+  <article
+    :class="
+      cn('relative overflow-hidden rounded-md border border-border bg-secondary/35', props.class)
+    "
+  >
     <img
       :src="character.assets.portrait ?? undefined"
       class="card-thumbnail aspect-[376/512] h-full w-full object-cover"
