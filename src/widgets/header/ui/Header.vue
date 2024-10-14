@@ -31,7 +31,7 @@ const nav = [
       </nav>
 
       <div class="flex flex-1 justify-end gap-2">
-        <a href="https://github.com/mk26710/hsr-scorer" target="_blank" rel="noreferrer">
+        <a href="https://github.com/Fyrefly-IV/hsr-scorer" target="_blank" rel="noreferrer">
           <Button variant="ghost" size="icon">
             <GithubIcon class="size-4" />
           </Button>
