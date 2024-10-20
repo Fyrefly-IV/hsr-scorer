@@ -1,6 +1,6 @@
 import { useLocalStorage, usePreferredColorScheme } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { computed, watch, watchEffect } from "vue";
+import { computed, watch } from "vue";
 import type { Theme } from "./theme.types";
 
 export const useThemeStore = defineStore("theme", () => {
