@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { HomeIcon, SettingsIcon } from "lucide-vue-next";
+import { HomeIcon, MonitorIcon, MoonStarIcon, SettingsIcon, SunIcon } from "lucide-vue-next";
+import { useThemeStore } from "@/features/theme-switch/model/theme.store";
 import Button from "@/shared/ui/button/Button.vue";
 import GithubIcon from "@/shared/ui/icons/GithubIcon.vue";
+
+const themeStore = useThemeStore();
 
 const nav = [
   {
@@ -36,6 +39,18 @@ const nav = [
             <GithubIcon class="size-4" />
           </Button>
         </a>
+
+        <div class="flex flex-row gap-2">
+          <Button size="icon" variant="outline" @click="themeStore.setThemeAuto">
+            <MonitorIcon class="size-4" />
+          </Button>
+          <Button size="icon" variant="outline" @click="themeStore.setThemeDark">
+            <MoonStarIcon class="size-4" />
+          </Button>
+          <Button size="icon" variant="outline" @click="themeStore.setThemeLight">
+            <SunIcon class="size-4" />
+          </Button>
+        </div>
       </div>
     </div>
   </header>
