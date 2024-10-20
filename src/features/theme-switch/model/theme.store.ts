@@ -45,15 +45,6 @@ export const useThemeStore = defineStore("theme", () => {
     { immediate: true },
   );
 
-  watchEffect(() => {
-    console.table({
-      preferredTheme: preferredTheme.value,
-      selectedTheme: selectedTheme.value,
-      displayedTheme: displayedTheme.value,
-      isDark: isDark.value,
-    });
-  });
-
   return {
     preferredTheme,
     selectedTheme,
