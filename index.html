@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
@@ -41,10 +41,19 @@
     <meta property="twitter:image" content="/img/meta/scorer-v2.webp" />
 
     <style>
-      :root {
+      html.dark {
         color-scheme: dark;
       }
     </style>
+
+    <script>
+      const selectedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (selectedTheme === "dark" || prefersDark === true) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body class="bg-background text-foreground">
     <div id="app"></div>
