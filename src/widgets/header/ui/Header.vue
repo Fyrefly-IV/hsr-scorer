@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { vOnClickOutside } from "@vueuse/components";
 import { HomeIcon, MonitorIcon, MoonStarIcon, SettingsIcon, SunIcon } from "lucide-vue-next";
+import { ref } from "vue";
 import { useThemeStore } from "@/features/theme-switch/model/theme.store";
 import Button from "@/shared/ui/button/Button.vue";
 import GithubIcon from "@/shared/ui/icons/GithubIcon.vue";
-
-const themeStore = useThemeStore();
 
 const nav = [
   {
@@ -18,6 +18,13 @@ const nav = [
     href: "/settings",
   },
 ];
+
+const themeStore = useThemeStore();
+const isSwitcherOpen = ref(false);
+
+function closeSwitcher() {
+  isSwitcherOpen.value = false;
+}
 </script>
 
 <template>
@@ -40,16 +47,43 @@ const nav = [
           </Button>
         </a>
 
-        <div class="flex flex-row gap-2">
-          <Button size="icon" variant="outline" @click="themeStore.setThemeAuto">
-            <MonitorIcon class="size-4" />
+        <div v-on-click-outside="closeSwitcher" class="relative">
+          <Button variant="outline" size="icon" @click="isSwitcherOpen = !isSwitcherOpen">
+            <component :is="themeStore.isDark === true ? MoonStarIcon : SunIcon" class="size-4" />
           </Button>
-          <Button size="icon" variant="outline" @click="themeStore.setThemeDark">
-            <MoonStarIcon class="size-4" />
-          </Button>
-          <Button size="icon" variant="outline" @click="themeStore.setThemeLight">
-            <SunIcon class="size-4" />
-          </Button>
+
+          <div
+            v-if="isSwitcherOpen"
+            class="absolute right-0 mt-2 grid grid-flow-row grid-cols-[1fr] gap-0.5 rounded-md border border-border bg-background p-2"
+          >
+            <Button
+              size="sm"
+              variant="ghost"
+              class="items-center justify-start gap-2"
+              @click="themeStore.setThemeDark"
+            >
+              <MoonStarIcon class="size-4" />
+              <span>Dark</span>
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              class="items-center justify-start gap-2"
+              @click="themeStore.setThemeLight"
+            >
+              <SunIcon class="size-4" />
+              <span>Light</span>
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              class="items-center justify-start gap-2"
+              @click="themeStore.setThemeAuto"
+            >
+              <MonitorIcon class="size-4" />
+              <span>Auto</span>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
