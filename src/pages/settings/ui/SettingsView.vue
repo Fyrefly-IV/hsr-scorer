@@ -198,7 +198,7 @@ useHead({
               :class="
                 cn(
                   'transition-transform',
-                  settings.isExcludedId(c.id) && 'translate-y-1 opacity-60',
+                  settings.isExcludedId(c.id) && 'scale-95 opacity-60',
                 )
               "
             />
