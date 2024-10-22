@@ -187,7 +187,7 @@ useHead({
         </div>
       </div>
       <ul
-        class="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+        class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
       >
         <li v-for="c in shownHsrCharacters" :key="c.id">
           <button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
@@ -196,10 +196,7 @@ useHead({
               :show-path="cardOptions.showPaths"
               :show-type="cardOptions.showTypes"
               :class="
-                cn(
-                  'transition-transform',
-                  settings.isExcludedId(c.id) && 'scale-95 opacity-60',
-                )
+                cn('transition-transform', settings.isExcludedId(c.id) && 'scale-95 opacity-60')
               "
             />
           </button>
