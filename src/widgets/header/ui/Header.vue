@@ -4,7 +4,6 @@ import { HomeIcon, MonitorIcon, MoonStarIcon, SettingsIcon, SunIcon } from "luci
 import { ref } from "vue";
 import { useThemeStore } from "@/features/theme-switch/model/theme.store";
 import Button from "@/shared/ui/button/Button.vue";
-import GithubIcon from "@/shared/ui/icons/GithubIcon.vue";
 
 const nav = [
   {
@@ -41,12 +40,6 @@ function closeSwitcher() {
       </nav>
 
       <div class="flex flex-1 justify-end gap-2">
-        <a href="https://github.com/Fyrefly-IV/hsr-scorer" target="_blank" rel="noreferrer">
-          <Button variant="ghost" size="icon">
-            <GithubIcon class="size-4" />
-          </Button>
-        </a>
-
         <div v-on-click-outside="closeSwitcher" class="relative">
           <Button variant="outline" size="icon" @click="isSwitcherOpen = !isSwitcherOpen">
             <component :is="themeStore.isDark === true ? MoonStarIcon : SunIcon" class="size-4" />
