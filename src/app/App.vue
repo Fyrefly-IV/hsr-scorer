@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue";
 import { RouterView } from "vue-router";
+import Footer from "@/widgets/footer/ui/Footer.vue";
 import Header from "@/widgets/header/ui/Header.vue";
 
 useHead({
@@ -11,6 +12,7 @@ useHead({
 <template>
   <Header />
   <RouterView />
+  <Footer />
 </template>
 
 <style>
