@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue";
 import { refDebounced } from "@vueuse/core";
-import { TriangleAlertIcon, XIcon } from "lucide-vue-next";
+import { RotateCcwIcon, TriangleAlertIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import { useGameStore } from "@/features/game/model/game";
 import { CHARACTER_PATHS, CHARACTER_TYPES } from "@/entities/character/config/constants";
@@ -146,41 +146,42 @@ useHead({
           <Button variant="secondary" @click="excludeAllShownCharacters">Deselect All</Button>
         </div>
         <div class="mt-4 flex flex-col gap-2">
-          <div class="flex flex-wrap gap-3">
-            <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10 md:max-w-64" />
-
-            <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-1">
+            <div class="flex gap-1 md:max-w-64">
               <Button
-                v-for="path in CHARACTER_PATHS"
-                :key="path"
                 class="aspect-square size-10 overflow-hidden p-0"
-                :class="cn(isPathFiltered(path) && 'border border-primary')"
                 variant="secondary"
-                @click="togglePathFilter(path)"
+                @click="resetFilters"
               >
-                <img :src="`/img/hsr/ui/${path.toLowerCase()}.webp`" class="size-7" />
+                <RotateCcwIcon class="size-4" />
               </Button>
-            </div>
 
-            <div class="flex flex-wrap gap-2">
-              <Button
-                v-for="type in CHARACTER_TYPES"
-                :key="type"
-                class="aspect-square size-10 overflow-hidden p-0"
-                :class="cn(isTypeFiltered(type) && 'border border-primary')"
-                variant="secondary"
-                @click="toggleTypeFilter(type)"
-              >
-                <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
-              </Button>
+              <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10" />
             </div>
 
             <Button
+              v-for="path in CHARACTER_PATHS"
+              :key="path"
               class="aspect-square size-10 overflow-hidden p-0"
+              :class="cn(isPathFiltered(path) && 'border border-primary')"
               variant="secondary"
-              @click="resetFilters"
+              @click="togglePathFilter(path)"
             >
-              <XIcon class="size-4" />
+              <img
+                :src="`/img/hsr/ui/${path.toLowerCase()}.webp`"
+                class="size-7 drop-shadow-[0_1px_1px_#000]"
+              />
+            </Button>
+
+            <Button
+              v-for="type in CHARACTER_TYPES"
+              :key="type"
+              class="aspect-square size-10 overflow-hidden p-0"
+              :class="cn(isTypeFiltered(type) && 'border border-primary')"
+              variant="secondary"
+              @click="toggleTypeFilter(type)"
+            >
+              <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
             </Button>
           </div>
         </div>
