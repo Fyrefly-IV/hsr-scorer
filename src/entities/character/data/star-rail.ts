@@ -19,6 +19,15 @@ import type { StarRailCharacter } from "../model/types";
 
 export const STAR_RAIL_CHARACTERS: StarRailCharacter[] = [
   {
+    id: "1225",
+    game: GAME_STAR_RAIL,
+    name: "Fugue",
+    rarity: 5,
+    path: PATH_NIHILITY,
+    type: TYPE_FIRE,
+    assets: { portrait: "/img/hsr/portraits/1225.webp" },
+  },
+  {
     id: "1317",
     game: GAME_STAR_RAIL,
     name: "Rappa",
@@ -570,5 +579,14 @@ export const STAR_RAIL_CHARACTERS: StarRailCharacter[] = [
     path: PATH_DESTRUCTION,
     type: TYPE_PHYSICAL,
     assets: { portrait: "/img/hsr/portraits/8001.webp" },
+  },
+  {
+    id: "1313",
+    game: GAME_STAR_RAIL,
+    name: "Sunday",
+    rarity: 5,
+    path: PATH_HARMONY,
+    type: TYPE_IMAGINARY,
+    assets: { portrait: "/img/hsr/portraits/1313.webp" },
   },
 ];
