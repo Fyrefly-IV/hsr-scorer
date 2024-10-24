@@ -193,7 +193,7 @@ useHead({
         </div>
       </div>
       <ul
-        class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+        class="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8"
       >
         <li v-for="c in shownHsrCharacters" :key="c.id">
           <button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
