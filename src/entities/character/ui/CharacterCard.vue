@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SparklesIcon } from "lucide-vue-next";
+import { computed } from "vue";
 import { cn } from "@/shared/lib/cn";
 import type { StarRailCharacter } from "../model/types";
 
@@ -10,6 +11,7 @@ type Props = {
   decoration?: boolean;
   showType?: boolean;
   showPath?: boolean;
+  rarityBg?: boolean;
   class?: string;
 };
 
@@ -17,12 +19,24 @@ const props = withDefaults(defineProps<Props>(), {
   textUnderName: undefined,
   class: "",
 });
+
+const cssVars = computed(() => {
+  return {
+    "--top": props.character.rarity === 5 ? "hsl(5, 26%, 42%)" : "hsl(237, 26%, 28%)",
+    "--bottom": props.character.rarity === 5 ? "hsl(36, 47%, 60%)" : "hsl(264, 52%, 59%)",
+  };
+});
 </script>
 
 <template>
   <article
+    :data-rarity-bg="props.rarityBg"
+    :style="cssVars"
     :class="
-      cn('relative overflow-hidden rounded-md border border-border bg-secondary/35', props.class)
+      cn(
+        'card relative overflow-hidden rounded-md bg-secondary/35 data-[rarity-bg=true]:bg-gradient-to-b data-[rarity-bg=true]:from-[--top] data-[rarity-bg=true]:to-[--bottom]',
+        props.class,
+      )
     "
   >
     <img
