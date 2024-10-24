@@ -141,16 +141,13 @@ useHead({
     <section class="container mt-10">
       <div>
         <H1>Characters</H1>
-        <div class="mt-4 grid grid-cols-2 flex-row gap-2 md:flex">
-          <Button variant="secondary" @click="includeAllShownCharacters">Select All</Button>
-          <Button variant="secondary" @click="excludeAllShownCharacters">Deselect All</Button>
-        </div>
-        <div class="mt-4 flex flex-col gap-2">
-          <div class="flex flex-wrap gap-1">
-            <div class="flex gap-1 md:max-w-64">
+        <div class="filters mt-4 flex flex-col gap-2">
+          <div class="flex flex-wrap gap-1 [&_button]:h-10">
+            <div class="flex w-full gap-1 min-[970px]:max-w-64">
               <Button
-                class="aspect-square size-10 overflow-hidden p-0"
+                class="aspect-square size-10 shrink-0 overflow-hidden p-0"
                 variant="secondary"
+                size="icon"
                 @click="resetFilters"
               >
                 <RotateCcwIcon class="size-4" />
@@ -183,6 +180,15 @@ useHead({
             >
               <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
             </Button>
+
+            <div class="flex w-full flex-row gap-1 min-[1180px]:w-fit">
+              <Button variant="secondary" class="h-10 flex-1" @click="includeAllShownCharacters">
+                Select All
+              </Button>
+              <Button variant="secondary" class="h-10 flex-1" @click="excludeAllShownCharacters">
+                Deselect All
+              </Button>
+            </div>
           </div>
         </div>
       </div>
