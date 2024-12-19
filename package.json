@@ -19,12 +19,12 @@
     "clsx": "^2.1.1",
     "lodash.uniq": "^4.5.0",
     "lucide-vue-next": "^0.453.0",
-    "pinia": "^2.2.4",
+    "pinia": "^2.3.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "^3.5.12",
-    "vue-router": "^4.4.5",
-    "zod": "^3.23.8"
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@feature-sliced/eslint-config": "^0.1.1",
@@ -34,11 +34,11 @@
     "@types/node": "^22.7.2",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "@vitejs/plugin-vue-jsx": "^4.0.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
-    "@vue/tsconfig": "^0.5.1",
+    "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
     "eslint-import-resolver-typescript": "^3.6.3",
@@ -50,8 +50,8 @@
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10",
-    "vue-tsc": "^2.1.6"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.4",
+    "vue-tsc": "^2.1.10"
   }
 }
