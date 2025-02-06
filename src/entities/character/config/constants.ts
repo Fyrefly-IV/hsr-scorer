@@ -5,6 +5,7 @@ export const PATH_HARMONY = "Harmony" as const;
 export const PATH_HUNT = "Hunt" as const;
 export const PATH_NIHILITY = "Nihility" as const;
 export const PATH_PRESERVATION = "Preservation" as const;
+export const PATH_REMEMBRANCE = "Remembrance" as const;
 
 export const TYPE_PHYSICAL = "Physical" as const;
 export const TYPE_FIRE = "Fire" as const;
@@ -22,6 +23,7 @@ export const CHARACTER_PATHS = [
 	PATH_HUNT,
 	PATH_NIHILITY,
 	PATH_PRESERVATION,
+	PATH_REMEMBRANCE,
 ] as const;
 
 export const CHARACTER_TYPES = [

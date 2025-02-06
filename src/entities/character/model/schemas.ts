@@ -8,6 +8,7 @@ import {
 	PATH_HUNT,
 	PATH_NIHILITY,
 	PATH_PRESERVATION,
+	PATH_REMEMBRANCE,
 	TYPE_FIRE,
 	TYPE_ICE,
 	TYPE_IMAGINARY,
@@ -38,6 +39,7 @@ export const StarRailPathsSchema = z.union([
 	z.literal(PATH_HUNT),
 	z.literal(PATH_NIHILITY),
 	z.literal(PATH_PRESERVATION),
+	z.literal(PATH_REMEMBRANCE),
 ]);
 
 export const StarRailTypesSchema = z.union([
