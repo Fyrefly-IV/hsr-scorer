@@ -19,6 +19,15 @@ import type { StarRailCharacter } from "../model/types";
 
 export const STAR_RAIL_CHARACTERS: StarRailCharacter[] = [
 	{
+		id: "1401",
+		game: GAME_STAR_RAIL,
+		name: "The Herta",
+		rarity: 5,
+		path: PATH_ERUDITION,
+		type: TYPE_ICE,
+		assets: { portrait: "/img/hsr/portraits/1401.webp" },
+	},
+	{
 		id: "1225",
 		game: GAME_STAR_RAIL,
 		name: "Fugue",
