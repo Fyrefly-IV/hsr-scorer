@@ -14,7 +14,3 @@ useHead({
   <RouterView />
   <Footer />
 </template>
-
-<style>
-@import "main.css";
-</style>

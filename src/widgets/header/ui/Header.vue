@@ -28,7 +28,7 @@ function closeSwitcher() {
 
 <template>
   <header
-    class="sticky top-0 z-50 h-[--height-header] bg-background supports-[backdrop-filter]:bg-background/80 supports-[backdrop-filter]:backdrop-blur-md"
+    class="sticky top-0 z-50 h-(--height-header) bg-background supports-backdrop-filter:bg-background/80 supports-backdrop-filter:backdrop-blur-md"
   >
     <div class="container flex h-full flex-row items-center">
       <nav class="flex flex-row gap-2">

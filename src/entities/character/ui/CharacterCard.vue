@@ -34,14 +34,14 @@ const cssVars = computed(() => {
     :style="cssVars"
     :class="
       cn(
-        'card relative overflow-hidden rounded-md bg-secondary/35 data-[rarity-bg=true]:bg-gradient-to-b data-[rarity-bg=true]:from-[--top] data-[rarity-bg=true]:to-[--bottom]',
+        'card relative overflow-hidden rounded-md bg-secondary/35 data-[rarity-bg=true]:bg-linear-to-b data-[rarity-bg=true]:from-(--top) data-[rarity-bg=true]:to-(--bottom)',
         props.class,
       )
     "
   >
     <img
       :src="character.assets.portrait ?? undefined"
-      class="card-thumbnail aspect-[376/512] h-full w-full object-cover"
+      class="card-thumbnail aspect-376/512 h-full w-full object-cover"
       draggable="false"
       decoding="async"
       loading="eager"
@@ -65,7 +65,7 @@ const cssVars = computed(() => {
 
     <div
       v-if="hideName !== true"
-      class="absolute bottom-0 left-0 right-0 flex w-full flex-col items-center bg-gradient-to-b from-black/40 to-black/60 pb-3.5 pt-3 backdrop-blur-sm has-[p]:pb-2.5 has-[p]:pt-2"
+      class="absolute bottom-0 left-0 right-0 flex w-full flex-col items-center bg-linear-to-b from-black/40 to-black/60 pb-3.5 pt-3 backdrop-blur-xs has-[p]:pb-2.5 has-[p]:pt-2"
     >
       <h3 class="relative font-anuphane text-lg font-semibold leading-none text-white">
         <SparklesIcon

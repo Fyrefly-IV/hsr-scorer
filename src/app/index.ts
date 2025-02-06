@@ -1,3 +1,5 @@
+import "./main.css";
+
 import { createHead } from "@unhead/vue";
 import { createPinia } from "pinia";
 import { createApp } from "vue";

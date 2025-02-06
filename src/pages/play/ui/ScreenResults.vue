@@ -73,7 +73,7 @@ const isWinnerId = (id: Character["id"]): boolean => {
 
     <div
       v-if="showScores"
-      class="container mt-8 flex w-full flex-shrink-0 flex-row flex-wrap justify-center gap-8 px-0"
+      class="container mt-8 flex w-full shrink-0 flex-row flex-wrap justify-center gap-8 px-0"
     >
       <CharacterCard
         v-for="(entry, i) in scores"

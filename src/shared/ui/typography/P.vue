@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <p :class="cn('leading-7 [&:not(:first-child)]:mt-4', props.class)">
+  <p :class="cn('leading-7 not-first:mt-4', props.class)">
     <slot />
   </p>
 </template>

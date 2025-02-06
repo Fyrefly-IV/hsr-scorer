@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { fileURLToPath, URL } from "node:url";
 
+import tailwind from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { defineConfig, HtmlTagDescriptor } from "vite";
@@ -7,7 +9,7 @@ import type { Plugin } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), injectCssAsStyleTag(), removeStylesheetLinks()],
+  plugins: [vue(), vueJsx(), tailwind(), injectCssAsStyleTag(), removeStylesheetLinks()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
