@@ -14,32 +14,32 @@ const fullMode = useGameStore();
 const showModalReset = ref<boolean>(false);
 
 const confirmReset = () => {
-  showModalReset.value = true;
+	showModalReset.value = true;
 };
 
 const reset = () => {
-  showModalReset.value = false;
-  fullMode.reset();
+	showModalReset.value = false;
+	fullMode.reset();
 };
 </script>
 
 <template>
-  <Main class="flex flex-col items-center justify-center bg-background pt-4 sm:pt-0">
-    <ScreenStart v-if="fullMode.screen === 'start'" />
-    <ScreenProgress v-if="fullMode.screen === 'progress'" @confirm-reset="confirmReset" />
-    <ScreenResults v-if="fullMode.screen === 'results'" @confirm-reset="confirmReset" />
-  </Main>
+	<Main class="bg-background flex flex-col items-center justify-center pt-4 sm:pt-0">
+		<ScreenStart v-if="fullMode.screen === 'start'" />
+		<ScreenProgress v-if="fullMode.screen === 'progress'" @confirm-reset="confirmReset" />
+		<ScreenResults v-if="fullMode.screen === 'results'" @confirm-reset="confirmReset" />
+	</Main>
 
-  <Dialog v-model="showModalReset">
-    <H2 class="font-bold">Are you sure?</H2>
-    <P>
-      You are about to completely reset current comparison progress!
-      <br />
-      This means, you will not be able to revert this action!
-    </P>
-    <div class="mt-4 flex flex-row gap-2 self-end">
-      <Button size="sm" @click="showModalReset = false">Cancel</Button>
-      <Button size="sm" variant="destructive" @click="reset">Confirm</Button>
-    </div>
-  </Dialog>
+	<Dialog v-model="showModalReset">
+		<H2 class="font-bold">Are you sure?</H2>
+		<P>
+			You are about to completely reset current comparison progress!
+			<br />
+			This means, you will not be able to revert this action!
+		</P>
+		<div class="mt-4 flex flex-row gap-2 self-end">
+			<Button size="sm" @click="showModalReset = false">Cancel</Button>
+			<Button size="sm" variant="destructive" @click="reset">Confirm</Button>
+		</div>
+	</Dialog>
 </template>

@@ -16,60 +16,60 @@ const cardOptions = useCharacterCardsOptions();
 const canUndo = computed(() => fullMode.choices.length > 0);
 
 const chooseThrottled = useThrottleFn((winnerId: Character["id"]) => {
-  fullMode.choose(winnerId);
+	fullMode.choose(winnerId);
 }, 200);
 
 const skipThrottled = useThrottleFn(() => {
-  fullMode.skip();
+	fullMode.skip();
 }, 200);
 
 const undo = () => {
-  if (canUndo.value) {
-    fullMode.undo();
-  }
+	if (canUndo.value) {
+		fullMode.undo();
+	}
 };
 </script>
 
 <template>
-  <div class="w-ful w-fit max-w-[600px]">
-    <div
-      v-if="fullMode.currentPair != null"
-      class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
-    >
-      <button
-        v-for="ch in fullMode.currentPair"
-        :key="`pair-${ch.id}`"
-        class="size-full"
-        @click="() => chooseThrottled(ch.id)"
-      >
-        <CharacterCard
-          :character="ch"
-          :show-path="cardOptions.showPaths"
-          :show-type="cardOptions.showTypes"
-        />
-      </button>
-    </div>
-    <div class="mt-6 flex w-full items-center justify-between">
-      <Button variant="ghost" size="icon" :disabled="!canUndo" @click="undo">
-        <UndoIcon class="size-6" />
-        <span class="sr-only">Undo</span>
-      </Button>
+	<div class="w-ful w-fit max-w-[600px]">
+		<div
+			v-if="fullMode.currentPair != null"
+			class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
+		>
+			<button
+				v-for="ch in fullMode.currentPair"
+				:key="`pair-${ch.id}`"
+				class="size-full"
+				@click="() => chooseThrottled(ch.id)"
+			>
+				<CharacterCard
+					:character="ch"
+					:show-path="cardOptions.showPaths"
+					:show-type="cardOptions.showTypes"
+				/>
+			</button>
+		</div>
+		<div class="mt-6 flex w-full items-center justify-between">
+			<Button variant="ghost" size="icon" :disabled="!canUndo" @click="undo">
+				<UndoIcon class="size-6" />
+				<span class="sr-only">Undo</span>
+			</Button>
 
-      <span class="text-sm text-muted-foreground sm:text-base">
-        <span>{{ fullMode.queueIDs.length }}</span>
-        <span class="hidden sm:inline"> pairs</span>
-        <span> left</span>
-      </span>
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" @click="skipThrottled">
-          <SkipForwardIcon class="size-6" />
-          <span className="sr-only">Skip</span>
-        </Button>
-        <Button variant="destructive" size="icon" @click="emit('confirmReset')">
-          <XIcon class="size-6" />
-          <span class="sr-only">Stop Comparing</span>
-        </Button>
-      </div>
-    </div>
-  </div>
+			<span class="text-muted-foreground text-sm sm:text-base">
+				<span>{{ fullMode.queueIDs.length }}</span>
+				<span class="hidden sm:inline"> pairs</span>
+				<span> left</span>
+			</span>
+			<div className="flex items-center gap-4">
+				<Button variant="ghost" size="icon" @click="skipThrottled">
+					<SkipForwardIcon class="size-6" />
+					<span className="sr-only">Skip</span>
+				</Button>
+				<Button variant="destructive" size="icon" @click="emit('confirmReset')">
+					<XIcon class="size-6" />
+					<span class="sr-only">Stop Comparing</span>
+				</Button>
+			</div>
+		</div>
+	</div>
 </template>

@@ -1,9 +1,9 @@
 import type { z } from "zod";
 import type {
-  CharacterSchema,
-  StarRailCharacterSchema,
-  StarRailPathsSchema,
-  StarRailTypesSchema,
+	CharacterSchema,
+	StarRailCharacterSchema,
+	StarRailPathsSchema,
+	StarRailTypesSchema,
 } from "./schemas";
 
 export type Character = z.infer<typeof CharacterSchema>;

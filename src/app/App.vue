@@ -5,12 +5,12 @@ import Footer from "@/widgets/footer/ui/Footer.vue";
 import Header from "@/widgets/header/ui/Header.vue";
 
 useHead({
-  title: "Honkai Scorer",
+	title: "Honkai Scorer",
 });
 </script>
 
 <template>
-  <Header />
-  <RouterView />
-  <Footer />
+	<Header />
+	<RouterView />
+	<Footer />
 </template>

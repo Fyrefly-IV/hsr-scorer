@@ -5,13 +5,13 @@
  * This function provides type safety for this use-case.
  */
 export const getObjectValue = <K extends string | number | symbol, V>(
-  o: { [Key in K]: V },
-  key: K,
+	o: { [Key in K]: V },
+	key: K,
 ): V | null => {
-  const value = o[key];
-  if (typeof value === "undefined") {
-    return null;
-  }
+	const value = o[key];
+	if (typeof value === "undefined") {
+		return null;
+	}
 
-  return value;
+	return value;
 };

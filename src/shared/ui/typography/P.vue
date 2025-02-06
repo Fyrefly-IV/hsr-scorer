@@ -2,12 +2,12 @@
 import { cn } from "@/shared/lib/cn";
 
 const props = defineProps({
-  class: { type: String, default: "" },
+	class: { type: String, default: "" },
 });
 </script>
 
 <template>
-  <p :class="cn('leading-7 not-first:mt-4', props.class)">
-    <slot />
-  </p>
+	<p :class="cn('leading-7 not-first:mt-4', props.class)">
+		<slot />
+	</p>
 </template>

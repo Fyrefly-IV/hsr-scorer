@@ -25,11 +25,11 @@ const cardOptions = useCharacterCardsOptions();
 const fullMode = useGameStore();
 
 const characterClickHandler = (id: Character["id"]) => {
-  if (!settings.isExcludedId(id)) {
-    settings.excludeIds(id);
-  } else {
-    settings.includeIds(id);
-  }
+	if (!settings.isExcludedId(id)) {
+		settings.excludeIds(id);
+	} else {
+		settings.includeIds(id);
+	}
 };
 
 const hsrSearchValue = ref<string>("");
@@ -39,175 +39,194 @@ const filtersByPaths = ref<StarRailPaths[]>([]);
 const filtersByTypes = ref<StarRailTypes[]>([]);
 
 const shownHsrCharacters = computed(() => {
-  let result = STAR_RAIL_CHARACTERS;
+	let result = STAR_RAIL_CHARACTERS;
 
-  if (filtersByPaths.value.length > 0) {
-    result = result.filter((c) => filtersByPaths.value.includes(c.path));
-  }
+	if (filtersByPaths.value.length > 0) {
+		result = result.filter((c) => filtersByPaths.value.includes(c.path));
+	}
 
-  if (filtersByTypes.value.length > 0) {
-    result = result.filter((c) => filtersByTypes.value.includes(c.type));
-  }
+	if (filtersByTypes.value.length > 0) {
+		result = result.filter((c) => filtersByTypes.value.includes(c.type));
+	}
 
-  if (hsrSearchDebounced.value.length > 0) {
-    result = result.filter((c) =>
-      c.name.toLowerCase().includes(hsrSearchDebounced.value.toLowerCase()),
-    );
-  }
+	if (hsrSearchDebounced.value.length > 0) {
+		result = result.filter((c) =>
+			c.name.toLowerCase().includes(hsrSearchDebounced.value.toLowerCase()),
+		);
+	}
 
-  return result;
+	return result;
 });
 
 const isPathFiltered = (value: StarRailPaths) => {
-  return filtersByPaths.value.includes(value);
+	return filtersByPaths.value.includes(value);
 };
 
 const isTypeFiltered = (value: StarRailTypes) => {
-  return filtersByTypes.value.includes(value);
+	return filtersByTypes.value.includes(value);
 };
 
 const togglePathFilter = (value: StarRailPaths) => {
-  if (filtersByPaths.value.includes(value)) {
-    filtersByPaths.value = filtersByPaths.value.filter((filter) => filter !== value);
-  } else {
-    filtersByPaths.value.push(value);
-  }
+	if (filtersByPaths.value.includes(value)) {
+		filtersByPaths.value = filtersByPaths.value.filter((filter) => filter !== value);
+	} else {
+		filtersByPaths.value.push(value);
+	}
 };
 
 const toggleTypeFilter = (value: StarRailTypes) => {
-  if (filtersByTypes.value.includes(value)) {
-    filtersByTypes.value = filtersByTypes.value.filter((filter) => filter !== value);
-  } else {
-    filtersByTypes.value.push(value);
-  }
+	if (filtersByTypes.value.includes(value)) {
+		filtersByTypes.value = filtersByTypes.value.filter((filter) => filter !== value);
+	} else {
+		filtersByTypes.value.push(value);
+	}
 };
 
 const resetFilters = () => {
-  filtersByPaths.value = [];
-  filtersByTypes.value = [];
-  hsrSearchValue.value = "";
+	filtersByPaths.value = [];
+	filtersByTypes.value = [];
+	hsrSearchValue.value = "";
 };
 
 const includeAllShownCharacters = () => {
-  settings.includeIds(...shownHsrCharacters.value.map((c) => c.id));
+	settings.includeIds(...shownHsrCharacters.value.map((c) => c.id));
 };
 
 const excludeAllShownCharacters = () => {
-  settings.excludeIds(...shownHsrCharacters.value.map((c) => c.id));
+	settings.excludeIds(...shownHsrCharacters.value.map((c) => c.id));
 };
 
 useHead({
-  title: "Honkai Scorer | Settings",
+	title: "Honkai Scorer | Settings",
 });
 </script>
 
 <template>
-  <Main class="flex flex-col">
-    <section class="font-anuphan container">
-      <H1>Settings</H1>
-      <P class="text-lg">
-        Here you can adjust your pool of characters you are comparing and also modify the cards
-        looks just a little bit!
-      </P>
+	<Main class="flex flex-col">
+		<section class="font-anuphan container">
+			<H1>Settings</H1>
+			<P class="text-lg">
+				Here you can adjust your pool of characters you are comparing and also modify the
+				cards looks just a little bit!
+			</P>
 
-      <Alert v-if="fullMode.screen === 'progress'" variant="destructive" class="mt-4">
-        <AlertTitle class="flex flex-row items-center gap-2">
-          <TriangleAlertIcon class="inline size-6" />
-          <span>WARNING!</span>
-        </AlertTitle>
-        <AlertDescription>
-          You are currently in progress of comparing characters, if you select or deselect
-          characters right now these changes will take effect only once you start comparing again!
-        </AlertDescription>
-      </Alert>
-    </section>
+			<Alert v-if="fullMode.screen === 'progress'" variant="destructive" class="mt-4">
+				<AlertTitle class="flex flex-row items-center gap-2">
+					<TriangleAlertIcon class="inline size-6" />
+					<span>WARNING!</span>
+				</AlertTitle>
+				<AlertDescription>
+					You are currently in progress of comparing characters, if you select or deselect
+					characters right now these changes will take effect only once you start
+					comparing again!
+				</AlertDescription>
+			</Alert>
+		</section>
 
-    <section class="font-anuphan container mt-10">
-      <div>
-        <H1>Cards</H1>
-      </div>
-      <div class="mt-4 flex w-fit flex-col gap-2">
-        <label class="flex items-center justify-center gap-2">
-          <Switch v-model="cardOptions.showTypes" />
-          <span class="text-sm leading-none">Show types</span>
-        </label>
-        <label class="flex items-center justify-center gap-2">
-          <Switch v-model="cardOptions.showPaths" />
-          <span class="text-sm leading-none">Show paths</span>
-        </label>
-      </div>
-    </section>
+		<section class="font-anuphan container mt-10">
+			<div>
+				<H1>Cards</H1>
+			</div>
+			<div class="mt-4 flex w-fit flex-col gap-2">
+				<label class="flex items-center justify-center gap-2">
+					<Switch v-model="cardOptions.showTypes" />
+					<span class="text-sm leading-none">Show types</span>
+				</label>
+				<label class="flex items-center justify-center gap-2">
+					<Switch v-model="cardOptions.showPaths" />
+					<span class="text-sm leading-none">Show paths</span>
+				</label>
+			</div>
+		</section>
 
-    <section class="container mt-10">
-      <div>
-        <H1>Characters</H1>
-        <div class="filters mt-4 flex flex-col gap-2">
-          <div class="flex flex-wrap gap-1 [&_button]:h-10">
-            <div class="flex w-full gap-1 min-[970px]:max-w-64">
-              <Button
-                class="aspect-square size-10 shrink-0 overflow-hidden p-0"
-                variant="secondary"
-                size="icon"
-                @click="resetFilters"
-              >
-                <RotateCcwIcon class="size-4" />
-              </Button>
+		<section class="container mt-10">
+			<div>
+				<H1>Characters</H1>
+				<div class="filters mt-4 flex flex-col gap-2">
+					<div class="flex flex-wrap gap-1 [&_button]:h-10">
+						<div class="flex w-full gap-1 min-[970px]:max-w-64">
+							<Button
+								class="aspect-square size-10 shrink-0 overflow-hidden p-0"
+								variant="secondary"
+								size="icon"
+								@click="resetFilters"
+							>
+								<RotateCcwIcon class="size-4" />
+							</Button>
 
-              <Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10" />
-            </div>
+							<Input
+								v-model="hsrSearchValue"
+								placeholder="e.g. Firefly"
+								class="h-10"
+							/>
+						</div>
 
-            <Button
-              v-for="path in CHARACTER_PATHS"
-              :key="path"
-              class="aspect-square size-10 overflow-hidden p-0"
-              :class="cn(isPathFiltered(path) && 'border border-primary')"
-              variant="secondary"
-              @click="togglePathFilter(path)"
-            >
-              <img
-                :src="`/img/hsr/ui/${path.toLowerCase()}.webp`"
-                class="size-7 drop-shadow-[0_1px_1px_#000]"
-              />
-            </Button>
+						<Button
+							v-for="path in CHARACTER_PATHS"
+							:key="path"
+							class="aspect-square size-10 overflow-hidden p-0"
+							:class="cn(isPathFiltered(path) && 'border-primary border')"
+							variant="secondary"
+							@click="togglePathFilter(path)"
+						>
+							<img
+								:src="`/img/hsr/ui/${path.toLowerCase()}.webp`"
+								class="size-7 drop-shadow-[0_1px_1px_#000]"
+							/>
+						</Button>
 
-            <Button
-              v-for="type in CHARACTER_TYPES"
-              :key="type"
-              class="aspect-square size-10 overflow-hidden p-0"
-              :class="cn(isTypeFiltered(type) && 'border border-primary')"
-              variant="secondary"
-              @click="toggleTypeFilter(type)"
-            >
-              <img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
-            </Button>
+						<Button
+							v-for="type in CHARACTER_TYPES"
+							:key="type"
+							class="aspect-square size-10 overflow-hidden p-0"
+							:class="cn(isTypeFiltered(type) && 'border-primary border')"
+							variant="secondary"
+							@click="toggleTypeFilter(type)"
+						>
+							<img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
+						</Button>
 
-            <div class="flex w-full flex-row gap-1 min-[1180px]:w-fit">
-              <Button variant="secondary" class="h-10 flex-1" @click="includeAllShownCharacters">
-                Select All
-              </Button>
-              <Button variant="secondary" class="h-10 flex-1" @click="excludeAllShownCharacters">
-                Deselect All
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ul
-        class="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8"
-      >
-        <li v-for="c in shownHsrCharacters" :key="c.id">
-          <button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
-            <CharacterCard
-              :character="c"
-              :show-path="cardOptions.showPaths"
-              :show-type="cardOptions.showTypes"
-              :class="
-                cn('transition-transform', settings.isExcludedId(c.id) && 'scale-95 opacity-60')
-              "
-            />
-          </button>
-        </li>
-      </ul>
-    </section>
-  </Main>
+						<div class="flex w-full flex-row gap-1 min-[1180px]:w-fit">
+							<Button
+								variant="secondary"
+								class="h-10 flex-1"
+								@click="includeAllShownCharacters"
+							>
+								Select All
+							</Button>
+							<Button
+								variant="secondary"
+								class="h-10 flex-1"
+								@click="excludeAllShownCharacters"
+							>
+								Deselect All
+							</Button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul
+				class="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8"
+			>
+				<li v-for="c in shownHsrCharacters" :key="c.id">
+					<button
+						class="size-full cursor-pointer"
+						@click="() => characterClickHandler(c.id)"
+					>
+						<CharacterCard
+							:character="c"
+							:show-path="cardOptions.showPaths"
+							:show-type="cardOptions.showTypes"
+							:class="
+								cn(
+									'transition-transform',
+									settings.isExcludedId(c.id) && 'scale-95 opacity-60',
+								)
+							"
+						/>
+					</button>
+				</li>
+			</ul>
+		</section>
+	</Main>
 </template>

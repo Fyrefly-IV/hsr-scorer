@@ -6,79 +6,82 @@ import { useThemeStore } from "@/features/theme-switch/model/theme.store";
 import Button from "@/shared/ui/button/Button.vue";
 
 const nav = [
-  {
-    icon: HomeIcon,
-    name: "Home",
-    href: "/",
-  },
-  {
-    icon: SettingsIcon,
-    name: "Settings",
-    href: "/settings",
-  },
+	{
+		icon: HomeIcon,
+		name: "Home",
+		href: "/",
+	},
+	{
+		icon: SettingsIcon,
+		name: "Settings",
+		href: "/settings",
+	},
 ];
 
 const themeStore = useThemeStore();
 const isSwitcherOpen = ref(false);
 
 function closeSwitcher() {
-  isSwitcherOpen.value = false;
+	isSwitcherOpen.value = false;
 }
 </script>
 
 <template>
-  <header
-    class="sticky top-0 z-50 h-(--height-header) bg-background supports-backdrop-filter:bg-background/80 supports-backdrop-filter:backdrop-blur-md"
-  >
-    <div class="container flex h-full flex-row items-center">
-      <nav class="flex flex-row gap-2">
-        <RouterLink v-for="endpoint in nav" :key="endpoint.href" :to="endpoint.href">
-          <Button variant="outline" size="icon">
-            <component :is="endpoint.icon" class="size-4" />
-          </Button>
-        </RouterLink>
-      </nav>
+	<header
+		class="bg-background supports-backdrop-filter:bg-background/80 sticky top-0 z-50 h-(--height-header) supports-backdrop-filter:backdrop-blur-md"
+	>
+		<div class="container flex h-full flex-row items-center">
+			<nav class="flex flex-row gap-2">
+				<RouterLink v-for="endpoint in nav" :key="endpoint.href" :to="endpoint.href">
+					<Button variant="outline" size="icon">
+						<component :is="endpoint.icon" class="size-4" />
+					</Button>
+				</RouterLink>
+			</nav>
 
-      <div class="flex flex-1 justify-end gap-2">
-        <div v-on-click-outside="closeSwitcher" class="relative">
-          <Button variant="outline" size="icon" @click="isSwitcherOpen = !isSwitcherOpen">
-            <component :is="themeStore.isDark === true ? MoonStarIcon : SunIcon" class="size-4" />
-          </Button>
+			<div class="flex flex-1 justify-end gap-2">
+				<div v-on-click-outside="closeSwitcher" class="relative">
+					<Button variant="outline" size="icon" @click="isSwitcherOpen = !isSwitcherOpen">
+						<component
+							:is="themeStore.isDark === true ? MoonStarIcon : SunIcon"
+							class="size-4"
+						/>
+					</Button>
 
-          <div
-            v-if="isSwitcherOpen"
-            class="absolute right-0 mt-2 grid grid-flow-row grid-cols-[1fr] gap-0.5 rounded-md border border-border bg-background p-2"
-          >
-            <Button
-              size="sm"
-              variant="ghost"
-              class="items-center justify-start gap-2"
-              @click="themeStore.setThemeDark"
-            >
-              <MoonStarIcon class="size-4" />
-              <span>Dark</span>
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              class="items-center justify-start gap-2"
-              @click="themeStore.setThemeLight"
-            >
-              <SunIcon class="size-4" />
-              <span>Light</span>
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              class="items-center justify-start gap-2"
-              @click="themeStore.setThemeAuto"
-            >
-              <MonitorIcon class="size-4" />
-              <span>Auto</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+					<div
+						v-if="isSwitcherOpen"
+						class="border-border bg-background absolute right-0 mt-2 grid grid-flow-row grid-cols-[1fr] gap-0.5 rounded-md border p-2"
+					>
+						<Button
+							size="sm"
+							variant="ghost"
+							class="items-center justify-start gap-2"
+							@click="themeStore.setThemeDark"
+						>
+							<MoonStarIcon class="size-4" />
+							<span>Dark</span>
+						</Button>
+						<Button
+							size="sm"
+							variant="ghost"
+							class="items-center justify-start gap-2"
+							@click="themeStore.setThemeLight"
+						>
+							<SunIcon class="size-4" />
+							<span>Light</span>
+						</Button>
+						<Button
+							size="sm"
+							variant="ghost"
+							class="items-center justify-start gap-2"
+							@click="themeStore.setThemeAuto"
+						>
+							<MonitorIcon class="size-4" />
+							<span>Auto</span>
+						</Button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 </template>

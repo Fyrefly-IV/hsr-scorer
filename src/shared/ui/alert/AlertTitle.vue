@@ -2,12 +2,12 @@
 import { cn } from "@/shared/lib/cn";
 
 const props = defineProps({
-  class: { type: String, default: "" },
+	class: { type: String, default: "" },
 });
 </script>
 
 <template>
-  <h5 :class="cn('mb-1 text-lg font-bold leading-none tracking-tight', props.class)">
-    <slot />
-  </h5>
+	<h5 :class="cn('mb-1 text-lg leading-none font-bold tracking-tight', props.class)">
+		<slot />
+	</h5>
 </template>
