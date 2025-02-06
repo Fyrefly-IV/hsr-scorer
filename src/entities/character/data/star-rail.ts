@@ -14,6 +14,7 @@ import {
 	PATH_HUNT,
 	PATH_NIHILITY,
 	PATH_PRESERVATION,
+	PATH_REMEMBRANCE,
 } from "../config/constants";
 import type { StarRailCharacter } from "../model/types";
 
@@ -26,6 +27,15 @@ export const STAR_RAIL_CHARACTERS: StarRailCharacter[] = [
 		path: PATH_ERUDITION,
 		type: TYPE_ICE,
 		assets: { portrait: "/img/hsr/portraits/1401.webp" },
+	},
+	{
+		id: "1402",
+		game: GAME_STAR_RAIL,
+		name: "Aglaea",
+		rarity: 5,
+		path: PATH_REMEMBRANCE,
+		type: TYPE_LIGHTNING,
+		assets: { portrait: "/img/hsr/portraits/1402.webp" },
 	},
 	{
 		id: "1225",
