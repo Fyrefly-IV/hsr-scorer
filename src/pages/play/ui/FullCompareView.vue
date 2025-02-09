@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useGameStore } from "@/features/game/model/game";
 import Button from "@/shared/ui/button/Button.vue";
 import Dialog from "@/shared/ui/dialog/Dialog.vue";
 import Main from "@/shared/ui/main/Main.vue";
@@ -9,8 +8,9 @@ import P from "@/shared/ui/typography/P.vue";
 import ScreenProgress from "./ScreenProgress.vue";
 import ScreenResults from "./ScreenResults.vue";
 import ScreenStart from "./ScreenStart.vue";
+import { useGame } from "@/features/game/model/store";
 
-const fullMode = useGameStore();
+const game = useGame();
 const showModalReset = ref<boolean>(false);
 
 const confirmReset = () => {
@@ -19,15 +19,15 @@ const confirmReset = () => {
 
 const reset = () => {
 	showModalReset.value = false;
-	fullMode.reset();
+	game.reset();
 };
 </script>
 
 <template>
 	<Main class="bg-background flex flex-col items-center justify-center pt-4 sm:pt-0">
-		<ScreenStart v-if="fullMode.screen === 'start'" />
-		<ScreenProgress v-if="fullMode.screen === 'progress'" @confirm-reset="confirmReset" />
-		<ScreenResults v-if="fullMode.screen === 'results'" @confirm-reset="confirmReset" />
+		<ScreenStart v-if="game.stage === 'START_SCREEN'" />
+		<ScreenProgress v-if="game.stage === 'IN_PROGRSS'" @confirm-reset="confirmReset" />
+		<ScreenResults v-if="game.stage === 'FINISHED'" @confirm-reset="confirmReset" />
 	</Main>
 
 	<Dialog v-model="showModalReset">

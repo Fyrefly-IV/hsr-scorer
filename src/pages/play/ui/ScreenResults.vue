@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { useGameStore } from "@/features/game/model/game";
 import { getCharacterById } from "@/entities/character/data/characters";
 import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import Button from "@/shared/ui/button/Button.vue";
 import H2 from "@/shared/ui/typography/H2.vue";
+import { useGame } from "@/features/game/model/store";
 
 const emit = defineEmits(["confirmReset"]);
 
-const fullMode = useGameStore();
+const game = useGame();
 
 const showScores = ref<boolean>(false);
 
 const scores = computed(() => {
-	const scoresSorted = Object.entries(fullMode.scores);
-	scoresSorted.sort((a, b) => b[1] - a[1]);
+	const scoresSorted = Object.entries(game.scores);
+	scoresSorted.sort((a, b) => (b?.[1] ?? 0) - (a?.[1] ?? 0));
 
 	const scoresWithCharacters = scoresSorted.map(([id, score]) => {
 		const character = getCharacterById(id);

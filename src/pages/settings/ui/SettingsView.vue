@@ -3,7 +3,6 @@ import { useHead } from "@unhead/vue";
 import { refDebounced } from "@vueuse/core";
 import { RotateCcwIcon, TriangleAlertIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
-import { useGameStore } from "@/features/game/model/game";
 import { CHARACTER_PATHS, CHARACTER_TYPES } from "@/entities/character/config/constants";
 import { STAR_RAIL_CHARACTERS } from "@/entities/character/data/star-rail";
 import { useCharacterCardsOptions, useExcludedCharacters } from "@/entities/character/model/stores";
@@ -19,10 +18,11 @@ import Main from "@/shared/ui/main/Main.vue";
 import Switch from "@/shared/ui/switch/Switch.vue";
 import H1 from "@/shared/ui/typography/H1.vue";
 import P from "@/shared/ui/typography/P.vue";
+import { useGame } from "@/features/game/model/store";
 
 const settings = useExcludedCharacters();
 const cardOptions = useCharacterCardsOptions();
-const fullMode = useGameStore();
+const game = useGame();
 
 const characterClickHandler = (id: Character["id"]) => {
 	if (!settings.isExcludedId(id)) {
@@ -106,19 +106,18 @@ useHead({
 		<section class="font-anuphan container">
 			<H1>Settings</H1>
 			<P class="text-lg">
-				Here you can adjust your pool of characters you are comparing and also modify the
-				cards looks just a little bit!
+				Here you can adjust your pool of characters you are comparing and also modify the cards
+				looks just a little bit!
 			</P>
 
-			<Alert v-if="fullMode.screen === 'progress'" variant="destructive" class="mt-4">
+			<Alert v-if="game.stage === 'IN_PROGRSS'" variant="destructive" class="mt-4">
 				<AlertTitle class="flex flex-row items-center gap-2">
 					<TriangleAlertIcon class="inline size-6" />
 					<span>WARNING!</span>
 				</AlertTitle>
 				<AlertDescription>
 					You are currently in progress of comparing characters, if you select or deselect
-					characters right now these changes will take effect only once you start
-					comparing again!
+					characters right now these changes will take effect only once you start comparing again!
 				</AlertDescription>
 			</Alert>
 		</section>
@@ -154,11 +153,7 @@ useHead({
 								<RotateCcwIcon class="size-4" />
 							</Button>
 
-							<Input
-								v-model="hsrSearchValue"
-								placeholder="e.g. Firefly"
-								class="h-10"
-							/>
+							<Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10" />
 						</div>
 
 						<Button
@@ -187,18 +182,10 @@ useHead({
 						</Button>
 
 						<div class="flex w-full flex-row gap-1 min-[1180px]:w-fit">
-							<Button
-								variant="secondary"
-								class="h-10 flex-1"
-								@click="includeAllShownCharacters"
-							>
+							<Button variant="secondary" class="h-10 flex-1" @click="includeAllShownCharacters">
 								Select All
 							</Button>
-							<Button
-								variant="secondary"
-								class="h-10 flex-1"
-								@click="excludeAllShownCharacters"
-							>
+							<Button variant="secondary" class="h-10 flex-1" @click="excludeAllShownCharacters">
 								Deselect All
 							</Button>
 						</div>
@@ -209,19 +196,13 @@ useHead({
 				class="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8"
 			>
 				<li v-for="c in shownHsrCharacters" :key="c.id">
-					<button
-						class="size-full cursor-pointer"
-						@click="() => characterClickHandler(c.id)"
-					>
+					<button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
 						<CharacterCard
 							:character="c"
 							:show-path="cardOptions.showPaths"
 							:show-type="cardOptions.showTypes"
 							:class="
-								cn(
-									'transition-transform',
-									settings.isExcludedId(c.id) && 'scale-95 opacity-60',
-								)
+								cn('transition-transform', settings.isExcludedId(c.id) && 'scale-95 opacity-60')
 							"
 						/>
 					</button>

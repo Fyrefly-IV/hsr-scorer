@@ -2,30 +2,30 @@
 import { useThrottleFn } from "@vueuse/core";
 import { SkipForwardIcon, UndoIcon, XIcon } from "lucide-vue-next";
 import { computed } from "vue";
-import { useGameStore } from "@/features/game/model/game";
 import { useCharacterCardsOptions } from "@/entities/character/model/stores";
 import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import Button from "@/shared/ui/button/Button.vue";
+import { useGame } from "@/features/game/model/store";
 
 const emit = defineEmits(["confirmReset"]);
 
-const fullMode = useGameStore();
+const game = useGame();
 const cardOptions = useCharacterCardsOptions();
 
-const canUndo = computed(() => fullMode.choices.length > 0);
+const canUndo = computed(() => game.history.length > 0);
 
 const chooseThrottled = useThrottleFn((winnerId: Character["id"]) => {
-	fullMode.choose(winnerId);
+	game.choose(winnerId);
 }, 200);
 
 const skipThrottled = useThrottleFn(() => {
-	fullMode.skip();
+	game.choose(null);
 }, 200);
 
 const undo = () => {
 	if (canUndo.value) {
-		fullMode.undo();
+		game.undo();
 	}
 };
 </script>
@@ -33,11 +33,11 @@ const undo = () => {
 <template>
 	<div class="w-ful w-fit max-w-[600px]">
 		<div
-			v-if="fullMode.currentPair != null"
+			v-if="game.currentPair != null"
 			class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
 		>
 			<button
-				v-for="ch in fullMode.currentPair"
+				v-for="ch in game.currentPair"
 				:key="`pair-${ch.id}`"
 				class="size-full"
 				@click="() => chooseThrottled(ch.id)"
@@ -56,7 +56,7 @@ const undo = () => {
 			</Button>
 
 			<span class="text-muted-foreground text-sm sm:text-base">
-				<span>{{ fullMode.queueIDs.length }}</span>
+				<span>{{ game.queue.length }}</span>
 				<span class="hidden sm:inline"> pairs</span>
 				<span> left</span>
 			</span>
