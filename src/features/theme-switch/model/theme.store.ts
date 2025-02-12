@@ -19,17 +19,25 @@ export const useThemeStore = defineStore("theme", () => {
 		return displayedTheme.value === "dark";
 	});
 
-	const setThemeAuto = () => {
+	function setThemeAuto() {
 		selectedTheme.value = "no-preference";
-	};
+	}
 
-	const setThemeDark = () => {
+	function setThemeDark() {
 		selectedTheme.value = "dark";
-	};
+	}
 
-	const setThemeLight = () => {
+	function setThemeLight() {
 		selectedTheme.value = "light";
-	};
+	}
+
+	function switchTheme() {
+		if (isDark.value === true) {
+			setThemeLight();
+		} else {
+			setThemeDark();
+		}
+	}
 
 	watch(
 		() => isDark.value,
@@ -53,5 +61,6 @@ export const useThemeStore = defineStore("theme", () => {
 		setThemeAuto,
 		setThemeDark,
 		setThemeLight,
+		switchTheme,
 	};
 });

@@ -1,4 +1,7 @@
 @theme inline {
+	--height-header: var(--height-header);
+	--height-svh-main: calc(100svh - var(--height-header));
+
 	--color-border: hsl(var(--border));
 	--color-input: hsl(var(--input));
 	--color-ring: hsl(var(--ring));

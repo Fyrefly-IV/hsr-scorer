@@ -27,9 +27,7 @@ function closeSwitcher() {
 </script>
 
 <template>
-	<header
-		class="bg-background supports-backdrop-filter:bg-background/80 sticky top-0 z-50 h-(--height-header) supports-backdrop-filter:backdrop-blur-md"
-	>
+	<header class="bg-background h-header border-border sticky top-0 z-50 border-b">
 		<div class="container flex h-full flex-row items-center">
 			<nav class="flex flex-row gap-2">
 				<RouterLink v-for="endpoint in nav" :key="endpoint.href" :to="endpoint.href">
@@ -42,10 +40,7 @@ function closeSwitcher() {
 			<div class="flex flex-1 justify-end gap-2">
 				<div v-on-click-outside="closeSwitcher" class="relative">
 					<Button variant="outline" size="icon" @click="isSwitcherOpen = !isSwitcherOpen">
-						<component
-							:is="themeStore.isDark === true ? MoonStarIcon : SunIcon"
-							class="size-4"
-						/>
+						<component :is="themeStore.isDark === true ? MoonStarIcon : SunIcon" class="size-4" />
 					</Button>
 
 					<div

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue";
 import { refDebounced } from "@vueuse/core";
-import { RotateCcwIcon, TriangleAlertIcon } from "lucide-vue-next";
+import { RefreshCwIcon } from "lucide-vue-next";
 import { computed, ref } from "vue";
-import { CHARACTER_PATHS, CHARACTER_TYPES } from "@/entities/character/config/constants";
+import { FILTERS } from "../config/filters";
 import { STAR_RAIL_CHARACTERS } from "@/entities/character/data/star-rail";
 import { useCharacterCardsOptions, useExcludedCharacters } from "@/entities/character/model/stores";
-import type { Character, StarRailPaths, StarRailTypes } from "@/entities/character/model/types";
+import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
 import { cn } from "@/shared/lib/cn";
 import Alert from "@/shared/ui/alert/Alert.vue";
@@ -14,15 +14,21 @@ import AlertDescription from "@/shared/ui/alert/AlertDescription.vue";
 import AlertTitle from "@/shared/ui/alert/AlertTitle.vue";
 import Button from "@/shared/ui/button/Button.vue";
 import Input from "@/shared/ui/input/Input.vue";
-import Main from "@/shared/ui/main/Main.vue";
 import Switch from "@/shared/ui/switch/Switch.vue";
-import H1 from "@/shared/ui/typography/H1.vue";
-import P from "@/shared/ui/typography/P.vue";
 import { useGame } from "@/features/game/model/store";
+import Card from "@/shared/ui/card/Card.vue";
+import CardHeader from "@/shared/ui/card/CardHeader.vue";
+import CardTitle from "@/shared/ui/card/CardTitle.vue";
+import CardContent from "@/shared/ui/card/CardContent.vue";
+import Label from "@/shared/ui/label/Label.vue";
+import type { Filter } from "../model/types";
+import { storeToRefs } from "pinia";
+
+const game = useGame();
+const cardOptions = useCharacterCardsOptions();
 
 const settings = useExcludedCharacters();
-const cardOptions = useCharacterCardsOptions();
-const game = useGame();
+const { excludedIds } = storeToRefs(settings);
 
 const characterClickHandler = (id: Character["id"]) => {
 	if (!settings.isExcludedId(id)) {
@@ -32,69 +38,73 @@ const characterClickHandler = (id: Character["id"]) => {
 	}
 };
 
+function selectAllCharacters() {
+	excludedIds.value = [];
+}
+
+function deselectAllCharacters() {
+	excludedIds.value = STAR_RAIL_CHARACTERS.map((character) => character.id);
+}
+
 const hsrSearchValue = ref<string>("");
 const hsrSearchDebounced = refDebounced(hsrSearchValue, 200);
 
-const filtersByPaths = ref<StarRailPaths[]>([]);
-const filtersByTypes = ref<StarRailTypes[]>([]);
+const activeFilters = ref<Filter[]>([]);
 
-const shownHsrCharacters = computed(() => {
-	let result = STAR_RAIL_CHARACTERS;
+function isFilterActive(filterId: Filter["id"]) {
+	return activeFilters.value.some((activeFilter) => activeFilter.id === filterId);
+}
 
-	if (filtersByPaths.value.length > 0) {
-		result = result.filter((c) => filtersByPaths.value.includes(c.path));
-	}
+function enableFilter(filter: Filter) {
+	activeFilters.value.push(filter);
+}
 
-	if (filtersByTypes.value.length > 0) {
-		result = result.filter((c) => filtersByTypes.value.includes(c.type));
-	}
+function disableFilter(filterId: string) {
+	activeFilters.value = activeFilters.value.filter((filter) => filter.id !== filterId);
+}
 
-	if (hsrSearchDebounced.value.length > 0) {
-		result = result.filter((c) =>
-			c.name.toLowerCase().includes(hsrSearchDebounced.value.toLowerCase()),
-		);
-	}
-
-	return result;
-});
-
-const isPathFiltered = (value: StarRailPaths) => {
-	return filtersByPaths.value.includes(value);
-};
-
-const isTypeFiltered = (value: StarRailTypes) => {
-	return filtersByTypes.value.includes(value);
-};
-
-const togglePathFilter = (value: StarRailPaths) => {
-	if (filtersByPaths.value.includes(value)) {
-		filtersByPaths.value = filtersByPaths.value.filter((filter) => filter !== value);
-	} else {
-		filtersByPaths.value.push(value);
-	}
-};
-
-const toggleTypeFilter = (value: StarRailTypes) => {
-	if (filtersByTypes.value.includes(value)) {
-		filtersByTypes.value = filtersByTypes.value.filter((filter) => filter !== value);
-	} else {
-		filtersByTypes.value.push(value);
-	}
-};
-
-const resetFilters = () => {
-	filtersByPaths.value = [];
-	filtersByTypes.value = [];
+function resetFilters() {
 	hsrSearchValue.value = "";
-};
+	activeFilters.value = [];
+}
 
-const includeAllShownCharacters = () => {
-	settings.includeIds(...shownHsrCharacters.value.map((c) => c.id));
-};
+function handleFilterClick(filter: Filter) {
+	if (isFilterActive(filter.id)) {
+		disableFilter(filter.id);
+	} else {
+		enableFilter(filter);
+	}
+}
 
-const excludeAllShownCharacters = () => {
-	settings.excludeIds(...shownHsrCharacters.value.map((c) => c.id));
-};
+const displayedCharacters = computed(() => {
+	const fieldGroups = activeFilters.value.reduce((groups, { field, value }) => {
+		if (!groups.has(field)) {
+			groups.set(field, new Set<string>());
+		}
+
+		groups.get(field)!.add(value);
+
+		return groups;
+	}, new Map<Filter["field"], Set<string>>());
+
+	return STAR_RAIL_CHARACTERS.filter((character) => {
+		const searchActive = hsrSearchDebounced.value.trim().length > 0;
+		const matchesSearch = searchActive
+			? character.name.toLowerCase().includes(hsrSearchDebounced.value.trim().toLowerCase())
+			: true;
+
+		const filtersActive = fieldGroups.size > 0;
+
+		const matchesFieldFilters =
+			!filtersActive ||
+			Array.from(fieldGroups.entries()).every(([field, allowedValues]) => {
+				const charValue = character[field as keyof Character];
+				return allowedValues.has(charValue as string);
+			});
+
+		return matchesSearch && matchesFieldFilters;
+	});
+});
 
 useHead({
 	title: "Honkai Scorer | Settings",
@@ -102,112 +112,91 @@ useHead({
 </script>
 
 <template>
-	<Main class="flex flex-col">
-		<section class="font-anuphan container">
-			<H1>Settings</H1>
-			<P class="text-lg">
-				Here you can adjust your pool of characters you are comparing and also modify the cards
-				looks just a little bit!
-			</P>
+	<main class="min-h-svh-main container mx-auto py-4">
+		<h1 class="mb-6 text-3xl font-bold">Settings</h1>
 
-			<Alert v-if="game.stage === 'IN_PROGRSS'" variant="destructive" class="mt-4">
-				<AlertTitle class="flex flex-row items-center gap-2">
-					<TriangleAlertIcon class="inline size-6" />
-					<span>WARNING!</span>
-				</AlertTitle>
-				<AlertDescription>
-					You are currently in progress of comparing characters, if you select or deselect
-					characters right now these changes will take effect only once you start comparing again!
-				</AlertDescription>
-			</Alert>
-		</section>
-
-		<section class="font-anuphan container mt-10">
-			<div>
-				<H1>Cards</H1>
-			</div>
-			<div class="mt-4 flex w-fit flex-col gap-2">
-				<label class="flex items-center justify-center gap-2">
+		<Card class="mb-6">
+			<CardHeader>
+				<CardTitle class="text-2xl font-semibold">Character Card Display</CardTitle>
+			</CardHeader>
+			<CardContent class="flex flex-col items-start space-y-6">
+				<Label class="flex items-center justify-center gap-4">
 					<Switch v-model="cardOptions.showTypes" />
-					<span class="text-sm leading-none">Show types</span>
-				</label>
-				<label class="flex items-center justify-center gap-2">
-					<Switch v-model="cardOptions.showPaths" />
-					<span class="text-sm leading-none">Show paths</span>
-				</label>
-			</div>
-		</section>
-
-		<section class="container mt-10">
-			<div>
-				<H1>Characters</H1>
-				<div class="filters mt-4 flex flex-col gap-2">
-					<div class="flex flex-wrap gap-1 [&_button]:h-10">
-						<div class="flex w-full gap-1 min-[970px]:max-w-64">
-							<Button
-								class="aspect-square size-10 shrink-0 overflow-hidden p-0"
-								variant="secondary"
-								size="icon"
-								@click="resetFilters"
-							>
-								<RotateCcwIcon class="size-4" />
-							</Button>
-
-							<Input v-model="hsrSearchValue" placeholder="e.g. Firefly" class="h-10" />
-						</div>
-
-						<Button
-							v-for="path in CHARACTER_PATHS"
-							:key="path"
-							class="aspect-square size-10 overflow-hidden p-0"
-							:class="cn(isPathFiltered(path) && 'border-primary border')"
-							variant="secondary"
-							@click="togglePathFilter(path)"
-						>
-							<img
-								:src="`/img/hsr/ui/${path.toLowerCase()}.webp`"
-								class="size-7 drop-shadow-[0_1px_1px_#000]"
-							/>
-						</Button>
-
-						<Button
-							v-for="type in CHARACTER_TYPES"
-							:key="type"
-							class="aspect-square size-10 overflow-hidden p-0"
-							:class="cn(isTypeFiltered(type) && 'border-primary border')"
-							variant="secondary"
-							@click="toggleTypeFilter(type)"
-						>
-							<img :src="`/img/hsr/ui/${type.toLowerCase()}.webp`" class="size-7" />
-						</Button>
-
-						<div class="flex w-full flex-row gap-1 min-[1180px]:w-fit">
-							<Button variant="secondary" class="h-10 flex-1" @click="includeAllShownCharacters">
-								Select All
-							</Button>
-							<Button variant="secondary" class="h-10 flex-1" @click="excludeAllShownCharacters">
-								Deselect All
-							</Button>
-						</div>
+					<div>
+						<span class="font-medium">Show Type</span>
+						<p class="text-muted-foreground text-sm">Display character types on cards</p>
 					</div>
+				</Label>
+				<Label class="flex items-center justify-center gap-4">
+					<Switch v-model="cardOptions.showPaths" />
+					<div>
+						<span class="font-medium">Show Paths</span>
+						<p class="text-muted-foreground text-sm">Display character paths on cards</p>
+					</div>
+				</Label>
+			</CardContent>
+		</Card>
+
+		<Alert
+			v-if="game.stage === 'EDITING_QUEUE' || game.stage === 'IN_PROGRSS'"
+			variant="destructive"
+			class="mb-6"
+		>
+			<AlertTitle>You are currently in game!</AlertTitle>
+			<AlertDescription>
+				While a game is in progress changes to the character pool are not going to affect your
+				current game.
+			</AlertDescription>
+		</Alert>
+
+		<Card>
+			<CardHeader>
+				<CardTitle class="text-2xl font-semibold">Character Selection</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div class="mb-4 flex gap-x-2">
+					<Input v-model="hsrSearchValue" placeholder="Enter character name" />
+					<Button variant="secondary" @click="resetFilters">
+						<RefreshCwIcon />
+						<span>Reset</span>
+					</Button>
 				</div>
-			</div>
-			<ul
-				class="mt-4 grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8"
-			>
-				<li v-for="c in shownHsrCharacters" :key="c.id">
-					<button class="size-full cursor-pointer" @click="() => characterClickHandler(c.id)">
+
+				<div class="mb-6 flex flex-wrap gap-2">
+					<Button variant="secondary" @click="selectAllCharacters()">Select All</Button>
+					<Button variant="secondary" @click="deselectAllCharacters()">Deselect All</Button>
+
+					<Button
+						v-for="filter in FILTERS"
+						:key="filter.id"
+						:variant="!isFilterActive(filter.id) ? 'outline' : 'secondary'"
+						@click="handleFilterClick(filter)"
+						size="icon"
+					>
+						<img :src="`/img/hsr/ui/${filter.value.toLowerCase()}.webp`" class="h-5.5" />
+					</Button>
+				</div>
+
+				<div class="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+					<button
+						v-for="character in displayedCharacters"
+						:key="character.id"
+						@click="characterClickHandler(character.id)"
+						:class="
+							cn(
+								'cursor-pointer transition-transform',
+								settings.isExcludedId(character.id) && 'scale-95 opacity-60',
+							)
+						"
+					>
 						<CharacterCard
-							:character="c"
-							:show-path="cardOptions.showPaths"
+							:character="character"
 							:show-type="cardOptions.showTypes"
-							:class="
-								cn('transition-transform', settings.isExcludedId(c.id) && 'scale-95 opacity-60')
-							"
+							:show-path="cardOptions.showPaths"
 						/>
 					</button>
-				</li>
-			</ul>
-		</section>
-	</Main>
+				</div>
+			</CardContent>
+		</Card>
+	</main>
 </template>

@@ -27,8 +27,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
-    "@tailwindcss/vite": "^4.0.4",
+    "@tailwindcss/postcss": "^4.0.6",
+    "@tailwindcss/vite": "^4.0.6",
     "@tsconfig/node22": "^22.0.0",
     "@types/lodash.uniq": "^4.5.9",
     "@types/node": "^22.13.1",
@@ -45,7 +45,7 @@
     "npm-run-all2": "^7.0.2",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.0.4",
+    "tailwindcss": "^4.0.6",
     "typescript": "^5.7.3",
     "vite": "^6.1.0",
     "vue-tsc": "^2.2.0"

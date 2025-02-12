@@ -34,7 +34,7 @@ const cssVars = computed(() => {
 		:style="cssVars"
 		:class="
 			cn(
-				'card bg-secondary/35 relative overflow-hidden rounded-md data-[rarity-bg=true]:bg-linear-to-b data-[rarity-bg=true]:from-(--top) data-[rarity-bg=true]:to-(--bottom)',
+				'card border-border bg-secondary dark:bg-secondary/35 relative overflow-hidden rounded-md border data-[rarity-bg=true]:bg-linear-to-b data-[rarity-bg=true]:from-(--top) data-[rarity-bg=true]:to-(--bottom)',
 				props.class,
 			)
 		"
@@ -44,7 +44,7 @@ const cssVars = computed(() => {
 			class="card-thumbnail aspect-376/512 h-full w-full object-cover"
 			draggable="false"
 			decoding="async"
-			loading="eager"
+			loading="lazy"
 		/>
 
 		<div
@@ -65,7 +65,7 @@ const cssVars = computed(() => {
 
 		<div
 			v-if="hideName !== true"
-			class="absolute right-0 bottom-0 left-0 flex w-full flex-col items-center bg-linear-to-b from-black/40 to-black/60 pt-3 pb-3.5 backdrop-blur-xs has-[p]:pt-2 has-[p]:pb-2.5"
+			class="absolute right-0 bottom-0 left-0 flex w-full flex-col items-center bg-black/50 pt-3 pb-3.5 has-[p]:pt-2 has-[p]:pb-2.5"
 		>
 			<h3 class="font-anuphane relative text-lg leading-none font-semibold text-white">
 				<SparklesIcon
