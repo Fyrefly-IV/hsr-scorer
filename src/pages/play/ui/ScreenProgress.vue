@@ -39,7 +39,7 @@ const undo = () => {
 			<button
 				v-for="ch in game.currentPair"
 				:key="`pair-${ch.id}`"
-				class="size-full"
+				class="w-[clamp(10.9375rem,_10.3448vw_+_8.9978rem,_15.625rem)] lg:size-full"
 				@click="() => chooseThrottled(ch.id)"
 			>
 				<CharacterCard
