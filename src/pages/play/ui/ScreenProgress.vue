@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn } from "@vueuse/core";
-import { SkipForwardIcon, UndoIcon, Watch, XIcon } from "lucide-vue-next";
+import { SkipForwardIcon, UndoIcon, XIcon } from "lucide-vue-next";
 import { computed, watch } from "vue";
 import { useCharacterCardsOptions } from "@/entities/character/model/stores";
 import type { Character } from "@/entities/character/model/types";
