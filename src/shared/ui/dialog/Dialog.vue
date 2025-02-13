@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { vOnClickOutside } from "@vueuse/components";
-import { effect, ref, useTemplateRef, watch } from "vue";
+import { effect, useTemplateRef, watch } from "vue";
 import { cn } from "@/shared/lib/cn";
 
 const open = defineModel<boolean>({ required: true });
