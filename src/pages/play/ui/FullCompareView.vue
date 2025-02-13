@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import Button from "@/shared/ui/button/Button.vue";
 import Dialog from "@/shared/ui/dialog/Dialog.vue";
-import Main from "@/shared/ui/main/Main.vue";
 import H2 from "@/shared/ui/typography/H2.vue";
 import P from "@/shared/ui/typography/P.vue";
 import ScreenProgress from "./ScreenProgress.vue";
@@ -24,11 +23,11 @@ const reset = () => {
 </script>
 
 <template>
-	<Main class="bg-background flex flex-col items-center justify-center pt-4 sm:pt-0">
+	<main class="bg-background text-foreground h-svh-main flex items-center justify-center p-4">
 		<ScreenStart v-if="game.stage === 'START_SCREEN'" />
 		<ScreenProgress v-if="game.stage === 'IN_PROGRSS'" @confirm-reset="confirmReset" />
 		<ScreenResults v-if="game.stage === 'FINISHED'" @confirm-reset="confirmReset" />
-	</Main>
+	</main>
 
 	<Dialog v-model="showModalReset">
 		<H2 class="font-bold">Are you sure?</H2>
