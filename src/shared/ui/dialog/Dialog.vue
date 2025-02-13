@@ -31,7 +31,7 @@ watch(
 		<dialog
 			ref="dialog"
 			:open="open"
-			class="m-auto flex h-full w-full items-center justify-center bg-transparent"
+			class="m-auto h-full w-full items-center justify-center bg-transparent open:flex"
 		>
 			<div
 				v-if="open === true"
