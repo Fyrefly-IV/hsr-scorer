@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { vOnClickOutside } from "@vueuse/components";
-import { effect, ref, watch } from "vue";
+import { effect, ref, useTemplateRef, watch } from "vue";
 import { cn } from "@/shared/lib/cn";
 
 const open = defineModel<boolean>({ required: true });
-const dialog = ref<HTMLDialogElement>();
+const dialogRef = useTemplateRef("dialog");
 
 const close = () => {
 	open.value = false;
 };
 
 effect(() => {
-	if (open.value && dialog.value) {
-		dialog.value.showModal();
+	if (open.value && dialogRef.value) {
+		dialogRef.value.showModal();
 	}
 });
 
@@ -20,7 +20,7 @@ watch(
 	() => open.value,
 	(s) => {
 		if (s === false) {
-			dialog.value?.close();
+			dialogRef.value?.close();
 		}
 	},
 );
@@ -28,14 +28,16 @@ watch(
 
 <template>
 	<Teleport to="body">
-		<dialog ref="dialog" :open="open">
+		<dialog
+			ref="dialog"
+			:open="open"
+			class="m-auto flex h-full w-full items-center justify-center bg-transparent"
+		>
 			<div
 				v-if="open === true"
 				v-on-click-outside="close"
 				:class="
-					cn(
-						'border-border bg-background flex w-full max-w-[600px] flex-col rounded-md border p-4',
-					)
+					cn('border-border bg-background flex w-full max-w-[600px] flex-col rounded-md border p-4')
 				"
 			>
 				<slot />
