@@ -16,6 +16,7 @@ import {
 	STAGE_KEY,
 	START_SCREEN,
 } from "../config";
+import { pairToCharactersRequired } from "../lib/pair-to-character";
 
 export const useGame = defineStore("the-game", () => {
 	const queue = useLocalStorage<QueueEntry[]>(QUEUE_KEY, []);
@@ -23,32 +24,17 @@ export const useGame = defineStore("the-game", () => {
 	const scores = useLocalStorage<Scores>(SCORES_KEY, {});
 	const stage = useLocalStorage<Stage>(STAGE_KEY, START_SCREEN);
 
-	const currentPairIds = computed(() => {
-		if (queue.value.length === 0 || stage.value !== IN_PROGRESS) {
-			return null;
-		}
-
-		const pair = queue.value.at(0);
-		if (!pair) {
-			return null;
-		}
-
-		return pair;
+	const firstThreePairs = computed(() => {
+		return queue.value.slice(0, 3).map(pairToCharactersRequired);
 	});
 
 	const currentPair = computed(() => {
-		const pair = currentPairIds.value;
+		const pair = firstThreePairs.value.at(0);
 		if (!pair) {
 			throw TypeError("theres no pair in queue");
 		}
 
-		const first = CHARACTERS_MAP.get(pair.firstId);
-		const second = CHARACTERS_MAP.get(pair.secondId);
-		if (!first || !second) {
-			throw TypeError("one of the character of current queue doesnt exist on character map");
-		}
-
-		return [first, second] as const;
+		return pair;
 	});
 
 	function choose(winnerId: Character["id"] | null) {
@@ -139,7 +125,7 @@ export const useGame = defineStore("the-game", () => {
 		history,
 		scores,
 		stage,
-		currentPairIds,
+		firstThreePairs,
 		currentPair,
 		choose,
 		undo,
