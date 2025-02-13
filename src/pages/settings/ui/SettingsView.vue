@@ -97,7 +97,7 @@ const displayedCharacters = computed(() => {
 
 		const matchesFieldFilters =
 			!filtersActive ||
-			Array.from(fieldGroups.entries()).every(([field, allowedValues]) => {
+			Array.from(fieldGroups.entries()).some(([field, allowedValues]) => {
 				const charValue = character[field as keyof Character];
 				return allowedValues.has(charValue as string);
 			});
