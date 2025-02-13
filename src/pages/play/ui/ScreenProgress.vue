@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn } from "@vueuse/core";
-import { SkipForwardIcon, UndoIcon, XIcon } from "lucide-vue-next";
-import { computed } from "vue";
+import { SkipForwardIcon, UndoIcon, Watch, XIcon } from "lucide-vue-next";
+import { computed, watch } from "vue";
 import { useCharacterCardsOptions } from "@/entities/character/model/stores";
 import type { Character } from "@/entities/character/model/types";
 import CharacterCard from "@/entities/character/ui/CharacterCard.vue";
@@ -28,10 +28,28 @@ const undo = () => {
 		game.undo();
 	}
 };
+
+// preload next pair portraits
+watch(
+	() => game.firstThreePairs.at(1),
+	(nextPair) => {
+		if (!nextPair) {
+			return;
+		}
+
+		nextPair.forEach((character) => {
+			if (character.assets.portrait) {
+				const img = new Image();
+				img.src = character.assets.portrait;
+			}
+		});
+	},
+	{ immediate: true },
+);
 </script>
 
 <template>
-	<div class="w-ful w-fit max-w-[600px]">
+	<div class="w-fit max-w-[600px]">
 		<div
 			v-if="game.currentPair != null"
 			class="grid w-fit grid-cols-[minmax(0,250px)] place-items-center gap-4 sm:grid-cols-[repeat(2,minmax(0,250px))]"
