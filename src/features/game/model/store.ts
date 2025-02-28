@@ -29,7 +29,7 @@ export const useGame = defineStore("the-game", () => {
 	});
 
 	const currentPair = computed(() => {
-		const pair = firstThreePairs.value.at(0);
+		const pair = firstThreePairs.value?.[0];
 		if (!pair) {
 			throw TypeError("theres no pair in queue");
 		}

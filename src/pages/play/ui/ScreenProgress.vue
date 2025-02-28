@@ -31,7 +31,7 @@ const undo = () => {
 
 // preload next pair portraits
 watch(
-	() => game.firstThreePairs.at(1),
+	() => game.firstThreePairs?.[1],
 	(nextPair) => {
 		if (!nextPair) {
 			return;
